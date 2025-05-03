@@ -1,0 +1,1017 @@
+ld
+ln -s ~/Library/Mobile\ Documents//iCloud\~com\~apple\~iBooks/Documents ~/Library/Mobile\ Documents/iCloud\~md\~obsidian/Documents/zambo-obsidian-vault/books
+vi ~/.config/aerospace/aerospace.toml
+	git fetch
+mkdir -p apps/suppliers/src/lib/context
+mv zambo.io astro-template
+mkdir zambo.io
+cd zambo.io
+npm create astro@latest
+rm -rf *
+rm -rf .
+rm -rf .*
+pnpx create astro@latest
+pnpm create astro@latest
+pnpm astro add tailwind
+j /Users/zambo/Development/00_Clients/unleash
+v landings
+vi /Users/zambo/Development/zambo/dotfiles/nvim
+vi /Users/zambo/Development/zambo/zambo.io
+vi .
+j /Users/zambo/Development/zambo/dotfiles/nvim
+j /Users/zambo/Development/zambo/zambo.io
+cd /Users/zambo/Downloads/diff-0.7.7-to-0.7.8/Library
+sftp -i ~/.ssh/dgo-foundry root@157.230.176.151
+ss
+v ~/.ssh/bkp
+pbpaste | ssh foundry@157.230.176.151 'cat >> .ssh/authorized_keys
+ls -a
+pbpaste | ssh foundry@157.230.176.151 'cat >> .ssh/authorized_keys\
+
+pbpaste | ssh foundry@157.230.176.151 'cat >> .ssh/authorized_keys'
+cd .ssh
+cd bkp
+mv bkp/config .
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCv9Swv+BFzxmRfbirMI1GlNn59wqQgVovX2WnmEb+ZU1xB6Iq45jmGCOmKey8VHqmJ+sJtdFk1+A/1TzwTV6nNynObaQZsMwvXoxKe4RG0ZRwS1SXyO5alJKCEZmr5+50PFe6UUIbv+KSW4/gDZP/0wA7k4fjBnNzCw3Xr0Rllb8SM+0euH3CK7V3dQv1N13vNVrFIvcdJdhz/z3q5DuuNjMU39QR/rg7CSlDM6J2OO96M7HM75jHd9zbO+as49GTMi8nD1ZQJ9Fi1nFv7SAOR6vfd8lu1LWhteU/ULXaWxVgZNgKdSwqravioOXgdh68/rrEFYluzebitTW7yfgfn9N9ErWfTJg1pFIvvfVoVM5+hRbbPlLzuZrdrxpkAqPFo8oXlAc3Ekjtc+xxhHGHzqjj1ZZgQVQtYz6Ot0bF5l75ciWQ3ZAcq+NeTT93pxLVKgczd4UPFHTIpGHvrUDOGPtX+B1iZVbmagmCvYIiIWJWykl9ggJwB9F0lAu8/inIWLaebHFsTyQF5SkaIKI517r3bL4JC76wZERfKGleo0TBtFBQ/KaDOhVQaozJu6LzcI9ZUcnuVqkWQivT9aRiuP7uB97ZnQ2dDOV6IXslvY0yHkUvd5XUvnlcpZPg5ym48eUErK5uHB2Vg4iqunhvS8wsHe6KI1RgqGiYbdXzxcw== > ~/.ssh/test.pub
+pbpaste > ~/.ssh/foundry.pub
+pbpaste > ~/.ssh/foundry-v2.pub
+cd Downloads
+vi 01JS0CGM6DZGY30987CN1W3X15.ofx
+zip -er extrato-da-sua-conta-01JS0CPAZ3FMB82MK3DX2DKPJC.zip extrato-da-sua-conta-01JS0CPAZ3FMB82MK3DX2DKPJC.csv
+aerospace list-monitors
+gf
+ga
+git commit -am "feat: mac global key" 
+gp
+ssh  o
+brew upgrade gh
+gh extension install github/gh-copilot\
+
+gh extension upgrade gh-copilot
+gh copilot suggest "
+gh copilot -h
+vi /Users/zambo/.zpreztorc
+gh copilot alias -h
+echo 'eval "$(gh copilot alias -- zsh)"' >> ~/.zshrc
+ghce list
+gh auth login --web -h github.com
+ghce add alias
+v /Users/zambo/.config/espanso/match/base.yml
+echo $PRIMARY_EMAIL
+\:mail 
+v /Users/zambo/.config/espanso/
+espanso path config
+espanso match list
+espanso 
+espanso migrate
+espanso service
+espanso service --h
+espanso service -h
+espanso service check
+espanso service status
+espanso workaround 
+espanso workaround -h
+espanso -h
+espanso path
+\:pma
+espanso cm o
+espanso cmd enable
+echo $CONFI
+echo $CONFIG
+echo $PRIMARY_EMAIL 
+vi /Users/zambo/.config/espanso
+set EDITOR=vim
+v /Users/zambo/.config/espanso
+espanso edit email
+espanso edit matches
+espanso restart
+espanso edit
+j
+aerospace list-apps
+vi /Users/zambo/.config/aerospace/aerospace.toml
+v -p /Users/zambo/.config/aerospace/aerospace.toml /Users/zambo/.config/espanso /Users/zambo/.config/ghostty
+pbcopy > where nvim
+where nvim
+pbcopy
+cat where nvim
+where nvim | pbcopy
+cd /Users/zambo/.config/1Password/ssh
+la 
+v agent.toml
+v /Users/zambo/.config/1Password/ssh/agent.toml
+cd /Users/zambo/.ssh/
+validation :w
+mv * /250421-bkp/
+mv * /250421-bkp/*
+mkdir 250421-bkp
+mv -p * /250421-bkp/*
+mv -p * /250421-bkp
+mv -r * /250421-bkp
+mv foundry* 250421-bkp
+mv test.pub 250421-bkp
+op 
+op --account
+op connect
+op connect vault
+op connect vault grant
+op vault list
+v /Users/zambo/.ssh/1Password/config 
+v 1Password
+v.
+zip 250421-bkp
+zip 250421-bkp 250421-bkp.zip
+zip 250421-bkp.zip 250421-bkp/
+rm -rf 250421-bkp bkp config
+5;5u
+v /Users/zambo/.config/ghostty/config 
+e o
+ta o
+task burndown.daily 
+v /Users/zambo/Development/zambo/dotfiles/hammerspoon
+v /Users/zambo/Development/zambo/miryoku_zmk
+brew install --cask mouseless.
+zprezto-update
+prompt -p powerlevel10k
+s
+brew install tmux
+eval "$(zoxide init zsh)"
+z 
+z Development
+z /Users/zambo/.config/aerospace/
+top
+tmux -V
+z zambo
+cd /Users/zambo/Development/zambo/zambo.io
+ex
+cd /Users/zambo/Development/zambo/dotfiles
+mkdir tmux
+cd tmux
+touch tmux.conf
+v tmux.conf
+tmux
+ex o
+v /Users/zambo/.ssh
+unzip 250421-bkp.zip
+mv 250421-bkp/* .
+mv -r 250421-bkp/* .
+mv -r 250421-bkp.
+mv -r 250421-bkp/
+cd 250421-bkp
+rm -rf 250421-bkp* 
+op plugin init gh
+ssh-add -l
+brew install --cask mouseless
+ghostty +list-themes\
+
+v config 
+ghostty +list-themes
+v /Users/zambo/Development/zambo/dotfiles/nvim/ o
+v /Users/zambo/Development/zambo/dotfiles/nvim/
+source .zshrc
+source Ëƒ¼/.zshrc
+cd /Users/zambo/.zpreztorc
+cd /Users/zambo/.zprezto
+v modules/
+v contrib
+v /Users/zambo/.bash_profile
+prompt -p powerline
+prompt -p agnoster
+v /Users/zambo/.zprezto/modules/prompt/functions/prompt_agnoster_setup
+v /Users/zambo/.zprezto/modules/prompt/external/agnoster/agnoster.zsh-theme
+rga-fzf prompt
+rga-fzf îƒ¼ƒ±
+v where
+rm -rf where
+v Sites
+prompt agnoster
+git config --global core.autocrlf input\
+\
+git config --global core.safecrlf true
+v /Users/zambo/.config/starship.toml
+brew install jesseduffield/lazygit/lazygit
+cd /Users/zambo/Development/00_Clients/unleash/landings
+cd /Users/zambo/Library/Mobile\ Documents/iCloud\~md\~obsidian/Documents/zambo-obsidian-vault
+v /Users/zambo/Library/Mobile\ Documents/iCloud\~md\~obsidian/Documents/zambo-obsidian-vault
+vio 
+cd ~ 
+tmux 
+xx
+rga-fzf spear
+exit
+v /Users/zambo/Development/00_Clients/unleash
+v /Users/zambo/Development/00_Clients/unleash/landings
+cd /Users/zambo/Development/00_Clients/hoepers/2024-website/hoepers-apps | v
+cd /Users/zambo/Development/00_Clients/hoepers/2024-website/hoepers-apps | v .
+cd /Users/zambo/Development/00_Clients/hoepers/2024-website/hoepers-apps > v .
+cd /Users/zambo/Development/00_Clients/hoepers/2024-website/hoepers-apps < v .
+v ,
+v apps/job-board
+cd apps/job-board
+cd ../suppliers
+git add .
+lazygit
+lazygit 
+cursor .
+code .
+open
+open .
+v /
+v /Users/zambo/Development/zambo/dotfiles/nvim/lua/plugins/colorscheme.lua
+00ll
+j /Users/zambo/Development/00_Clients/hoepers/2024-website/hoepers-apps
+cd apps/suppliers
+v /Users/zambo/Development/zambo/dotfiles/nvim/lua/plugins
+cd suppliers
+pnpm dev
+v .neoconf.json
+mkdir old
+mv ** old/
+mv ** old
+mv .* old
+git clone https://github.com/Matt-FTW/dotfiles.git
+cd dotfiles
+mv dotfiles matt-dotfiles
+cd matt-dotfiles
+v .czrc
+v .local
+cd .l/
+l .local/bin/
+cd .local/bin/
+v tty-clock
+cd bin
+vi dev 
+vi dev
+cd .config
+v dotfyle.json
+cd ,,
+pbcopy < pwd
+pbcopy  pwd
+pwd | pbcopy
+cd nvim
+cp --help
+cp -h
+cp man
+cp 
+cp -H
+man cp
+cp -R /Users/zambo/Development/zambo/dotfiles/matt-dotfiles/.config/nvim/** .
+brew install --cask kitty
+brew install yazi ffmpeg sevenzip jq poppler fd ripgrep fzf zoxide resvg imagemagick font-symbols-only-nerd-font
+v .zshrc
+stylelint src/app/layout.tsx
+v v
+rm v
+v aaaa
+rm aaaa
+\:qa
+ghostty +list-actions
+borders -h
+v /Users/zambo/.config/borders
+borders style=round
+borders
+killall borders
+brew services start borders
+brew services Pictures borders
+v /Users/zambo/.config/borders/bordersrc 
+tt
+v /Users/zambo/.config/ghostty/ o
+ghostty +show-config --default --docs
+man cat
+pbcopy > ghostty +show-config --default --docs
+pbcopy < ghostty +show-config --default --docs
+pbcopy < where nvim
+cat | pbcopy < where nvim
+cat | pbcopy 
+pbcopy > ped
+ls -a | pbcopy
+ghostty +show-config --default --docs | pbcopy
+v themes
+v themes/kanagawa-wave
+ghostty +list-fonts
+cd nv
+cd ,nv
+v stylua.toml
+v .
+man cal
+ncal
+cal
+cal -Je
+cal -J
+cal 2025
+cal -o
+cal -p
+cal -j
+cal -O
+cal 2025 -j
+cal -j 2025
+cal j
+cal -3
+cal -3j
+cal -Mb
+ncal -Mb
+ncal -h
+cal -h 
+cal -y
+cal -h
+cal -mb
+tree
+curl -sSL https://s.numi.app/cli | sh
+numi
+numi-cli 
+numi-cli 2 + 2
+numi-cli today + 2 weeks
+numi-cli "today + 2 weeks"
+l z
+l .z
+ja
+rm .trae
+rm -rf .trae
+v .zcompdump
+cd .adobe
+v .zli
+v .zlogin
+man borders
+v /Users/zambo/.config/aerospace/aerospace.toml
+aerospace workspace -h
+aerospace -h
+brew install jordanbaird-ice
+v /Users/zambo/.config/ghostty
+v /Users/zambo/.config/ghostty/themes/kanagawa-wave
+v /Users/zambo/.config/borders/bordersrc
+brew services restart borders
+cd /Users/zambo/Development/zambo/dotfiles/nvim
+mkdir references
+mv ** references
+mv -r ** references/
+mv ** references/
+cd references
+mkdir matt
+mv ** matt/
+mv ** references/matt/old .
+mv ** references/matt/old/* .
+mv ** references/matt/old/** .
+mv ** references/matt/old/**.* .
+mv ** references/old/**.* .
+mv ** old/**.* .
+uu
+mv -r ** old/**.* .
+mv -r ** old/* .
+mv ** old/ . -r
+mv -R ** old/* . 
+mv -r ** old/** .
+man mv
+mv old/* .
+cd old
+rm old
+rm old -rf
+rm -rf old
+cd .. 
+cp -R references/matt/after .
+vi
+mkdir -p lua/plugins/extras/ui/colorschemes/ && cp -R references/matt/lua/plugins/extras/ui
+mkdir -p lua/plugins/extras/ui/colorschemes/ && cp -R references/matt/lua/plugins/extras/ui/* "$_"
+l lua/plugins/extras/ui/colorschemes
+l lua/plugins/extras/ui/colorschemes/
+cd lua/plugins/extras/ui/colorschemes/
+rm -rf *.lua
+mv colorschemes/* .
+rm -rf colorschemes
+JJ
+cd ../..
+ssh
+z ghostty
+brew install zoxide
+z
+zoxide
+zoxide import
+v modules
+pwd
+cd .zprezto/
+jj
+cd modules
+source runcoms/zpreztorc
+bash source ~/.zprezto/
+bash source ~/.zpreztorc
+source ~/.zshrc 
+cd /Users/zambo/.zprezto/runcoms
+source zpreztorc
+stat
+stat README.md
+TERMINFO
+TERMINFO=78/xterm-ghostty 
+nvim /Users/zambo/.zpreztorc
+TERM=ghostty
+cd 
+TERMINFO=
+cd /Applications/Ghostty.app/Contents/Resources/terminfo
+cd 67
+v ghostty
+TERMINFO=78/xterm-_ghostty_ 
+\:q
+q
+x 
+source .zpreztorc
+man zshmodules
+zfgrep nop
+v .zshenv
+Development
+~
+d
+d1
+d 1
+1
+2
+man lu
+man list
+man l
+man ls
+lu
+l -S
+lu -S
+x
+v ,nv
+bindkey
+bindkey-all
+aa
+tput
+tput colors
+cd /Users/zambo/.ssh
+vi config
+config
+cd 1Password
+v o
+rm -rf 1Password
+v config
+manp ls
+ql
+ql config
+osx-ls-download-history
+osx-rm-dir-metadata
+echo $fpath
+ll -S
+/Users/zambo/.zprezto
+/Users/zambo/.config/ghostty/config
+cd /Users/zambo/.ssh/config
+/Users/zambo/.config/ghostty
+/Users/zambo/Library/Mobile\ Documents/iCloud\~md\~obsidian/Documents/zambo-obsidian-vault
+b
+lm
+o
+o Terminal.md
+cat Terminal.md | pbc
+cleas
+clear
+df
+du
+dut
+cd $ZPREZTODIR\
+git clone --recurse-submodules https://github.com/belak/prezto-contrib contrib
+la
+cd .git
+cd ..
+cd contrib
+cd alias-tips
+v external
+.
+..
+cd zoxide
+v README.md
+v init.zsh
+v /Users/zambo/.zprezto
+ls -l
+cd /
+cd
+source ~/.zpreztorc
+ls -lh
+git status
+cd /Users/zambo/.config/ghostty
+cd /Users/zambo/Development/00_Clients/hoepers/2024-website/hoepers-apps
+gs
+gS
+man gS
+alias
+g status
+v /Users/zambo/Development/zambo/dotfiles/nvim
+prompt l
+prompt powerline --show
+prompt_starship_precmd
+prompt_starship_preexec
+source /Users/zambo/.zshrc
+prompt_powerlevel10k_setup
+prompt_cleanup 
+ls
+v /Users/zambo/.zshrc
+source /Users/zambo/.zpreztorc
+v /Users/zambo/.zpreztorc
+prompt_agnoster_setup
+source ~/.zshrc
+prompt_spaceship_setup
+prompt spaceship
+v /Users/zambo/Development/00_Clients/hoepers/2024-website/hoepers-apps
+cd h o
+cd hoepers-apps
+z hoepers-apps
+nn
+ssh foundry@157.230.176.151
+	nll
+vio
+l
+v 
+ll
+vi 
+v /Users/zambo/.config/ghostty/config
+v /Users/zambo/.config/ghostty/themes/kanagawa-dragon
+v
+ll
+z Development/zambo/zambo.io
+ll
+g status
+cd ..
+ll
+l
+ll
+cd 
+ll
+la
+mkdir prezto.bak
+ll
+mv .z* prezto.bak
+ll
+ls
+ls -a
+nvim .zshrc
+source .zshrc
+ll
+ls
+rm -rf .zshrc
+rm -rf .zsh_history
+cp .config/prezto.bak/.zsh_history .
+ll
+ls
+nvim .zsh_history
+l
+ll
+zsh-newuser-install
+vi .config/prezto.bak
+nvim .config/prezto.bak
+ll
+ls
+SET
+cat SET
+env
+chezmoi add :q
+nvim ~/.config/chezmoi/chezmoi.json
+mv .config .dotfiles
+chezmoi diff
+chezmoi status
+chezmoi removi .config
+chezmoi remove .config
+chezmoi forget .config
+ll
+chezmoi status
+chezmoi doctor
+chezmoi cd
+ll
+ls
+ls -a
+cd .git
+ll
+ls
+cd config 
+v config
+vi config
+chezmoi
+op read $URL
+nvim ~/.config/chezmoi/chezmoi.json
+nvim
+ll
+cd ..
+ll
+ls
+cd
+l
+la
+ls -a
+cd .dotfiles
+ll
+ls
+ls -la
+ll
+echo $XDG_DATA_HOME
+mkdir .config
+echo $XDG_DATA_HOME
+echo $XDG_CONFIG_DIRS
+env
+env
+cd ..
+cp .dotfiles/prezto.bak/.zprezto/runcoms/zshenv .zshenv
+nvim .zshenv
+vim .dotfiles/prezto.bak/.zsh
+ll
+vim .dotfiles/prezto.bak/.zsh_sessions
+vim .dotfiles/prezto.bak/.zsh_sessions
+vi .zshenv
+XDG_DATA_HOME
+echo $XDG_DATA_HOME
+vi .zshenv
+source .zshenv
+ll
+ll
+chezmoi status
+chezmoi cd
+chezmoi cd
+ll
+ls
+cd .config
+ll
+ls
+ls -a
+ll
+ls
+cd ..
+ll
+ls
+ls -a
+ls -la
+ll
+cp -r .dotfiles/chezmoi .
+ll
+ls
+mv chezmoi .config
+ll
+ls
+cd .con
+cd .config
+ll
+ls
+la
+ls \a
+ls -a
+ll
+ls
+cd ..
+vim .config/chezmoi/chezmoi.json
+ll
+ll
+cd .config
+ls -a
+cd //
+cd
+ll
+ll
+chezmoi edit
+vi .config/chezmoi/chezmoi.toml
+v .config/chezmoi/chezmoi.json
+vim .config/chezmoi/chezmoi.json
+vim .config/chezmoi/chezmoi.toml
+vim .config/chezmoi/chezmoi.json
+vim .config/chezmoi/chezmoi.toml
+chezmoi init
+rm -rf .config/chezmoi/chezmoi.json
+chezmoi init
+ll
+ll
+ls
+pwd
+exit
+ll
+chezmoi init
+sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply natelandau
+chezmoi init natelandau\
+
+ll
+chezmoi doctor
+chezmoi diff
+chezmoi apply
+chezmoi update
+sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply natelandau
+chezmoi init
+chezmoi init
+chezmoi init
+chezmoi init natelandau\
+
+chezmoi init natelandau\
+
+ll
+ll
+ls
+cd .config
+ll
+ls -a
+cd ..
+chezmoi init natelandau\
+
+cd .local/bin
+ll
+ls
+cd ..
+ls
+cd share
+ls
+ls -l
+ll
+cd GameAnalytics
+ll
+ls
+ls
+cd ..
+ll
+ls
+chezmoi cd
+exit
+chezmoi init natelandau\
+
+ll
+ll
+ls
+git add .
+git commit -m "hello world" 
+git branch -M main
+ll
+git remote add origin git@github.com:$GITHUB_USERNAME/dotfiles.git
+git remote add origin git@github.com:$GITHUB_USERNAME/dotfiles.git
+git push -u origin main
+git push -u origin main -f
+git remote add origin git@github.com:$GITHUB_USERNAME/dotfiles.git
+ll
+ls
+ls -a
+cd .git
+ll
+ls
+cd ..
+rm -rf .git
+x
+exit
+ls
+git status
+git add .
+git commet -m "hello world"
+git commit -m "hello world"
+echo $GITHUB_USERNAME
+echo $GITHUB_USERNAME
+source dot_zshenv
+echo $GITHUB_USERNAME
+exit
+lc
+ls
+cd dot_fe
+cd dot_dotfiles
+ns
+ls
+cd ..
+cd ..
+ls
+git status
+chezmoi diff
+git init
+git add .
+git commit -m "hello world"
+ls
+ll
+ls -a
+chezmoi cd
+ll
+ls
+cd .
+ll
+chezmoi forget ~/.zshrc ~/.zshenv
+ll
+ll
+cd .dotfiles
+ll
+ls
+ls -l
+cd ..
+mv .dotfiles .old.dotfiles
+mkdir dotfiles
+mv dotfiles .dotfiles
+cd .dotfiles
+ll
+ls
+cp -r /Users/zambo/Development/zambo/dotfiles/espanso .
+ll
+ls
+cp /Users/zambo/Development/zambo/dotfiles/nvim .
+cp -r /Users/zambo/Development/zambo/dotfiles/nvim .
+ls
+chezmoi add nvim
+ll
+ls
+cd ../.config
+ls
+cd ..
+cd .dotfiles
+ll
+ls
+diff
+chezmoi diff
+chezmoi diff
+git remote add origin https://github.com/zambo/dotfiles.git\
+git branch -M main\
+git push -u origin main
+git init
+git remote add origin https://github.com/zambo/dotfiles.git\
+git branch -M main\
+git push -u origin main
+ll
+git branch -M main
+touch .gitkeep
+git commit -m "bootstrap dotconfig files"
+git add .
+git commit -m "bootstrap dotconfig files"
+git branch -M main
+git push -u origin main
+ll
+mv ../.old.dotfiles
+mv ../.old.dotfiles/aerospace .
+mv ../.old.dotfiles/borders .
+chezmoi diff
+chezmoi add borders
+ls
+chezmoi add aerospace
+chezmoi diff
+chezmoi apply
+chezmoi update
+chezmoi init
+ll
+chezmoi apply
+chezmoi diff
+ll
+sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply $GITHUB_USERNAME
+ll
+chezmoi update\
+
+chezmoi edit ~/.zshrc
+cd ..
+nvim .zshrc
+chezmoi add .zshrc .zshenv
+ll
+ls
+chezmoi edit ~/.zshrc
+source .zshrc
+chezmoi diff
+chezmoi -v apply\
+
+chezmoi cd
+chezmoi inig
+chezmoi init
+chezmoi cd 
+ll
+ls
+ls
+cd dot_dotfiles
+ll
+ls
+cd ..
+ll
+git add .
+cd ~/.dotfiles/
+chezmoi add zsh
+vi ~/.dotfiles/zsh/.zsh_history
+chezmoi add zsh
+cd ..
+ll
+ls
+chezmoi add .zshenv
+ll
+ls
+ll
+cd .config
+ll
+ls
+mv ../.dotfiles/* .
+ll
+ls
+cd ../.dotfiles
+ls
+ls -la
+cd .git
+ls
+cd ..
+ls -l
+ls -la
+cd ..
+ll
+cd ..
+cd 
+rm -rf .dotfiles
+ll
+ls
+chezmoi cd
+ll
+lazygit
+chezmoi diff
+chezmoi diff
+chezmoi -v apply
+chezmoi diff
+lazygit
+git status
+chezmoi diff
+chezmoi cd
+vi .zshenv
+chezmoi cd
+cd .dotfiles
+ll
+chezmoi add .
+chezmoi add *
+ll
+ls
+chezmoi add ghostty aerospace zsh nvim
+chezmoi add espanso hammerspoon
+ll
+chezmoi add borders
+cd bin
+ll
+l
+ls
+cd ..
+ls
+cd borders
+ls
+ls -a
+cd ..
+ls
+open .
+ll
+ls
+chezmoi cd
+uu
+ll
+lazygit
+rm -rf git
+chezmoi cd
+cd .config
+ll
+ls
+ll
+ll
+ll
+ls
+ll
+cd op
+ls
+ll
+cd plugins
+ll
+cd ..
+cd ..
+ll
+cd github-copilot
+ll
+v versions.json
+cd ..
+ls
+ll
+la
+lla
+la
+vi .gitignore
+v .gitignore
+vi
+exit
+cd ~/.config/zsh
+ls -a
+pwd
+vi ~/.zshenv
+v ~/.zshenv
+source ~/.zshenv
+cd ~/.config/zsh
+ls
+ls -a
+rm -rf .DS_Store
+ll
+cd ..
+ll
+chezmoi completion zsh
+ll
+ll
+ls
+chezmoi cd
+chezmoi cd
+chezmoi forget dot_dotfiles dot_zshenv
+chezmoi forget dot_dotfiles 
+l
+ll
+chezmoi remove dot_dotfiles 
+chezmoi destroy dot_dotfiles 
+chezmoi destroy dot_dotfiles -f
+chezmoi destroy -h
+chezmoi destroy -h
+chezmoi forget dot_dotfiles/aerospace
+rm -rf dot_dotfiles
+ll
+ls
+git add .
+lazygit
+cd ~
+cd
+cd .config
+ll
+chezmoi add borders espanso ghostty hammerspoon lazygit/ nvim zsh
+chezmoi cd
+ll
+vi .zshenv
+v .zshenv
+chezmoi edit .config/zsh/.zshenv
+chezmoi cd
