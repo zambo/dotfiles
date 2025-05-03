@@ -1,0 +1,62 @@
+# Chezmoi-specific files
+.chezmoiroot
+.chezmoiversion
+.chezmoiignore
+
+# Temp files
+*.tmp
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Editor directories and files
+.idea/
+.vscode/
+*.sublime-workspace
+*.sublime-project
+
+# Local configuration that should not be committed
+.local/
+.env
+.env.*
+!.env.example
+
+# Sensitive files and directories
+.ssh/id_*
+.ssh/*.pem
+.ssh/known_hosts
+.gnupg/*
+!.gnupg/gpg*.conf
+.config/op/
+.password-store/
+
+# Package managers and dependencies
+node_modules/
+.npm/
+.yarn/
+.pnpm-store/
+.cargo/
+.gem/
+
+# Caches
+.cache/
+.npm/
+.pnpm-store/
+.yarn/cache
+.zcompdump*
+
+# History files
+.*history
+.bash_history
+.zsh_history
+.python_history
+
+# macOS specific
+.Trash/
+.Spotlight-V100/
+.fseventsd/
+
+# Log files
+*.log
+logs/
