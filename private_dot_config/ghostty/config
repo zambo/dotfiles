@@ -83,6 +83,8 @@ background-opacity = 1
 
 macos-titlebar-style = hidden
 macos-option-as-alt = true
+# keybind = alt+left=unbind
+# keybind = alt+right=unbind
 macos-icon = retro
 # macos-icon-frame = chrome
 
@@ -119,7 +121,7 @@ mouse-hide-while-typing 	= true
 window-inherit-font-size 	= true
 # gtk-wide-tabs 			= false
 confirm-close-surface		= true
-clipboard-paste-protection	= true
+clipboard-paste-protection	= false
 clipboard-paste-bracketed-safe	= false
 
 # Tmux Key Bindings
@@ -142,3 +144,8 @@ clipboard-paste-bracketed-safe	= false
 # keybind = super+r=reload_config
 
 window-save-state = always
+unfocused-split-opacity = 0.4
+focus-follows-mouse = true
+split-divider-color = #c0a36e 
+# shell-integration = fish
+
