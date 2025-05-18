@@ -20,7 +20,7 @@ SETUVAR --export EXA_LL_OPTIONS:\x2d\x2dlong
 SETUVAR --export EXA_LO_OPTIONS:\x2d\x2doneline
 SETUVAR --export EXA_LT_OPTIONS:\x2d\x2dtree\x1e\x2d\x2dlevel
 SETUVAR --export EXA_L_OPTIONS:\x1d
-SETUVAR --export EXA_STANDARD_OPTIONS:\x2d\x2dgroup\x1e\x2d\x2dheader\x1e\x2d\x2dgroup\x2ddirectories\x2dfirst
+SETUVAR --export EXA_STANDARD_OPTIONS:\x2d\x2dlong\x1e\x2d\x2dall
 SETUVAR VIRTUAL_ENV_DISABLE_PROMPT:true
 SETUVAR --export __ABBR_TIPS_KEYS:\x2dadd\x1ev
 SETUVAR --export __ABBR_TIPS_VALUES:v\x20nvim\x1envim

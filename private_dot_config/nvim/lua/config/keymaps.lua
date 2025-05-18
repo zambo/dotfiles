@@ -12,6 +12,9 @@ map("n", "U", "<C-r>", { desc = "Redo" })
 -- Edit inside Word
 vim.keymap.set("n", "<C-c>", "ciw")
 
+vim.keymap.set("n", "<M-Left>", "b", { desc = "Move backwards" })
+vim.keymap.set("n", "<M-Right>", "w", { desc = "Move forwards" })
+
 -- Disable continuations
 -- map("n", "<Leader>o", "o<Esc>^Da", opts)
 -- map("n", "<Leader>O", "O<Esc>^Da", opts)
