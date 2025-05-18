@@ -83,8 +83,8 @@ background-opacity = 1
 
 macos-titlebar-style = hidden
 macos-option-as-alt = true
-# keybind = alt+left=unbind
-# keybind = alt+right=unbind
+ keybind = alt+left=unbind
+keybind = alt+right=unbind
 macos-icon = retro
 # macos-icon-frame = chrome
 

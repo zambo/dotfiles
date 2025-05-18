@@ -1,5 +1,10 @@
+function fish
+    source ~/.config/fish/config.fish
+end
+
 if status is-interactive
     # Commands to run in interactive sessions can go here
+    fish_config theme choose tokyonight_moon
     atuin init fish | source
 end
 
@@ -28,13 +33,16 @@ alias cat bat
 # alias _ ~/Development
 
 # direnv fish config https://direnv.net/docs/hook.html#fish
-# direnv hook fish | source
-#
+direnv hook fish | source
+
 # trigger direnv at prompt, and on every arrow-based directory change (default)
-# set -g direnv_fish_mode eval_on_arrow
+set -g direnv_fish_mode eval_on_arrow
 #
 # trigger direnv at prompt, and only after arrow-based directory changes before executing command
 # set -g direnv_fish_mode eval_after_arrow
 #
 # trigger direnv at prompt only, this is similar functionality to the original behavior
 # set -g direnv_fish_mode disable_arrow
+#
+#
+zoxide init fish | source
