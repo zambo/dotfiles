@@ -1,48 +1,47 @@
-function fish
-    source ~/.config/fish/config.fish
-end
-
+# Environment Variables
 if status is-interactive
-    # Commands to run in interactive sessions can go here
-    fish_config theme choose tokyonight_moon
-    atuin init fish | source
+    set -gx EDITOR nvim
+    set -gx PATH /opt/homebrew/bin $PATH
+    set -gx fish_key_bindings fish_vi_key_bindings
+
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+
+    # Direnv Setup (moved inside interactive check)
+    direnv hook fish | source
+
+    # Direnv behavior configuration
+    set -g direnv_fish_mode eval_on_arrow
 end
 
-# Enable vim mode
-# set -g fish_key_bindings fish_vi_key_bindings
+# Key Bindings
+set fzf_directory_opts --bind "ctrl-o:execute($EDITOR {} &> /dev/tty)"
 
-# Abbreviations
-# abbr >~/.config/fish/user/abbr.fish
+# Shell Integrations
+atuin init fish | source # Shell history
+zoxide init fish | source # Smart directory jumping
 
-# Aliases
-alias v nvim
-alias vi nvim
-alias vim nvim
+# Core Command Aliases
+abbr --add -g cd z
+abbr --add -g v nvim
+abbr --add -g vi nvim
+abbr --add -g vim nvim
+abbr --add -g v. nvim .
+abbr --add -g x exit
+abbr --add -g g lazygit
 
-alias t task
-alias tt taskwarrior-tui
+# Task Management Aliases
+abbr --add -g t task
+abbr --add -g tt taskwarrior-tui
 
-alias x exit
+# Better Alternatives
+abbr --add -g cat bat
 
-alias cd z
+# Safety Features
+# Move files to trash instead of deleting them (requires `brew install trash`)
+if type -q trash
+    abbr --add -g rm trash
+end
 
-alias g lazygit
-
-# Replace original tools
-alias cat bat
-# alias _ ~/Development
-
-# direnv fish config https://direnv.net/docs/hook.html#fish
-direnv hook fish | source
-
-# trigger direnv at prompt, and on every arrow-based directory change (default)
-set -g direnv_fish_mode eval_on_arrow
-#
-# trigger direnv at prompt, and only after arrow-based directory changes before executing command
-# set -g direnv_fish_mode eval_after_arrow
-#
-# trigger direnv at prompt only, this is similar functionality to the original behavior
-# set -g direnv_fish_mode disable_arrow
-#
-#
-zoxide init fish | source
+# bun
+set --export BUN_INSTALL "$HOME/.bun"
+set --export PATH $BUN_INSTALL/bin $PATH
