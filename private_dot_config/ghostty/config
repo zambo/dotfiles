@@ -77,6 +77,7 @@ font-thicken = true
 alpha-blending = native
 
 theme = "kanagawa-wave"
+# theme = "tokyonight_moon"
 
 cursor-click-to-move = true
 background-opacity = 1
@@ -125,18 +126,18 @@ clipboard-paste-protection	= false
 clipboard-paste-bracketed-safe	= false
 
 # Tmux Key Bindings
-# keybind = ctrl+n=new_window
+# keybind = ctrl+n=ntw_window
 
-# keybind = ctrl+h=goto_split:left
-# keybind = ctrl+j=goto_split:bottom
-# keybind = ctrl+k=goto_split:top
-# keybind = ctrl+l=goto_split:right
-#
-# keybind = ctrl+a>h=new_split:left
-# keybind = ctrl+a>j=new_split:down
-# keybind = ctrl+a>k=new_split:up
-# keybind = ctrl+a>l=new_split:right
-# keybind = ctrl+a>f=toggle_split_zoom
+keybind = ctrl+n=goto_split:left
+keybind = ctrl+e=goto_split:bottom
+keybind = ctrl+i=goto_split:top
+keybind = ctrl+o=goto_split:right
+
+keybind = ctrl+a>n=new_split:left
+keybind = ctrl+a>e=new_split:down
+keybind = ctrl+a>i=new_split:up
+keybind = ctrl+a>o=new_split:right
+keybind = ctrl+a>f=toggle_split_zoom
 #
 # keybind = ctrl+a>n=next_tab
 # keybind = ctrl+a>p=previous_tab
@@ -144,8 +145,8 @@ clipboard-paste-bracketed-safe	= false
 # keybind = super+r=reload_config
 
 window-save-state = always
-unfocused-split-opacity = 0.4
-focus-follows-mouse = true
+unfocused-split-opacity = 0.5
+# focus-follows-mouse = true
 split-divider-color = #c0a36e 
-# shell-integration = fish
+shell-integration = fish
 
