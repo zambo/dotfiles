@@ -1,0 +1,32 @@
+# This is Git's per-user configuration file.
+[user]
+  signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBXi6PMvuQoZkbcz3ys0beOG3iJ4hEeIn2i1+HU/SYaD
+	name = zambo
+	email = henrique.zambonin@gmail.com
+# Please adapt and uncomment the following lines:
+#	name = Henrique Zambonin
+#	email = zambo@bob.local
+[credential]
+[core]
+	editor = code --wait
+	excludesfile = /Users/zambo/.gitignore_global
+	compression = 0
+	autocrlf = input
+	safecrlf = true
+[init]
+	defaultBranch = main
+[http]
+	postBuffer = 500M
+	maxRequestBuffer = 100M
+[gpg]
+	format = ssh
+[gpg "ssh"]
+	program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
+[commit]
+	gpgsign = true
+[credential "https://github.com"]
+	helper =
+	helper = !/opt/homebrew/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper =
+	helper = !/opt/homebrew/bin/gh auth git-credential
