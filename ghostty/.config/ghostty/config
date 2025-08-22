@@ -150,3 +150,4 @@ unfocused-split-opacity = 0.5
 split-divider-color = #c0a36e 
 shell-integration = fish
 
+keybind = shift+enter=text:\n
