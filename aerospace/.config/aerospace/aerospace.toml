@@ -1,12 +1,12 @@
-# Start AeroSpace at login
+#dStart AeroSpace at login
 start-at-login = true
 
 # 'start-at-login' needs to be 'true' for 'after-login-command' to work
 # Available commands: https://nikitabobko.github.io/AeroSpace/commands
 after-login-command = []
 after-startup-command = [
-  'exec-and-forget borders',
-  # active_color=0xffe1e3e4 inactive_color=0xff494d64 width=13.0',
+	'exec-and-forget borders',
+	# active_color=0xffe1e3e4 inactive_color=0xff494d64 width=13.0',
 ]
 
 # See https://nikitabobko.github.io/AeroSpace/guide#on-focus-changed-callbacks
@@ -152,7 +152,7 @@ alt-ctrl-b = 'workspace prev --wrap-around'
 
 # Fullscreen mode
 # alt-ctrl-shift-f = 'fullscreen --no-outer-gaps'
-alt-ctrl-shift-f = 'fullscreen'
+alt-enter = 'fullscreen'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
 alt-tab = ['focus right --boundaries-action wrap-around-the-workspace']
@@ -180,8 +180,8 @@ alt-ctrl-esc = ['reload-config']
 esc = ['reload-config', 'mode main']
 r = ['flatten-workspace-tree', 'mode main'] # reset layout
 f = [
-  'layout floating tiling',
-  'mode main',
+	'layout floating tiling',
+	'mode main',
 ] # Toggle between floating and tiling layout
 backspace = ['close-all-windows-but-current', 'mode main']
 
@@ -194,13 +194,13 @@ backspace = ['close-all-windows-but-current', 'mode main']
 if.app-name-regex-substring = 'Idle Champions'
 run = ['layout floating', 'move-node-to-workspace 👾']
 
-[[on-window-detected]]
-if.app-id = 'com.apple.mail'
-run = 'move-node-to-workspace 🡬'
+# [[on-window-detected]]
+# if.app-id = 'com.apple.mail'
+# run = 'move-node-to-workspace 🡬'
 
-[[on-window-detected]]
-if.app-id = 'com.apple.iCal'
-run = 'move-node-to-workspace 🡩'
+# [[on-window-detected]]
+# if.app-id = 'com.apple.iCal'
+# run = 'move-node-to-workspace 🡩'
 
 [[on-window-detected]]
 if.app-id = 'com.todoist.mac.Todoist'
@@ -238,15 +238,16 @@ run = 'layout floating'
 
 
 [workspace-to-monitor-force-assignment]
-# J = ['built-in', 'secondary']
-# M = ['built-in', 'secondary']
-# K = ['built-in', 'secondary']
-# 1 = ['secondary']                        # Main monitor
-# 2 = ['secondary']                        # Non-main monitor in case when there are only two monitors
-# 3 = ['secondary']                        # Case insensitive regex substring
-# Browser = ['lg', 'built-in']
-# Code = ['lg', 'built-in']
-# Music = ['lg', 'built-in']
+# "🯱" = ['built-in', 'secondary']
+# "🯲" = ['built-in', 'secondary']
+"🯳" = ['built-in', 'secondary']
+# "🯴" = ['built-in', 'secondary']
+# "🯵" = ['built-in', 'secondary']
+"🯶" = ['built-in', 'secondary']
+# "🯷" = ['built-in', 'secondary']
+# "🯸" = ['built-in', 'secondary']
+"🯹" = ['built-in', 'secondary']
+# "🯰" = ['built-in', 'secondary']
 # Planning = ['lg', 'built-in']
 # Writing = ['lg', 'built-in']
 # Messages = ['lg', 'built-in']
