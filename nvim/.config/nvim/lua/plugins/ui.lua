@@ -161,29 +161,162 @@ return {
   {
     "snacks.nvim",
     opts = {
+      picker = {
+        -- Global defaults for all sources
+        hidden = true,
+        ignored = true,
+        sources = {
+          -- File-based pickers: show hidden/ignored but exclude heavy directories
+          files = {
+            hidden = true,
+            ignored = true,
+            exclude = {
+              "node_modules",
+              ".git",
+              "dist",
+              "build",
+              "target",
+              "__pycache__",
+              ".next",
+              ".nuxt",
+              "vendor",
+              ".venv",
+              "venv",
+            },
+          },
+          smart = {
+            hidden = true,
+            ignored = true,
+            exclude = {
+              "node_modules",
+              ".git",
+              "dist",
+              "build",
+              "target",
+              "__pycache__",
+              ".next",
+              ".nuxt",
+              "vendor",
+              ".venv",
+              "venv",
+            },
+          },
+          git_files = {
+            hidden = true,
+            ignored = true,
+          },
+          recent = {
+            hidden = true,
+            ignored = true,
+          },
+          -- Search-based pickers: exclude heavy directories entirely
+          grep = {
+            hidden = true,
+            ignored = true,
+            exclude = {
+              "node_modules",
+              ".git",
+              "dist",
+              "build",
+              "target",
+              "__pycache__",
+              ".next",
+              ".nuxt",
+              "vendor",
+              ".venv",
+              "venv",
+              "*.log",
+              "*.min.js",
+              "*.min.css",
+            },
+          },
+          grep_buffers = {
+            hidden = true,
+            ignored = true,
+          },
+          grep_word = {
+            hidden = true,
+            ignored = true,
+            exclude = {
+              "node_modules",
+              ".git",
+              "dist",
+              "build",
+              "target",
+              "__pycache__",
+              ".next",
+              ".nuxt",
+              "vendor",
+              ".venv",
+              "venv",
+              "*.log",
+              "*.min.js",
+              "*.min.css",
+            },
+          },
+          git_grep = {
+            hidden = true,
+            ignored = true,
+            exclude = {
+              "node_modules",
+              "dist",
+              "build",
+              "target",
+              "__pycache__",
+              ".next",
+              ".nuxt",
+              "vendor",
+              ".venv",
+              "venv",
+            },
+          },
+        },
+      },
+      explorer = {
+        hidden = true,
+        ignored = true,
+        exclude = {
+          ".DS_Store",
+          "*.tmp",
+          "*.swp",
+          "*~",
+        },
+        filters = {
+          -- Custom filters for explorer (more lenient than search)
+          custom = {
+            -- Only hide system/temp files, but show package dirs for navigation
+            ".DS_Store",
+            "*.tmp",
+            "*.swp",
+            "*~",
+            "Thumbs.db",
+          },
+        },
+      },
       dashboard = {
         preset = {
           pick = function(cmd, opts)
             return LazyVim.pick(cmd, opts)()
           end,
-          header = [[
-                          ░▒▓███████▓▒░▒▓████████▓▒░▒▓██████▓▒░░▒▓█▓▒░░▒▓█▓▒░                
-                         ░▒▓█▓▒░         ░▒▓█▓▒░  ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░                
-                         ░▒▓█▓▒░         ░▒▓█▓▒░  ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░                
-                          ░▒▓██████▓▒░   ░▒▓█▓▒░  ░▒▓████████▓▒░░▒▓██████▓▒░                 
-                                ░▒▓█▓▒░  ░▒▓█▓▒░  ░▒▓█▓▒░░▒▓█▓▒░  ░▒▓█▓▒░                    
-                                ░▒▓█▓▒░  ░▒▓█▓▒░  ░▒▓█▓▒░░▒▓█▓▒░  ░▒▓█▓▒░                    
-                         ░▒▓███████▓▒░   ░▒▓█▓▒░  ░▒▓█▓▒░░▒▓█▓▒░  ░▒▓█▓▒░                    
-                                                                                             
- ░▒▓████████▓▒░▒▓██████▓▒░ ░▒▓██████▓▒░░▒▓█▓▒░░▒▓█▓▒░░▒▓███████▓▒░▒▓████████▓▒░▒▓███████▓▒░  
- ░▒▓█▓▒░     ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░ 
- ░▒▓█▓▒░     ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░ 
- ░▒▓██████▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░░▒▓██████▓▒░░▒▓██████▓▒░ ░▒▓█▓▒░░▒▓█▓▒░ 
- ░▒▓█▓▒░     ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░      ░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░ 
- ░▒▓█▓▒░     ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░      ░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░ 
- ░▒▓█▓▒░      ░▒▓██████▓▒░ ░▒▓██████▓▒░ ░▒▓██████▓▒░░▒▓███████▓▒░░▒▓████████▓▒░▒▓███████▓▒░  
-                                                                                             
-]],
+          header = [[                   ░▒▓███████▓▒░▒▓████████▓▒░▒▓██████▓▒░░▒▓█▓▒░░▒▓█▓▒░                      
+                  ░▒▓█▓▒░         ░▒▓█▓▒░  ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░                      
+                  ░▒▓█▓▒░         ░▒▓█▓▒░  ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░                      
+                   ░▒▓██████▓▒░   ░▒▓█▓▒░  ░▒▓████████▓▒░░▒▓██████▓▒░                       
+                         ░▒▓█▓▒░  ░▒▓█▓▒░  ░▒▓█▓▒░░▒▓█▓▒░  ░▒▓█▓▒░                          
+                         ░▒▓█▓▒░  ░▒▓█▓▒░  ░▒▓█▓▒░░▒▓█▓▒░  ░▒▓█▓▒░                          
+                  ░▒▓███████▓▒░   ░▒▓█▓▒░  ░▒▓█▓▒░░▒▓█▓▒░  ░▒▓█▓▒░                          
+                                                                                            
+                                                                                            
+░▒▓████████▓▒░▒▓██████▓▒░ ░▒▓██████▓▒░░▒▓█▓▒░░▒▓█▓▒░░▒▓███████▓▒░▒▓████████▓▒░▒▓███████▓▒░  
+░▒▓█▓▒░     ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░ 
+░▒▓█▓▒░     ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░ 
+░▒▓██████▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░░▒▓██████▓▒░░▒▓██████▓▒░ ░▒▓█▓▒░░▒▓█▓▒░ 
+░▒▓█▓▒░     ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░      ░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░ 
+░▒▓█▓▒░     ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░      ░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░ 
+░▒▓█▓▒░      ░▒▓██████▓▒░ ░▒▓██████▓▒░ ░▒▓██████▓▒░░▒▓███████▓▒░░▒▓████████▓▒░▒▓███████▓▒░  
+                                                                                            
+                                                                                            ]],
+
           -- stylua: ignore
           ---@type snacks.dashboard.Item[]
           -- keys = {

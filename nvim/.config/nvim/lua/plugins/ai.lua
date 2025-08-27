@@ -34,6 +34,24 @@ local function create_codecompanion_component()
   return M
 end
 
+local commit_template = [[
+You are an expert at following the Conventional Commit specification.
+
+Given the git diff listed below, please generate a commit message. Try to keep it short and concise, using a more natural language style.
+
+Follow the Conventional Commit format, starting with a type (feat, fix, docs, style, refactor, perf, test, chore), followed by an optional scope in parentheses, and then a brief description.
+
+When unsure about the module names to use in the commit message, you can refer to the last 20 commit messages in this repository.
+
+If the changes do not fit any specific type, use 'chore' as the type.
+
+Write commit message for the diffs with commitizen convention. Wrap the whole message in a markdown code block with language `gitcommit`
+
+```diff
+%s
+```
+]]
+
 return {
   {
     "zbirenbaum/copilot.lua",
@@ -127,6 +145,34 @@ return {
           })
         end,
       },
+      prompt_library = {
+        ["Generate a Commit Message"] = {
+          strategy = "chat",
+          description = "Generate a commit message",
+          opts = {
+            index = 10,
+            is_default = true,
+            is_slash_cmd = true,
+            short_name = "commit",
+            auto_submit = true,
+          },
+          prompts = {
+            {
+              role = "user",
+              content = function()
+                local diff = vim.fn.system("git diff --no-ext-diff --staged")
+                local log = vim.fn.system('git log --pretty=format:"%s" -n 20')
+                local prompt = string.format(commit_template, diff, log)
+                -- Remove all newlines and excess whitespace for output
+                return prompt
+              end,
+              opts = {
+                contains_code = true,
+              },
+            },
+          },
+        },
+      },
       slash_commands = {
         ["url"] = {
           callback = function(url)
@@ -167,12 +213,6 @@ return {
             picker = "snacks",
             ---Automatically generate titles for new chats
             auto_generate_title = true,
-            title_generation_opts = {
-              ---Adapter for generating titles (defaults to active chat's adapter)
-              adapter = nil, -- e.g "copilot"
-              ---Model for generating titles (defaults to active chat's model)
-              model = nil, -- e.g "gpt-4o"
-            },
             ---On exiting and entering neovim, loads the last chat on opening chat
             continue_last_chat = false,
             ---When chat is cleared with `gx` delete the chat from history
@@ -181,12 +221,20 @@ return {
             dir_to_save = vim.fn.stdpath("data") .. "/codecompanion-history",
             ---Enable detailed logging for history extension
             enable_logging = false,
+            ---Add error handling for API requests
+            -- on_error = function(err)
+            --   -- Silently handle API overload errors
+            --   if err and type(err) == "string" and err:match("Overloaded") then
+            --     return true -- suppress error
+            --   end
+            --   return false -- show error
+            -- end,
           },
         },
       },
       strategies = {
         chat = {
-          adapter = "anthropic", -- Changed to use Claude for chat
+          adapter = "copilot", -- Changed to use Claude for chat
         },
         inline = {
           adapter = "copilot",

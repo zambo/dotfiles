@@ -61,3 +61,14 @@ set --export BUN_INSTALL "$HOME/.bun"
 set --export PATH $BUN_INSTALL/bin $PATH
 
 alias claude="/Users/zambo/.claude/local/claude"
+
+# pnpm
+set -gx PNPM_HOME "/Users/zambo/Library/pnpm"
+if not string match -q -- $PNPM_HOME $PATH
+  set -gx PATH "$PNPM_HOME" $PATH
+end
+# pnpm end
+set -gx XDG_CONFIG_HOME "$HOME/.config"
+set -gx XDG_CONFIG_HOME "$HOME/.config"
+set -x ZEPHYR_SDK_INSTALL_DIR ~/zephyr-sdk-0.16.8
+set -x ZEPHYR_SDK_INSTALL_DIR ~/zephyr-sdk-0.16.8

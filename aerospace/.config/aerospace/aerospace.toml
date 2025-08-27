@@ -5,8 +5,8 @@ start-at-login = true
 # Available commands: https://nikitabobko.github.io/AeroSpace/commands
 after-login-command = []
 after-startup-command = [
-	'exec-and-forget borders',
-	# active_color=0xffe1e3e4 inactive_color=0xff494d64 width=13.0',
+  'exec-and-forget borders',
+  # active_color=0xffe1e3e4 inactive_color=0xff494d64 width=13.0',
 ]
 
 # See https://nikitabobko.github.io/AeroSpace/guide#on-focus-changed-callbacks
@@ -102,13 +102,13 @@ alt-0 = 'workspace 🯰'
 # 🯰🯱🯲🯳🯴🯵🯶🯷🯸🯹0︎⃣1︎⃣9︎⃣9︎⃣8︎⃣ⅠⅡⅢⅣⅤⅥⅦⅧⅨⅩ𐄊↓↑↘↗1⃞2⃞3⃞4⃞5⃞6⃞7⃞8⃞9⃞[10]1⃞2⃞3⃞4⃞5⃞6⃞7⃞8⃞9⃞[10]1⃞2⃞➋➌⇦⃞⇨⃞⇦⃝➲2⃞9⃞
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#exec-and-forget
-alt-c = ['exec-and-forget open -a "Calendar"']
-alt-v = ['exec-and-forget open -a "Obsidian"']
-alt-w = ['exec-and-forget open -a "Zen Browser"']
-alt-t = ['exec-and-forget open -a "Ghostty"']
-alt-s = ['exec-and-forget open -a "Spotify"']
-alt-b = ['exec-and-forget open -a "Blender"']
-alt-m = ['exec-and-forget open -a "Mail"']
+# alt-c = ['exec-and-forget open -a "Calendar"']
+# alt-v = ['exec-and-forget open -a "Obsidian"']
+# alt-w = ['exec-and-forget open -a "Zen Browser"']
+# alt-t = ['exec-and-forget open -a "Ghostty"']
+# alt-s = ['exec-and-forget open -a "Spotify"']
+# alt-b = ['exec-and-forget open -a "Blender"']
+# alt-m = ['exec-and-forget open -a "Mail"']
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
 # colemakdh order... qwfpb, arstg, zxcdv, jluy', mneio, kh,./
@@ -180,8 +180,8 @@ alt-ctrl-esc = ['reload-config']
 esc = ['reload-config', 'mode main']
 r = ['flatten-workspace-tree', 'mode main'] # reset layout
 f = [
-	'layout floating tiling',
-	'mode main',
+  'layout floating tiling',
+  'mode main',
 ] # Toggle between floating and tiling layout
 backspace = ['close-all-windows-but-current', 'mode main']
 
