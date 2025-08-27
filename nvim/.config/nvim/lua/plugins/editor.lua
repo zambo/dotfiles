@@ -45,7 +45,7 @@ return {
             mode = { "n", "v" },
           },
           {
-            "<leader>ac", -- Chat
+            "<leader>at", -- Chat
             "<cmd>CodeCompanionChat Toggle<cr>",
             desc = "Toggle Chat",
             mode = { "n", "v" },
@@ -61,6 +61,14 @@ return {
             "<leader>ai", -- Inline
             "<cmd>CodeCompanionChat Inline<cr>",
             desc = "Inline Chat",
+            mode = { "n", "v" },
+          },
+          {
+            "<leader>ac",
+            function()
+              require("codecompanion").prompt("commit")
+            end,
+            desc = "Generate Commit Message",
             mode = { "n", "v" },
           },
         },
