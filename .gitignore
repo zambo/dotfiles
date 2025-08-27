@@ -1,1 +1,143 @@
-task/.config/task/taskchampion.sqlite3
+#######################################
+# General system and editor ignores
+#######################################
+
+# macOS system files
+**/.DS_Store
+
+# Editor swap/backup files
+*~
+.*.swp
+.*.swo
+.*.bak
+
+# Common system files
+**/.Trash
+**/Thumbs.db
+**/desktop.ini
+
+# Local log/state/cache folders
+**/.cache/
+**/.log/
+**/.local/
+
+# Swap, backup, undo, shada files (anywhere)
+**/swap/
+**/backup/
+**/undo/
+**/shada/
+*.swp
+*.swo
+*.bak
+*.tmp
+*.undo
+*.shada
+
+# VSCode settings (if used)
+.vscode/
+
+#######################################
+# Dotfiles-specific ignores
+#######################################
+
+# SQLite databases (anywhere), just in case. Used by taskwarrior in this context
+*.sqlite*
+
+
+# Shell and editor history files (anywhere)
+*history*
+fish/.config/fish/fishd.*
+
+#######################################
+# Security & Secrets
+#######################################
+
+# Environment files
+.env*
+*.env*
+
+# SSH keys and certificates
+**/*.pem
+**/*.key
+**/*.crt
+**/*.p12
+**/*.pfx
+**/id_rsa*
+**/id_ed25519*
+**/id_ecdsa*
+
+# API tokens and credentials
+**/credentials*
+**/token*
+**/auth*
+**/.aws/credentials
+**/.aws/config
+
+# Keychain and password files
+**/*.keychain*
+**/.gnupg/
+**/.password-store/
+
+#######################################
+# Application-Specific
+#######################################
+
+# Node.js
+**/node_modules/
+**/npm-debug.log*
+**/yarn-debug.log*
+**/yarn-error.log*
+**/.npm/
+**/.yarn/
+
+# Python
+**/__pycache__/
+**/*.pyc
+**/*.pyo
+**/*.pyd
+**/.Python
+**/pip-log.txt
+
+# Package managers
+**/Cargo.lock
+**/composer.lock
+**/package-lock.json
+**/yarn.lock
+
+#######################################
+# Development Tools
+#######################################
+
+# Git hooks and local configs
+**/.git/hooks/
+**/.gitconfig.local
+
+# IDE/Editor files
+**/.idea/
+**/nbproject/
+**/*.sublime-*
+**/.settings/
+**/.project
+**/.classpath
+
+# Build artifacts
+**/dist/
+**/build/
+**/target/
+**/*.o
+**/*.so
+**/*.dylib
+
+# Application state/session
+**/session*
+**/state*
+**/.restart-*
+**/pid*
+
+# Logs and debugging
+**/*.log
+**/debug.log
+**/error.log
+**/access.log
+
+
