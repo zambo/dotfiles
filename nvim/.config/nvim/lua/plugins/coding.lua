@@ -1,6 +1,5 @@
 return {
   {
-
     "echasnovski/mini.align",
     opts = {},
     keys = {
@@ -8,7 +7,7 @@ return {
       { "gA", mode = { "n", "v" } },
     },
   },
-
+  { "wakatime/vim-wakatime", lazy = false },
   {
     "smjonas/inc-rename.nvim",
     cmd = "IncRename",
