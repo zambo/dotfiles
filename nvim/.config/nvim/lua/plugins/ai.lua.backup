@@ -141,23 +141,10 @@ return {
             schema = { model = { default = "codestral-latest" } },
           })
         end,
-        -- claude_oauth = function()
-        --   vim.notify("[CodeCompanion] 🚀 Loading dynamic Claude adapter...", vim.log.levels.INFO)
-        --   local dynamic_adapter = require("anthropic.claude_code_adapter_dynamic").create()
-        --
-        --   if dynamic_adapter then
-        --     vim.notify("[CodeCompanion] ✅ Using OAuth with dynamic models!", vim.log.levels.INFO)
-        --     return dynamic_adapter
-        --   else
-        --     vim.notify("[CodeCompanion] ⚠️  OAuth not available, falling back to API key", vim.log.levels.WARN)
-        --     vim.notify("[CodeCompanion] 💡 Run :Anthropic auth to set up OAuth", vim.log.levels.INFO)
-        --     return require("codecompanion.adapters").extend("anthropic", {
-        --       env = {
-        --         api_key = "cmd:op read op://personal/anthropic/credential --no-newline",
-        --       },
-        --     })
-        --   end
-        -- end,
+        anthropic_oauth = anthropic_oauth_adapter,
+        claude_oauth = function()
+          return require("anthropic.claude_code_adapter_dynamic").create()
+        end,
       },
       prompt_library = {
         ["Generate a Commit Message"] = {
@@ -213,7 +200,7 @@ return {
         },
       },
       strategies = {
-        chat = { adapter = "copilot" },
+        chat = { adapter = "anthropic_oauth" },
         inline = { adapter = "copilot" },
         command = { adapter = "copilot" },
       },

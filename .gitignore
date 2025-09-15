@@ -141,3 +141,4 @@ fish/.config/fish/fishd.*
 **/access.log
 
 
+fish/.config/fish/config.local.fish
