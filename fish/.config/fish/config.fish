@@ -30,7 +30,7 @@ end
 if type -q atuin
     atuin init fish | source # Shell history
 end
-if type -q zoxide  
+if type -q zoxide
     zoxide init fish | source # Smart directory jumping
 end
 
@@ -43,9 +43,16 @@ abbr --add -g v. nvim .
 abbr --add -g x exit
 abbr --add -g g lazygit
 
+abbr --add -g oc opencode
+
 # Task Management Aliases
-abbr --add -g t task
-abbr --add -g tt taskwarrior-tui
+abbr --add -g tt task
+abbr --add -g tta task add
+abbr --add -g ttl task list
+abbr --add -g ttc task complete
+abbr --add -g ttd task done
+abbr --add -g ttu task undo
+# abbr --add -g tt taskwarrior-tui
 
 # Better Alternatives
 abbr --add -g cat bat
@@ -60,15 +67,25 @@ end
 set --export BUN_INSTALL "$HOME/.bun"
 set --export PATH $BUN_INSTALL/bin $PATH
 
-alias claude="/Users/zambo/.claude/local/claude"
+# alias claude="/Users/zambo/.claude/local/claude"
+function claude
+    /Users/zambo/.claude/local/claude $argv
+end
 
 # pnpm
-set -gx PNPM_HOME "/Users/zambo/Library/pnpm"
+set -gx PNPM_HOME /Users/zambo/Library/pnpm
 if not string match -q -- $PNPM_HOME $PATH
-  set -gx PATH "$PNPM_HOME" $PATH
+    set -gx PATH "$PNPM_HOME" $PATH
 end
+
 # pnpm end
 set -gx XDG_CONFIG_HOME "$HOME/.config"
-set -gx XDG_CONFIG_HOME "$HOME/.config"
 set -x ZEPHYR_SDK_INSTALL_DIR ~/zephyr-sdk-0.16.8
-set -x ZEPHYR_SDK_INSTALL_DIR ~/zephyr-sdk-0.16.8
+
+# Local and private variables. E.g. API keys, secrets, etc.
+if test -f ~/.config/fish/config.local.fish
+    source ~/.config/fish/config.local.fish
+end
+
+# Load cht.sh completions manually since fish has issues with dots in completion filenames
+source ~/.config/fish/completions/cheat_sh.fish

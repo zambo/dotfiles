@@ -4,6 +4,7 @@ return {
     "williamboman/mason.nvim",
     opts = function(_, opts)
       vim.list_extend(opts.ensure_installed, {
+        "fish-lsp",
         "stylua",
         "selene",
         "luacheck",
@@ -14,5 +15,13 @@ return {
         "css-lsp",
       })
     end,
+  },
+  {
+    "neovim/nvim-lspconfig",
+    opts = {
+      servers = {
+        fish_lsp = {}, -- This enables fish-lsp for .fish files
+      },
+    },
   },
 }
