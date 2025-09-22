@@ -1,0 +1,11 @@
+rules:
+  - name: "Find PDFs"
+    locations:
+      - ~/Downloads
+      - ~/Documents/00_Inbox
+    subfolders: false
+    filters:
+      - extension: pdf
+    actions:
+      - echo: "Found PDF!"
+      - move: "~/Documents/00_Inbox/PDFs/"

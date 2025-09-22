@@ -142,3 +142,4 @@ fish/.config/fish/fishd.*
 
 
 fish/.config/fish/config.local.fish
+lazygit/.config/lazygit/temp_lazygit.tar.gz

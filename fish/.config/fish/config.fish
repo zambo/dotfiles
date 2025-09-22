@@ -44,9 +44,13 @@ abbr --add -g x exit
 abbr --add -g g lazygit
 
 abbr --add -g oc opencode
+abbr --add -g o "open ."
+
+abbr --add -g nc "z nvim && nvim"
+abbr --add -g fc "z ~/.config/fish && nvim config.fish"
 
 # Task Management Aliases
-abbr --add -g tt task
+abbr --add -g tt taskwarrior-tui
 abbr --add -g tta task add
 abbr --add -g ttl task list
 abbr --add -g ttc task complete
