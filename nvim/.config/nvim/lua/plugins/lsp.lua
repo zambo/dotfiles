@@ -1,27 +1,27 @@
 return {
   -- tools
-  {
-    "williamboman/mason.nvim",
-    opts = function(_, opts)
-      vim.list_extend(opts.ensure_installed, {
-        "fish-lsp",
-        "stylua",
-        "selene",
-        "luacheck",
-        "shellcheck",
-        "shfmt",
-        "tailwindcss-language-server",
-        "typescript-language-server",
-        "css-lsp",
-      })
-    end,
-  },
-  {
-    "neovim/nvim-lspconfig",
-    opts = {
-      servers = {
-        fish_lsp = {}, -- This enables fish-lsp for .fish files
-      },
-    },
-  },
+  -- {
+  --   "williamboman/mason.nvim",
+  --   opts = function(_, opts)
+  --     vim.list_extend(opts.ensure_installed, {
+  --       -- "fish-lsp",
+  --       "stylua",
+  --       "selene",
+  --       "luacheck",
+  --       "shellcheck",
+  --       "shfmt",
+  --       "tailwindcss-language-server",
+  --       "typescript-language-server",
+  --       "css-lsp",
+  --     })
+  --   end,
+  -- },
+  -- {
+  --   "neovim/nvim-lspconfig",
+  --   opts = {
+  --     servers = {
+  --       fish_lsp = {}, -- this enables fish-lsp for .fish files
+  --     },
+  --   },
+  -- },
 }

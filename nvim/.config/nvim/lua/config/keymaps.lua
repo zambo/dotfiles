@@ -4,7 +4,7 @@
 local util = require("util")
 local map = vim.keymap.set
 
-util.cowboy()
+-- util.cowboy()
 
 -- Redo
 map("n", "U", "<C-r>", { desc = "Redo" })
@@ -22,13 +22,6 @@ map("n", "<M-Right>", "w", { desc = "Move forwards" })
 
 -- Expand 'cc' into 'CodeCompanion' in the command line
 vim.cmd([[cab cc CodeCompanion]])
-
--- Snacks Explorer: Reveal instead of toggle
--- map("n", "<leader>e", function()
---   Snacks.explorer.reveal({
---     hidden = true,
---   })
--- end, { desc = "Reveal Explorer" })
 
 -- Disable continuations
 -- map("n", "<Leader>o", "o<Esc>^Da", opts)
