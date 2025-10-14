@@ -1,12 +1,12 @@
 {
-  "filterLinkHints": true,
-  "keyMappings": "# Insert your preferred key mappings here.\n\nunmap x\nunmap r\n\nunmap H\nunmap J\nunmap K\nunmap L\n\nmap H nextTab\nmap J goForward\nmap K  goBack\nmap L previousTab\n\nmap q passNextKey",
-  "linkHintCharacters": "stfpcdrwxaqz",
+  "keyMappings": "# Insert your preferred key mappings here.\n\nunmap x\nunmap r\nunmap R\n\nunmap H\nunmap J\nunmap K\nunmap L\n\nmap xx removeTab\nmap rr reload\nmap RR reload hard\nmap q passNextKey\n\n\nunmap f\n\nmap ff LinkHints.activateMode \nmap fs LinkHints.activateMode action=focus\nmap ft LinkHints.activateMode action=copy-text\nmap fh LinkHints.activateMode action=hover\nmap fy LinkHints.activateModeToCopyLinkUrl\nmap fd LinkHints.activateModeToDownloadLink\n\n\n\nmap sgs Vomnibar.activate keyword=gs\nmap sgm Vomnibar.activate keyword=gm\nmap sgi Vomnibar.activate keyword=gi\nmap sd Vomnibar.activate keyword=dnd\nmap sf Vomnibar.activate keyword=fr\nmap sy Vomnibar.activate keyword=yt\nmap smd Vomnibar.activate keyword=mdn\nmap si Vomnibar.activate keyword=imdb\nmap swk Vomnibar.activate keyword=wkp\nmap swa Vomnibar.activate keyword=wa\nmap sws Vomnibar.activate keyword=site\nmap sb Vomnibar.activate keyword=beyond",
+  "linkHintCharacters": "stfpcdrwxqz",
+  "linkHintNumbers": "sfctpdrawqxz",
   "newTabUrl": "https://news.ycombinator.com/",
   "regexFindMode": true,
   "grabBackFocus": true,
-  "searchEngines": "w: https://www.wikipedia.org/w/index.php?title=Special:Search&search=%s Wikipedia\n\ngh: https://github.com/search?q=%s GitHub\ndnd: https://5e.tools/search.html?q=%s 5e.tools\n\ng: https://www.google.com/search?q=%s Google\ngi: https://www.google.com/search?tbm=isch&q=%s Google Images\ngm: https://www.google.com/maps?q=%s Google Maps\n\ny: https://www.youtube.com/results?search_query=%s Youtube",
-  "settingsVersion": "2.2.1",
+  "searchEngines": "gh: https://github.com/search?q=%s GitHub\n\ngs: https://www.google.com/search?q=%s Google\ngi: https://www.google.com/search?tbm=isch&q=%s Google Images\ngm: https://www.google.com/maps?q=%s Google Maps\n\nrecent: https://www.google.com/search?hl=en&tbo=1&tbs=qdr:y&q=%s Google (last year only)\ntranslate: https://translate.google.com/?source=osdd#auto|auto|%s Google Translator\nwkp: https://en.wikipedia.org/wiki/Special:Search?search=%s Wikipedia\nwa: https://www.wolframalpha.com/input/?i=%s Wolfram|Alpha\nmdn: https://developer.mozilla.org/en-US/search?q=%s MDN\nyt: https://www.youtube.com/results?search_query=%s YouTube\nimdb: https://www.imdb.com/find?s=all&q=%s IMDB\n\n# Find your way from your home to places using Google Maps\nhome: https://www.google.com/maps/dir/home/%s\n\n# Use google to search the current site you're on\nsite: javascript:location='https://www.google.com/search?num=100&q=site:'+escape(location.hostname)+'+%s'\n\n\ndnd: https://5e.tools/search.html?q=%s 5e.tools\nfr: https://forgottenrealms.fandom.com/wiki/Special:Search?scope=internal&navigationSearch=true&query=%s\nbeyond: https://www.dndbeyond.com/search?q=%s D&D Beyond",
+  "settingsVersion": "2.3",
   "userDefinedLinkHintCss": "div > .vimiumHintMarker {\n/* linkhint boxes */\nbackground: linear-gradient(105.66deg, #282727 0%, #0D0C0C 103.4%);\nborder: 1px solid #E6C384;\nborder-radius: 4.14955px;\npadding: 3px 6px;\n}\n\ndiv > .vimiumHintMarker > .matchingCharacter {\nfont-style: italic;\nfont-weight: 200;\ntext-transform: uppercase;\ncolor: #625E5A;\n}\n\ndiv > div.internalVimiumHintMarker > span,\ndiv > div.vimiumHintMarker > span {\n  font-family: \"ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace\"\n  font-style: normal;\n  font-weight: 800;\n  font-size: 12.68px;\n  letter-spacing: 0.1em;\n  text-transform: uppercase;\n  color: #E6C384;\n}",
   "exclusionRules": [
     {
@@ -14,8 +14,8 @@
       "pattern": "https?://mail.google.com/*"
     },
     {
-      "passKeys": "",
-      "pattern": "https?://play.zambo.world/*"
+      "passKeys": "0123456789kjlmc<>",
+      "pattern": "https?://www.youtube.com/*"
     }
   ]
 }
