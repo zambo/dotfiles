@@ -96,36 +96,36 @@ return {
       filetypes = { markdown = true, help = true },
     },
   },
-  {
-    "Davidyz/VectorCode",
-    version = "*", -- optional, depending on whether you're on nightly or release
-    dependencies = { "nvim-lua/plenary.nvim" },
-    cmd = "VectorCode", -- if you're lazy-loading VectorCode
-  },
-  {
-    dir = "~/Development/ai-nvim/anthropic.nvim",
-    name = "anthropic.nvim",
-    dev = true,
-    enabled = false,
-    config = function()
-      require("anthropic_auth").setup({ -- Changed from "anthropic" to "anthropic_auth"
-        auth_method = "auto",
-        auto_refresh = true,
-        debug = true,
-      })
-    end,
-  },
-  {
-    "ravitemer/mcphub.nvim",
-    dependencies = { "nvim-lua/plenary.nvim" },
-    build = "npm install -g mcp-hub@latest",
-    config = function()
-      require("mcphub").setup()
-    end,
-  },
+  -- {
+  --   "Davidyz/VectorCode",
+  --   version = "*", -- optional, depending on whether you're on nightly or release
+  --   dependencies = { "nvim-lua/plenary.nvim" },
+  --   cmd = "VectorCode", -- if you're lazy-loading VectorCode
+  -- },
+  -- {
+  --   dir = "~/Development/ai-nvim/anthropic.nvim",
+  --   name = "anthropic.nvim",
+  --   dev = true,
+  --   enabled = false,
+  --   config = function()
+  --     require("anthropic_auth").setup({ -- Changed from "anthropic" to "anthropic_auth"
+  --       auth_method = "auto",
+  --       auto_refresh = true,
+  --       debug = true,
+  --     })
+  --   end,
+  -- },
+  -- {
+  --   "ravitemer/mcphub.nvim",
+  --   dependencies = { "nvim-lua/plenary.nvim" },
+  --   build = "npm install -g mcp-hub@latest",
+  --   config = function()
+  --     require("mcphub").setup()
+  --   end,
+  -- },
   {
     "olimorris/codecompanion.nvim",
-    enabled = true,
+    enabled = false,
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-treesitter/nvim-treesitter",
@@ -417,6 +417,7 @@ Instructions:
   },
   {
     "NickvanDyke/opencode.nvim",
+    enabled = false,
     dependencies = { { "folke/snacks.nvim", opts = { input = { enabled = true } } } },
     opts = {},
     keys = {
@@ -495,73 +496,73 @@ Instructions:
       },
     },
   },
-  {
-    "nvim-lualine/lualine.nvim",
-    optional = true,
-    event = "VeryLazy",
-    opts = function(opts)
-      return {
-        tabline = {
-          -- lualine_y = {
-          --   {
-          --     function()
-          --       return require("vectorcode.integrations").lualine(opts)[1]()
-          --     end,
-          --     cond = function()
-          --       if package.loaded["vectorcode"] == nil then
-          --         return false
-          --       else
-          --         return require("vectorcode.integrations").lualine(opts).cond()
-          --       end
-          --     end,
-          --   },
-          -- },
-        },
-        sections = {
-          lualine_x = {
-            {
-              function()
-                -- Check if MCPHub is loaded
-                if not vim.g.loaded_mcphub then
-                  return "󰐻 -"
-                end
-
-                local count = vim.g.mcphub_servers_count or 0
-                local status = vim.g.mcphub_status or "stopped"
-                local executing = vim.g.mcphub_executing
-
-                -- Show "-" when stopped
-                if status == "stopped" then
-                  return "󰐻 -"
-                end
-
-                -- Show spinner when executing, starting, or restarting
-                if executing or status == "starting" or status == "restarting" then
-                  local frames = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" }
-                  local frame = math.floor(vim.loop.now() / 100) % #frames + 1
-                  return "󰐻 " .. frames[frame]
-                end
-
-                return "󰐻 " .. count
-              end,
-              color = function()
-                if not vim.g.loaded_mcphub then
-                  return { fg = "#6c7086" } -- Gray for not loaded
-                end
-
-                local status = vim.g.mcphub_status or "stopped"
-                if status == "ready" or status == "restarted" then
-                  return { fg = "#50fa7b" } -- Green for connected
-                elseif status == "starting" or status == "restarting" then
-                  return { fg = "#ffb86c" } -- Orange for connecting
-                else
-                  return { fg = "#ff5555" } -- Red for error/stopped
-                end
-              end,
-            },
-          },
-        },
-      }
-    end,
-  },
+  -- {
+  --   "nvim-lualine/lualine.nvim",
+  --   optional = true,
+  --   event = "VeryLazy",
+  --   opts = function(opts)
+  --     return {
+  --       tabline = {
+  --         -- lualine_y = {
+  --         --   {
+  --         --     function()
+  --         --       return require("vectorcode.integrations").lualine(opts)[1]()
+  --         --     end,
+  --         --     cond = function()
+  --         --       if package.loaded["vectorcode"] == nil then
+  --         --         return false
+  --         --       else
+  --         --         return require("vectorcode.integrations").lualine(opts).cond()
+  --         --       end
+  --         --     end,
+  --         --   },
+  --         -- },
+  --       },
+  --       sections = {
+  --         lualine_x = {
+  --           {
+  --             function()
+  --               -- Check if MCPHub is loaded
+  --               if not vim.g.loaded_mcphub then
+  --                 return "󰐻 -"
+  --               end
+  --
+  --               local count = vim.g.mcphub_servers_count or 0
+  --               local status = vim.g.mcphub_status or "stopped"
+  --               local executing = vim.g.mcphub_executing
+  --
+  --               -- Show "-" when stopped
+  --               if status == "stopped" then
+  --                 return "󰐻 -"
+  --               end
+  --
+  --               -- Show spinner when executing, starting, or restarting
+  --               if executing or status == "starting" or status == "restarting" then
+  --                 local frames = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" }
+  --                 local frame = math.floor(vim.loop.now() / 100) % #frames + 1
+  --                 return "󰐻 " .. frames[frame]
+  --               end
+  --
+  --               return "󰐻 " .. count
+  --             end,
+  --             color = function()
+  --               if not vim.g.loaded_mcphub then
+  --                 return { fg = "#6c7086" } -- Gray for not loaded
+  --               end
+  --
+  --               local status = vim.g.mcphub_status or "stopped"
+  --               if status == "ready" or status == "restarted" then
+  --                 return { fg = "#50fa7b" } -- Green for connected
+  --               elseif status == "starting" or status == "restarting" then
+  --                 return { fg = "#ffb86c" } -- Orange for connecting
+  --               else
+  --                 return { fg = "#ff5555" } -- Red for error/stopped
+  --               end
+  --             end,
+  --           },
+  --         },
+  --       },
+  --     }
+  --   end,
+  -- },
 }
