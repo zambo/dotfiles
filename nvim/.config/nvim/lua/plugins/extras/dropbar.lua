@@ -16,19 +16,19 @@ return {
       win_configs = {
         border = "rounded",
         -- Add vertical spacing around menu
-        row = 1,  -- This creates top margin
+        row = 1, -- This creates top margin
       },
       entry = {
         padding = {
-          left = 2,   -- Internal item left padding
-          right = 2,  -- Internal item right padding
+          left = 2, -- Internal item left padding
+          right = 2, -- Internal item right padding
         },
       },
     },
     icons = {
       ui = {
         bar = {
-          separator = "  ",  -- Add more space between items
+          separator = "  ", -- Add more space between items
         },
       },
     },
