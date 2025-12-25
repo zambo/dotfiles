@@ -81,10 +81,18 @@ t = ['workspace 🯶', 'mode main']
 w = ['workspace 🯷', 'mode main']
 f = ['workspace 🯸', 'mode main']
 p = ['workspace 🯹', 'mode main']
-q = ['workspace next --wrap-around', 'mode main']
-b = ['workspace prev --wrap-around', 'mode main']
+q = [
+  'exec-and-forget aerospace list-workspaces --monitor focused --empty no | aerospace workspace next --wrap-around',
+  'mode main',
+]
+# q = ['workspace next --wrap-around', 'mode main']
+b = [
+  'exec-and-forget aerospace list-workspaces --monitor focused --empty no | aerospace workspace prev --wrap-around',
+  'mode main',
+]
+# b = ['workspace prev --wrap-around', 'mode main']
 tab = ['workspace-back-and-forth', 'mode main']
-esc = 'mode main'                                 # "quit" back to main (safety exit)
+esc = 'mode main'                               # "quit" back to main (safety exit)
 
 [mode.workspace-move.binding]
 x = ['move-node-to-workspace 🯱', 'mode main']
@@ -135,6 +143,12 @@ esc = 'mode main'                    # "quit" back to main (safety exit)
 
 [[on-window-detected]]
 if.app-id = 'app.zen-browser.zen'
+if.window-title-regex-substring = 'Picture-in-Picture'
+run = 'layout floating'
+
+
+[[on-window-detected]]
+if.app-id = 'com.google.Chrome'
 if.window-title-regex-substring = 'Picture-in-Picture'
 run = 'layout floating'
 

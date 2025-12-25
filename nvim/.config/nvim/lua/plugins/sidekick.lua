@@ -1,6 +1,11 @@
+if true then
+  return {}
+end
+
 return {
   {
     "folke/sidekick.nvim",
+    enabled = false,
     opts = {
       -- add any options here
     },
