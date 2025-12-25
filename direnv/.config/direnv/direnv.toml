@@ -1,0 +1,9 @@
+[global]
+load_dotenv=true
+log_filter="direnv" # Disables all logs
+
+[whitelist]
+exact = [ "~/.env" ]
+
+[watch]
+files = [ "~/.env" ]
