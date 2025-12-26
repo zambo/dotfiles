@@ -42,8 +42,20 @@ map({ "n", "v" }, "<leader>at", "<cmd>CodeCompanionChat Toggle<cr>", { desc = "T
 map("v", "<leader>ad", "<cmd>CodeCompanionChat Add<cr>", { desc = "Add to Chat" })
 map({ "n", "v" }, "<leader>ai", "<cmd>CodeCompanionChat Inline<cr>", { desc = "Inline Chat" })
 map({ "n", "v" }, "<leader>ac", function()
-  require("codecompanion").prompt("commit")
+  require("codecompanion").prompt("commit-message")
 end, { desc = "Generate Commit Message" })
+
+-- map("n", "<leader>acR", function()
+--   vim.cmd("Lazy! reload codecompanion.nvim")
+--   vim.notify("CodeCompanion reloaded - try again", vim.log.levels.INFO)
+-- end, { desc = "Reload CodeCompanion plugin" })
+--
+-- -- Reload CodeCompanion to pick up prompt changes
+-- map("n", "<leader>acr", function()
+--   require("plenary.reload").reload_module("codecompanion")
+--   require("codecompanion").setup(require("lazy.core.config").plugins["codecompanion.nvim"].opts)
+--   vim.notify("CodeCompanion reloaded", vim.log.levels.INFO)
+-- end, { desc = "Reload CodeCompanion" })
 
 -- filepath: lua/config/keymaps.lua
 map("n", "<leader>ww", function()

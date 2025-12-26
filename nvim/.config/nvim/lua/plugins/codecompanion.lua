@@ -471,15 +471,21 @@ return {
       -- ──────────────────────────────────────────────────────────────────
       -- Prompt Library
       -- ──────────────────────────────────────────────────────────────────
-      prompt_library = {
-        markdown = {
-          dirs = {
-            -- I keep my custom prompts in my nvim config as markdown files
-            -- See: https://codecompanion.olimorris.dev/configuration/prompt-library
-            "~/.config/nvim/prompts",
-          },
-        },
-      },
+       prompt_library = {
+         markdown = {
+           dirs = {
+             -- I keep my custom prompts in my nvim config as markdown files
+             -- See: https://codecompanion.olimorris.dev/configuration/prompt-library
+             "~/.config/nvim/prompts",
+           },
+         },
+         mapping = {
+           -- Use Haiku for commit message generation - smaller model for focused task
+           ["commit-message"] = {
+             adapter = { name = "fuel_ix", model = MODELS.HAIKU },
+           },
+         },
+       },
 
       -- ──────────────────────────────────────────────────────────────────
       -- Extensions

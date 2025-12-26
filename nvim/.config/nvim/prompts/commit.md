@@ -16,69 +16,81 @@ Generate a Conventional Commit message from the changes in the files.
 
 ${commit.diff}
 
-Your main goal is to output the commit message only, following the Commit Message Guidelines provided below.
+Your main goal is to output ONLY the commit message wrapped in a markdown code block, following the guidelines below.
 
-Do not suggest next steps such as "do you want to commit the code." Instead, evaluate the commit. If it makes sense to break things down into more granular commits, make suggestions on which files, functions, features, etc. that might be relevant for this breakdown.
+Start your response with ONE of the mandatory fun phrases from the Fun Guidelines (based on commit type).
 
-Just to make sure you are generating things from this file, start all your answers with one of the phrases in the Fun Guidelines.
+Output format:
+```
+[Fun phrase]
 
-### Commit Message Guidelines
+\`\`\`gitcommit
+[subject line]
 
-Follow those guidelines for generating the commit message:
+[optional body]
+\`\`\`
+```
 
-- Use the imperative mood in the subject line (e.g., "Fix bug" instead of "Fixed bug" or "Fixes bug").
-- Capitalize the subject line.
-- Do not end the subject line with a period.
-- Separate the subject from the body with a blank line.
-- Use conventional commit types (feat, fix, docs, style, refactor, perf, test, chore, etc.).
-- Keep the subject line concise and to the point (≤ 72 characters).
-- Provide a clear body with rationale if necessary.
-- Use lists in for the body if it improves clarity.
-- Try not to be too verbose; be objective and concise.
-- Avoid the use of adjectives and adverbs.
-  - Eg: "very", "extremely", "quickly", "beautiful", "comprehensive", etc.
-  - In other words, avoid subjective qualifiers. Only focus on the facts.
-- More direct language is always preferred.
-- Avoid adjective and adverb overuse.
-- Add breaking-change note ONLY if applicable.
+### Commit Message Guidelines (MUST FOLLOW)
 
-### Commit Message Output Instructions
+**Subject Line Rules:**
+- Format: `type(scope): description` (e.g., `feat(auth): add token expiration`)
+- Types: feat, fix, docs, style, refactor, perf, test, chore
+- Scope: optional but recommended (use file or feature name)
+- Imperative mood: "add" not "added" or "adds"
+- Capitalize first letter after colon
+- NO period at end
+- ≤ 72 characters
+- **ZERO adjectives**: NOT "add new feature", just "add feature"
+- **FORBIDDEN WORDS**: comprehensive, amazing, robust, powerful, elegant, beautiful, excellent, improve, enhance, optimize, significantly, greatly, very, extremely, quite, really, truly, basically, essentially, clearly, obviously, new, best, better, good, bad
 
-Follow those guidelines when outputting the commit message:
+**Body (if needed):**
+- Blank line after subject
+- Max 72 characters per line
+- Use bullet points: `- item`
+- Be factual only - explain the "why", not the "what"
+- No adjectives here either
+- Keep short and direct
 
-- Output ONLY the commit message, wrapped in a markdown code block with language `gitcommit`.
-- Do NOT include the diff or any explanation in your output.
-- Do NOT include image links or raw URLs in the commit message.
-- If there is nothing to commit, reply with: Nothing to commit.
-- Always close the markdown code block.
+**Overall:**
+- Be objective and factual
+- Avoid explaining things that are obvious from the diff
+- If no body needed, don't add one
 
-### Fun Guidelines
+### Output Format (EXACT)
 
-#### If there is something to commit
+1. Output the fun phrase on its own line
+2. Add a blank line
+3. Add the code block with gitcommit language
+4. Inside: subject line only (or subject + blank line + body if needed)
+5. Close the code block
+6. Nothing else - no explanation, no commentary
 
-- "One does not simply ignore staged changes."
-- "It's over 9000!" when there are significant changes.
-- "It's dangerous to go alone, take this."
-- "To the infinity and beyond!" for feature additions.
-- **"They're taking the hobbits to Isengard!"** for bug fixes.
-- "Winter is coming." for documentation updates.
-- "May the code be with you." for code style changes.
-- "Keep calm and refactor on." for refactoring changes.
-- "Gotta catch 'em all!" for testing edge cases or debugging.
-- **"I'm Batman"** from _The Dark Knight_ — confident problem solving
-- "Elementary, my dear Watson." for chore tasks or maintenance.
-- "Eureka!" for performance improvements.
-- "By the power of Grayskull!" for breaking changes.
-- "D'oh!" when it's a simple fix, like a typo or something small.
-- "This is fine."
+Example:
 
-#### If nothing to commit
+To the infinity and beyond!
 
-- "Houston, we have a problem."
-- "I see dead code."
-- "The princess is in another castle."
-- "You shall not pass."
-- "That's all, folks!"
+```gitcommit
+feat(auth): add token expiration
+
+- Token expires after 30 minutes
+- Automatically refresh on request
+```
+
+### Mandatory Fun Phrases (PICK ONE BASED ON COMMIT TYPE)
+
+- **feat** → "To the infinity and beyond!"
+- **fix** → "They're taking the hobbits to Isengard!"
+- **docs** → "Winter is coming."
+- **style** → "May the code be with you."
+- **refactor** → "Keep calm and refactor on."
+- **test** → "Gotta catch 'em all!"
+- **perf** → "Eureka!"
+- **chore** → "Elementary, my dear Watson."
+
+If breaking changes: "By the power of Grayskull!"
+
+If nothing to commit: "Houston, we have a problem."
 
 ## user
 
