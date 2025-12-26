@@ -1,0 +1,4 @@
+pre-commit:
+  commands:
+    secrets-detection:
+      run: gitleaks protect --staged --verbose --exit-code 1
