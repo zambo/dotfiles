@@ -1,0 +1,23 @@
+-- -- Load the URLDispatcher Spoon
+-- hs.loadSpoon("URLDispatcher")
+--
+-- -- Define a handler function to open YouTube URLs in Arc browser
+-- -- Arc's bundle ID is "company.thebrowser.Browser"
+-- local function openInArc(url)
+-- 	hs.urlevent.openURLWithBundle(url, "company.thebrowser.Browser")
+-- end
+--
+-- -- Configure URLDispatcher using url_patterns
+-- spoon.URLDispatcher.url_patterns = {
+-- 	{ "youtube%.com", openInArc },
+-- 	{ "youtu%.be", openInArc },
+-- }
+--
+-- -- Set default handler for all other URLs - open in Chrome
+-- spoon.URLDispatcher.default_handler = "com.google.Chrome"
+--
+-- -- Enable Slack redirect URL decoding (this is the default, but being explicit)
+-- spoon.URLDispatcher.decode_slack_redir_urls = true
+--
+-- -- Start the URL dispatcher
+-- spoon.URLDispatcher:start()

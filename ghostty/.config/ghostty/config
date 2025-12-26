@@ -1,73 +1,50 @@
 # Run `ghostty +show-config --default --docs` to view a list of
 # all available config options and their default values.
-#
-# Additionally, each config option is also explained in detail
-# on Ghostty's website, at https://ghostty.org/docs/config.
-#
-# Ghostty can reload the configuration while running by using the menu
-# options or the bound key (default: Command + Shift + comma on macOS and
-# Control + Shift + comma on other platforms). Not all config options can be
-# reloaded while running; some only apply to new windows and others may require
-# a full restart to take effect.
+# See https://ghostty.org/docs/config for detailed documentation.
 
-# Config syntax crash course
-# ==========================
-# # The config file consists of simple key-value pairs,
-# # separated by equals signs.
-# font-family = Iosevka
-# window-padding-x = 2
-#
-# # Spacing around the equals sign does not matter.
-# # All of these are identical:
-# key=value
-# key= value
-# key =value
-# key = value
-#
-# # Any line beginning with a # is a comment. It's not possible to put
-# # a comment after a config option, since it would be interpreted as a
-# # part of the value. For example, this will have a value of "#123abc":
-# background = #123abc
-#
-# # Empty values are used to reset config keys to default.
-# key =
-#
-# # Some config options have unique syntaxes for their value,
-# # which is explained in the docs for that config option.
-# # Just for example:
-# resize-overlay-duration = 4s 200ms
+# ============================================================================
+# SHELL INTEGRATION
+# ============================================================================
 
-# font-family = "JetBrainsMono Nerd Font Mono"
-# term = xterm-256color
+shell-integration = fish
 
-# font-family = "Monaspace Argon Var"
-# font-family-bold = "Monaspace Krypton Var"
-# font-family-italic = "Monaspace Xeon Var"
-# font-family-bold-italic = "Monaspace Krypton Var"
+font-family = "Monaspace Krypton Var"
+font-family-bold = "Monaspace Xenon Var"
+font-family-italic = "Monaspace Radon Var"
+font-family-bold-italic = "Monaspace Argon Var"
 
-font-family = "OperatorMono Nerd Font"
+
+shell-integration = "fish"
+
+# font-family = "OperatorMono Nerd Font"
 # font-family-bold = "JetBrainsMono Nerd Font Mono"
 # font-family-italic = "Operator Mono SSm Lig"
 # font-family-bold-italic = "JetBrainsMono Nerd Font Mono"
 
-# font-synthetic-style=
+# Alternative Fonts:
+# font-family = "JetBrainsMono Nerd Font Mono"
+# font-family = "Monaspace Krypton Var"
+# font-family-bold = "Monaspace Xenon Var"
+# font-family-italic = "Monaspace Radon Var"
+# font-family-bold-italic = "Monaspace Argon Var"
 
 font-style = "Medium" 
-font-style-italic = "Light Italic"
-font-style-bold = "Bold"
+font-style-italic = "Medium Italic"
+font-style-bold = "Medium"
 font-style-bold-italic = "Medium Italic"
 
+# font-variation = slnt=-11
 
 # font-variation-bold = wght=800
 # font-variation-bold = slnt=-11
-
+#
 # font-variation-italic = wght=800
-# font-variation-italic = slnt=-11
-
+font-variation-italic = slnt=-11
+#
 # font-variation-bold-italic = wght=800
-# font-variation-bold-italic = slnt=-11
+font-variation-bold-italic = slnt=-11
 
-font-size = 16
+font-size = 12
 font-feature = "'calt', 'ss01', 'ss02', 'ss03', 'ss04', 'ss05', 'ss06', 'ss07', 'ss08', 'ss09', 'liga'" 
 
 font-thicken = true
@@ -80,7 +57,7 @@ theme = "kanagawa-wave"
 # theme = "tokyonight_moon"
 
 cursor-click-to-move = true
-background-opacity = 1
+# background-opacity = 0.95
 
 macos-titlebar-style = hidden
 macos-option-as-alt = true
@@ -91,48 +68,126 @@ macos-icon = retro
 
 freetype-load-flags = "no-force-autohint"
 
-# macos-titlebar-proxy-icon = hidden
+# Cell Adjustments
+adjust-cell-height = 75%
+adjust-cell-width = 5%
+adjust-cursor-thickness = 2
+adjust-underline-position = 9
 
-# window-decoration = none
+# ============================================================================
+# THEME & APPEARANCE
+# ============================================================================
+
+# theme = "kanagawa-wave"
+# theme = "tokyonight_moon"
+theme = "Kanagawa Wave"
+window-colorspace = display-p3
+alpha-blending = native
+# background-opacity = 0.95
+background-blur-radius = 65
+
+
+
+# ============================================================================
+# CURSOR
+# ============================================================================
+
+cursor-style = underline
+cursor-style-blink = true
+cursor-click-to-move = true
+
+# ============================================================================
+# WINDOW CONFIGURATION
+# ============================================================================
 
 window-padding-x = 20
 window-padding-y = 0,0
 window-padding-color = extend
-# window-theme = ghostty
-window-colorspace = display-p3
 window-padding-balance = true
 window-decoration = true
-# fullscreen = true
+window-save-state = always
+window-inherit-font-size = true
 
+# ============================================================================
+# SPLITS
+# ============================================================================
+
+unfocused-split-opacity = 0.6
+split-divider-color = #c0a36e
+
+# ============================================================================
+# MACOS SPECIFIC
+# ============================================================================
+
+macos-titlebar-style = hidden
+macos-option-as-alt = true
+macos-icon = retro
+
+# ============================================================================
+# MOUSE & CLIPBOARD
+# ============================================================================
+
+mouse-hide-while-typing = true
+copy-on-select = clipboard
+clipboard-paste-protection = false
+clipboard-paste-bracketed-safe = false
+
+# ============================================================================
+# MISC SETTINGS
+# ============================================================================
+
+link-url = true
+confirm-close-surface = true
+
+# ============================================================================
+# KEYBINDINGS
+# ============================================================================
+
+# Unbind conflicting keys
+keybind = alt+left=unbind
+keybind = alt+right=unbind
+
+# Quick Terminal
 keybind = global:alt+ctrl+shift+cmd+t=toggle_quick_terminal
-#
-# macos-icon = official
 
-cursor-style = underline 
-cursor-style-blink = true
-adjust-cursor-thickness  	= 2
-adjust-underline-position  	= 9
-adjust-cell-height = 75%
-adjust-cell-width = 5%
-link-url 			= true
-background-blur-radius 		= 65
-mouse-hide-while-typing 	= true
-# keybind 			= global:cmd+s=toggle_quick_terminal
-# window-decoration 		= true
-window-inherit-font-size 	= true
-# gtk-wide-tabs 			= false
-confirm-close-surface		= true
-clipboard-paste-protection	= false
-clipboard-paste-bracketed-safe	= false
+# Config Reload
+keybind = super+r=reload_config
 
-# Tmux Key Bindings
-# keybind = ctrl+n=ntw_window
+# Terminal Input
+keybind = shift+enter=text:\n
 
+# Split Management
+keybind = ctrl+enter=toggle_split_zoom
+keybind = cmd+shift+up=resize_split:up,50
+keybind = cmd+shift+down=resize_split:down,50
+keybind = cmd+shift+left=resize_split:left,50
+keybind = cmd+shift+right=resize_split:right,50
+keybind = cmd+shift+equal=equalize_splits
+
+# ============================================================================
+# ALTERNATIVE CONFIGURATIONS (commented out)
+# ============================================================================
+
+# Other Options:
+# background-opacity = 0.95
+# bold-is-bright = true
+# macos-icon-frame = beige
+# macos-titlebar-proxy-icon = hidden
+# term = xterm-256color
+# fullscreen = true
+# focus-follows-mouse = true
+
+# Vim-like Scrolling:
+# keybind = performable:ctrl+u=scroll_page_up
+# keybind = performable:ctrl+d=scroll_page_down
+# keybind = performable:g>g=scroll_to_top
+# keybind = performable:shift+g=scroll_to_bottom
+
+# Tmux-style Split Navigation:
 # keybind = ctrl+n=goto_split:left
-# keybind = ctrl+e=goto_split:bottom
+# keybind = ctrl+e=goto_spperformable:lit:bottom
 # keybind = ctrl+i=goto_split:top
 # keybind = ctrl+o=goto_split:right
-#
 # keybind = ctrl+a>n=new_split:left
 # keybind = ctrl+a>e=new_split:down
 # keybind = ctrl+a>i=new_split:up
@@ -145,7 +200,7 @@ clipboard-paste-bracketed-safe	= false
 keybind = super+r=reload_config
 
 window-save-state = always
-unfocused-split-opacity = 0.5
+unfocused-split-opacity = 0.6
 # focus-follows-mouse = true
 split-divider-color = #c0a36e 
 shell-integration = fish
@@ -162,3 +217,11 @@ keybind = cmd+shift+left=resize_split:left,50
 keybind = cmd+shift+right=resize_split:right,50
 
 keybind = cmd+shift+equal=equalize_splits
+
+
+# Vim like scrolling
+# keybind = ctrl+u=scroll_page_up
+# keybind = ctrl+d=scroll_page_down
+# keybind = g+g=scroll_to_top
+# keybind = shift+g=scroll_to_bottom
+

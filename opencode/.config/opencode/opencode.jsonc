@@ -1,12 +1,247 @@
 {
-  "$schema": "https://opencode.ai/config.json",
-  "mcp": {
-    "taskwarrior": {
-      "type": "local",
-      "command": ["npx", "-y", "mcp-server-taskwarrior"],
-      // "args": ["-y", "mcp-server-taskwarrior"],
-      "enabled": true,
-    },
-  },
+	"$schema": "https://opencode.ai/config.json",
+	// Theme configuration
+	"theme": "system",
+	"model": "fuel_ix/claude-haiku-4-5",
+	"autoupdate": true,
+	// TUI
+	"tui": {
+		"scroll_speed": 3,
+		"scroll_acceleration": {
+			"enabled": true
+		}
+	},
+	"provider": {
+		"fuel_ix": {
+			"npm": "@ai-sdk/openai-compatible",
+			"name": "Fuel iX",
+			"options": {
+				"baseURL": "https://proxy.fuelix.ai/v1"
+			},
+			"models": {
+				"claude-sonnet-4-5": {
+					"name": "claude-sonnet-4-5"
+				},
+				"claude-haiku-4-5": {
+					"name": "claude-haiku-4-5"
+				},
+				"gpt-5-2": {
+					"name": "gpt-5.2-chat"
+				},
+				"gpt-4-1": {
+					"name": "gpt-4-1"
+				},
+				"gpt-5": {
+					"name": "gpt-5"
+				},
+				"gpt-5-chat": {
+					"name": "gpt-5-chat"
+				},
+				"gpt-5-mini": {
+					"name": "gpt-5-mini"
+				}
+			}
+			// FULL List of Models as 2025-12-16 20:06
+			// "models": {
+			// 	"claude-3-5-sonnet": {
+			// 		"name": "claude-3-5-sonnet"
+			// 	},
+			// 	"claude-3-5-sonnet-20240620": {
+			// 		"name": "claude-3-5-sonnet-20240620"
+			// 	},
+			// 	"claude-3-5-haiku": {
+			// 		"name": "claude-3-5-haiku"
+			// 	},
+			// 	"claude-sonnet-4": {
+			// 		"name": "claude-sonnet-4"
+			// 	},
+			// 	"dall-e-3": {
+			// 		"name": "dall-e-3"
+			// 	},
+			// 	"gpt-4o": {
+			// 		"name": "gpt-4o"
+			// 	},
+			// 	"gpt-4o-2024-05-13": {
+			// 		"name": "gpt-4o-2024-05-13"
+			// 	},
+			// 	"text-embedding-3-large": {
+			// 		"name": "text-embedding-3-large"
+			// 	},
+			// 	"text-embedding-3-small": {
+			// 		"name": "text-embedding-3-small"
+			// 	},
+			// 	"imagen-3": {
+			// 		"name": "imagen-3"
+			// 	},
+			// 	"gpt-4o-mini": {
+			// 		"name": "gpt-4o-mini"
+			// 	},
+			// 	"text-embedding-ada-002": {
+			// 		"name": "text-embedding-ada-002"
+			// 	},
+			// 	"gpt-4o-2024-05-13-content-filter": {
+			// 		"name": "gpt-4o-2024-05-13-content-filter"
+			// 	},
+			// 	"gpt-4o-mini-2024-07-18": {
+			// 		"name": "gpt-4o-mini-2024-07-18"
+			// 	},
+			// 	"gpt-4o-2024-08-06": {
+			// 		"name": "gpt-4o-2024-08-06"
+			// 	},
+			// 	"gpt-3_5-turbo-0125": {
+			// 		"name": "gpt-3_5-turbo-0125"
+			// 	},
+			// 	"mistral-large": {
+			// 		"name": "mistral-large"
+			// 	},
+			// 	"claude-3-5-sonnet-20241022": {
+			// 		"name": "claude-3-5-sonnet-20241022"
+			// 	},
+			// 	"imagen-3-fast": {
+			// 		"name": "imagen-3-fast"
+			// 	},
+			// 	"llama-3.2-90b": {
+			// 		"name": "llama-3.2-90b"
+			// 	},
+			// 	"o3-mini": {
+			// 		"name": "o3-mini"
+			// 	},
+			// 	"o4-mini": {
+			// 		"name": "o4-mini"
+			// 	},
+			// 	"tts-1": {
+			// 		"name": "tts-1"
+			// 	},
+			// 	"tts-1-hd": {
+			// 		"name": "tts-1-hd"
+			// 	},
+			// 	"whisper-1": {
+			// 		"name": "whisper-1"
+			// 	},
+			// 	"gemini-2.5-pro": {
+			// 		"name": "gemini-2.5-pro"
+			// 	},
+			// 	"mistral-large-24.11": {
+			// 		"name": "mistral-large-24.11"
+			// 	},
+			// 	"gemini-2.5-flash": {
+			// 		"name": "gemini-2.5-flash"
+			// 	},
+			// 	"gemini-2.0-flash": {
+			// 		"name": "gemini-2.0-flash"
+			// 	},
+			// 	"cursor-c-3-5-sonnet": {
+			// 		"name": "cursor-c-3-5-sonnet"
+			// 	},
+			// 	"claude-3-7-sonnet": {
+			// 		"name": "claude-3-7-sonnet"
+			// 	},
+			// 	"cursor-c-3-7-sonnet": {
+			// 		"name": "cursor-c-3-7-sonnet"
+			// 	},
+			// 	"claude-3-7-sonnet-20250219": {
+			// 		"name": "claude-3-7-sonnet-20250219"
+			// 	},
+			// 	"gpt-4.1": {
+			// 		"name": "gpt-4.1"
+			// 	},
+			// 	"claude-4-sonnet": {
+			// 		"name": "claude-4-sonnet"
+			// 	},
+			// 	"cursor-c-4-sonnet": {
+			// 		"name": "cursor-c-4-sonnet"
+			// 	},
+			// 	"gpt-5-2025-08-07": {
+			// 		"name": "gpt-5-2025-08-07"
+			// 	},
+			// 	"gpt-5-nano-2025-08-07": {
+			// 		"name": "gpt-5-nano-2025-08-07"
+			// 	},
+			// 	"gpt-5-mini-2025-08-07": {
+			// 		"name": "gpt-5-mini-2025-08-07"
+			// 	},
+			// 	"gpt-5-chat-2025-08-07": {
+			// 		"name": "gpt-5-chat-2025-08-07"
+			// 	},
+			// 	"claude-3-5-haiku-20241022": {
+			// 		"name": "claude-3-5-haiku-20241022"
+			// 	},
+			// 	"claude-sonnet-4-20250514": {
+			// 		"name": "claude-sonnet-4-20250514"
+			// 	},
+			// 	"gpt-5": {
+			// 		"name": "gpt-5"
+			// 	},
+			// 	"gpt-5-chat": {
+			// 		"name": "gpt-5-chat"
+			// 	},
+			// 	"gpt-5-mini": {
+			// 		"name": "gpt-5-mini"
+			// 	},
+			// 	"gpt-5-nano": {
+			// 		"name": "gpt-5-nano"
+			// 	},
+			// 	"gpt-oss-120b-sovereign": {
+			// 		"name": "gpt-oss-120b-sovereign"
+			// 	},
+			// 	"claude-sonnet-4-5": {
+			// 		"name": "claude-sonnet-4-5"
+			// 	},
+			// 	"claude-sonnet-4-legacy": {
+			// 		"name": "claude-sonnet-4-legacy"
+			// 	},
+			// 	"claude-sonnet-4-5-20250929": {
+			// 		"name": "claude-sonnet-4-5-20250929"
+			// 	},
+			// 	"gemini-2.5-flash-lite": {
+			// 		"name": "gemini-2.5-flash-lite"
+			// 	},
+			// 	"claude-haiku-4-5": {
+			// 		"name": "claude-haiku-4-5"
+			// 	},
+			// 	"claude-haiku-4-5-20251001": {
+			// 		"name": "claude-haiku-4-5-20251001"
+			// 	},
+			// 	"c-haiku-4-5": {
+			// 		"name": "c-haiku-4-5"
+			// 	},
+			// 	"imagen-4": {
+			// 		"name": "imagen-4"
+			// 	},
+			// 	"gpt-4o-transcribe-2025-03-20": {
+			// 		"name": "gpt-4o-transcribe-2025-03-20"
+			// 	},
+			// 	"gpt-4o-transcribe": {
+			// 		"name": "gpt-4o-transcribe"
+			// 	},
+			// 	"gemini-3-pro-preview": {
+			// 		"name": "gemini-3-pro-preview"
+			// 	},
+			// 	"gemini-3-pro": {
+			// 		"name": "gemini-3-pro"
+			// 	},
+			// 	"claude-sonnet-4-5-bedrock": {
+			// 		"name": "claude-sonnet-4-5-bedrock"
+			// 	},
+			// 	"mistral-small-3.2-24b": {
+			// 		"name": "mistral-small-3.2-24b"
+			// 	},
+			// 	"nemotron-ultra-253b": {
+			// 		"name": "nemotron-ultra-253b"
+			// 	},
+			// 	"gpt-5.2-2025-12-11": {
+			// 		"name": "gpt-5.2-2025-12-11"
+			// 	},
+			// 	"qwen3-embedding-8b": {
+			// 		"name": "qwen3-embedding-8b"
+			// 	},
+			// 	"kalm-embedding-gemma3-12b": {
+			// 		"name": "kalm-embedding-gemma3-12b"
+			// 	},
+			// 	"glm-4.6": {
+			// 		"name": "glm-4.6"
+			// 	}
+			// }
+		}
+	}
 }
-
