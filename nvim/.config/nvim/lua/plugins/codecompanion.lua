@@ -15,8 +15,12 @@ end
 -- ============================================================================
 
 local FUELIX_API_URL = "https://proxy.fuelix.ai/v1"
+local FUELIX_API_KEY = os.getenv("FUEL_IX_API_KEY")
 local CACHE_FILE = vim.fn.stdpath("cache") .. "/fuelix_models.json"
 local CACHE_DURATION = 24 * 60 * 60 -- 24 hours - models don't change that often
+
+-- Determine which adapter to use based on API key availability
+local USE_COPILOT = not FUELIX_API_KEY or FUELIX_API_KEY == ""
 
 -- Model Configuration - single source of truth for model names
 local MODELS = {
@@ -28,14 +32,13 @@ local MODELS = {
   SONNET = "claude-sonnet-4-5",
 }
 
+-- Helper function to select adapter based on API key availability
+local function get_adapter(model)
+  return USE_COPILOT and "copilot" or { name = "fuel_ix", model = model }
+end
+
 -- Debug mode - set FUELIX_DEBUG=1 to enable diagnostic logging
 local DEBUG = os.getenv("FUELIX_DEBUG") == "0"
-
--- I use 1Password's new environments feature to mount the API key as an env var
--- See: https://developer.1password.com/docs/environments/
--- Alternative: op read 'op://Private/Fuel iX API Key/credential' --no-newline
--- See: https://developer.1password.com/docs/cli/secret-references
-local FUELIX_API_KEY = os.getenv("FUEL_IX_API_KEY")
 
 -- Fallback models in case the API is down or unreachable
 local FALLBACK_MODELS = {
@@ -258,8 +261,8 @@ return {
       -- ──────────────────────────────────────────────────────────────────
       interactions = {
         chat = {
-          -- I prefer Sonnet for chat, but simply change the default as needed
-          adapter = { name = "fuel_ix", model = MODELS.SONNET },
+          -- Use Copilot if Fuel iX API key is not available
+          adapter = get_adapter(MODELS.SONNET),
           variables = {
             ["buffer"] = {
               opts = {
@@ -274,8 +277,8 @@ return {
         },
 
         inline = {
-          -- Haiku for inline edits - faster and cheaper for quick changes
-          adapter = { name = "fuel_ix", model = MODELS.HAIKU },
+          -- Use Copilot if Fuel iX API key is not available
+          adapter = get_adapter(MODELS.HAIKU),
           keymaps = {
             accept_change = {
               modes = { n = "ga" },
@@ -290,8 +293,8 @@ return {
         },
 
         cmd = {
-          -- Also use Haiku for commands - quick responses are key here
-          adapter = { name = "fuel_ix", model = MODELS.HAIKU },
+          -- Use Copilot if Fuel iX API key is not available
+          adapter = get_adapter(MODELS.HAIKU),
           opts = {
             completion_provider = "blink",
           },
@@ -471,24 +474,24 @@ return {
       -- ──────────────────────────────────────────────────────────────────
       -- Prompt Library
       -- ──────────────────────────────────────────────────────────────────
-       prompt_library = {
-         markdown = {
-           dirs = {
-             -- I keep my custom prompts in my nvim config as markdown files
-             -- See: https://codecompanion.olimorris.dev/configuration/prompt-library
-             "~/.config/nvim/prompts",
-           },
-         },
-         mapping = {
-           -- Use Haiku for commit message generation - smaller model for focused task
-           ["commit-message"] = {
-             adapter = { name = "fuel_ix", model = MODELS.HAIKU },
-           },
-         },
-       },
+      prompt_library = {
+        markdown = {
+          dirs = {
+            -- I keep my custom prompts in my nvim config as markdown files
+            -- See: https://codecompanion.olimorris.dev/configuration/prompt-library
+            "~/.config/nvim/prompts",
+          },
+        },
+        mapping = {
+          -- Use Copilot if Fuel iX API key is not available
+          ["commit-message"] = {
+            adapter = get_adapter(MODELS.HAIKU),
+          },
+        },
+      },
 
       -- ──────────────────────────────────────────────────────────────────
-      -- Extensions
+      --
       -- ──────────────────────────────────────────────────────────────────
       extensions = {
         -- See: https://github.com/topics/codecompanion
@@ -531,6 +534,13 @@ return {
     -- Register user commands after plugin loads
     config = function(_, opts)
       require("codecompanion").setup(opts)
+
+      -- Notify which backend is active
+      if USE_COPILOT then
+        vim.notify("CodeCompanion: Using Copilot (FUEL_IX_API_KEY not set)", vim.log.levels.WARN)
+      else
+        vim.notify("CodeCompanion: Using Fuel iX", vim.log.levels.INFO)
+      end
 
       -- Command to run health check
       vim.api.nvim_create_user_command("FuelIxHealth", function()
