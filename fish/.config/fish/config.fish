@@ -3,7 +3,8 @@ if status is-interactive
     set -gx EDITOR nvim
     set -gx PATH /opt/homebrew/bin $PATH
     set -gx fish_key_bindings fish_vi_key_bindings
-
+    # https://github.com/eza-community/eza?tab=readme-ov-file
+    set -gx EZA_STANDARD_OPTIONS --group-directories-first --icons --git --long --header --color=auto --hyperlink --smart-group --git-repos --no-user --created --accessed --modified --time-style=long-iso
     eval "$(/opt/homebrew/bin/brew shellenv)"
 
     # Direnv Setup (moved inside interactive check)
