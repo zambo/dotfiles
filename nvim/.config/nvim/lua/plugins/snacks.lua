@@ -1,6 +1,6 @@
 ---@class snacks.Config
 
--- Files and directories to ignore globally
+-- Files and directories to ignore within snacks nvim context (grep, explorer, files)
 local ignoreList = {
   ".git",
   "node_modules",
@@ -10,6 +10,7 @@ local ignoreList = {
   "^build",
   ".DS_Store",
   "thumbs.db",
+  "storybook-static",
 }
 
 return {

@@ -13,6 +13,14 @@ map("n", "<C-c>", "ciw")
 map("n", "<M-Left>", "b", { desc = "Move backwards" })
 map("n", "<M-Right>", "w", { desc = "Move forwards" })
 
+-- sort json using jq (only json files)
+map("n", "<leader>cj", ":%!jq -S .<CR>", { desc = "Format JSON with jq" })
+
+-- cmd + shift + bracket to switch buffer
+-- this leverages combo I have set on my keyboard to switch tabs in browser
+map("n", "\x1b[1;6C", "<cmd>bnext<cr>", { desc = "Next buffer" })
+map("n", "\x1b[1;6D", "<cmd>bprev<cr>", { desc = "Previous buffer" })
+
 -- Expand 'cc' into 'CodeCompanion' in the command line
 vim.cmd([[cab cc CodeCompanion]])
 vim.cmd([[cab ccc CodeCompanionChat]])

@@ -1,22 +1,20 @@
-return {
-  "nvimtools/none-ls.nvim",
-  optional = true,
-  opts = function(_, opts)
-    local nls = require("null-ls")
-    opts.sources = opts.sources or {}
-    table.insert(opts.sources, nls.builtins.formatting.prettier)
-    table.insert(opts.sources, nls.builtins.formatting.biome)
-    table.insert(opts.sources, nls.builtins.diagnostics.markdownlint_cli2)
-  end,
-}
-
--- {
+return {}
+-- return {
 --   "nvimtools/none-ls.nvim",
---   optional = true,
+--   -- optional = true,
+--   enable = true,
 --   opts = function(_, opts)
 --     local nls = require("null-ls")
---     opts.sources = vim.list_extend(opts.sources or {}, {
---       nls.builtins.diagnostics.markdownlint_cli2,
---     })
+--     opts.sources = opts.sources or {}
+--     table.insert(opts.sources, nls.builtins.formatting.prettier)
+--     table.insert(
+--       opts.sources,
+--       nls.builtins.formatting.prettier.with({
+--         extra_filetypes = { "typescript", "typescriptreact" },
+--         prefer_local = "node_modules/.bin",
+--       })
+--     )
+--     table.insert(opts.sources, nls.builtins.formatting.biome)
+--     table.insert(opts.sources, nls.builtins.diagnostics.markdownlint_cli2)
 --   end,
 -- }
