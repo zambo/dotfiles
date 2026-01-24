@@ -2,7 +2,22 @@
 	"$schema": "https://opencode.ai/config.json",
 	// Theme configuration
 	"theme": "system",
-	"model": "fuel_ix/claude-haiku-4-5",
+	"default_agent": "peer",
+	"disabled_providers": [
+		"azure_openai",
+		"anthropic",
+		"cohere",
+		"google_palm",
+		"huggingface",
+		"openai",
+		"replicate",
+		"stability_ai",
+		"vertex_ai",
+		"opencode"
+	],
+	"model": "fuel_ix/claude-sonnet-4-5",
+	"small_model": "fuel_ix/gpt-5-mini",
+	"username": "zambo",
 	"autoupdate": true,
 	// TUI
 	"tui": {
@@ -11,6 +26,15 @@
 			"enabled": true
 		}
 	},
+	"command": {
+		"do_things": {
+			"template": "just do echo something on shell like hello world !`echo hello`",
+			"description": "An example command that does things."
+		}
+	},
+	// Keybindings
+	"keybinds": {},
+	// Provider and Model configuration
 	"provider": {
 		"fuel_ix": {
 			"npm": "@ai-sdk/openai-compatible",
@@ -20,25 +44,26 @@
 			},
 			"models": {
 				"claude-sonnet-4-5": {
-					"name": "claude-sonnet-4-5"
+					"name": "Claude Sonnet 4.5",
+					"reasoning": true
 				},
 				"claude-haiku-4-5": {
-					"name": "claude-haiku-4-5"
+					"name": "Claude Haiku 4.5"
 				},
 				"gpt-5-2": {
-					"name": "gpt-5.2-chat"
+					"name": "GPT 5.2 Chat"
 				},
 				"gpt-4-1": {
-					"name": "gpt-4-1"
+					"name": "GPT 4.1"
 				},
 				"gpt-5": {
-					"name": "gpt-5"
+					"name": "GPT 5"
 				},
 				"gpt-5-chat": {
-					"name": "gpt-5-chat"
+					"name": "GPT 5 Chat"
 				},
 				"gpt-5-mini": {
-					"name": "gpt-5-mini"
+					"name": "GPT 5 Mini"
 				}
 			}
 			// FULL List of Models as 2025-12-16 20:06
