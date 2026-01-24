@@ -1,3 +1,9 @@
+-- Define hyper key if not already defined
+local hyper = { "cmd", "alt", "ctrl", "shift" }
+
+-- Log when config loads
+hs.alert.show("Hammerspoon config loaded")
+
 -- Load the URLDispatcher Spoon
 hs.loadSpoon("URLDispatcher")
 
@@ -16,7 +22,7 @@ hs.hotkey.bind({ "cmd", "shift" }, "O", function()
                 return currentURL
             end if
         end tell
-    ]]
+ h   ]]
 
 	local ok, url = hs.osascript.applescript(script)
 
@@ -42,3 +48,20 @@ spoon.URLDispatcher.decode_slack_redir_urls = true
 
 -- Start the URL dispatcher
 spoon.URLDispatcher:start()
+
+-- Close notifications
+-- hs.hotkey.bind(hyper, "n", function()
+-- 	hs.alert.show("Clearing notifications...")
+--
+-- 	-- Use macOS built-in shortcuts to clear notifications
+-- 	-- Option+Shift+Click on notification center opens it and shows Clear All
+-- 	hs.eventtap.keyStroke({ "cmd", "shift" }, "n", 0) -- Open Notification Center
+-- 	hs.timer.doAfter(0.3, function()
+-- 		-- Press Option to reveal "Clear All" button
+-- 		hs.eventtap.keyStroke({ "alt" }, "c", 0) -- Clear All shortcut
+-- 		hs.timer.doAfter(0.2, function()
+-- 			hs.eventtap.keyStroke({ "cmd", "shift" }, "n", 0) -- Close Notification Center
+-- 			hs.alert.show("Notifications cleared")
+-- 		end)
+-- 	end)
+-- end)

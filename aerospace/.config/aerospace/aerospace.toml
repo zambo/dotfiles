@@ -69,6 +69,8 @@ s = 'mode workspace-move' # "send" window to workspace
 f = 'mode window-nav'     # "focus" / find windows
 m = 'mode window-move'    # "move" windows
 j = 'mode window-merge'   # "join" windows together
+a = 'mode app-launcher'   # "app" launcher
+r = 'mode resize-window'  # "resize" window
 esc = 'mode main'         # "quit" back to main (safety exit)
 
 [mode.workspace-nav.binding]
@@ -81,15 +83,23 @@ t = ['workspace 🯶', 'mode main']
 w = ['workspace 🯷', 'mode main']
 f = ['workspace 🯸', 'mode main']
 p = ['workspace 🯹', 'mode main']
-q = [
-  'exec-and-forget aerospace list-workspaces --monitor focused --empty no | aerospace workspace next --wrap-around',
-  'mode main',
-]
+
+b = ['workspace b', 'mode main']
+g = ['workspace g', 'mode main']
+v = ['workspace v', 'mode main']
+q = ['workspace q', 'mode main']
+a = ['workspace a', 'mode main']
+z = ['workspace z', 'mode main']
+
+# q = [
+#   'exec-and-forget aerospace list-workspaces --monitor focused --empty no | aerospace workspace next --wrap-around',
+#   'mode main',
+# ]
 # q = ['workspace next --wrap-around', 'mode main']
-b = [
-  'exec-and-forget aerospace list-workspaces --monitor focused --empty no | aerospace workspace prev --wrap-around',
-  'mode main',
-]
+# b = [
+#   'exec-and-forget aerospace list-workspaces --monitor focused --empty no | aerospace workspace prev --wrap-around',
+#   'mode main',
+# ]
 # b = ['workspace prev --wrap-around', 'mode main']
 tab = ['workspace-back-and-forth', 'mode main']
 esc = 'mode main'                               # "quit" back to main (safety exit)
@@ -104,6 +114,12 @@ t = ['move-node-to-workspace 🯶', 'mode main']
 w = ['move-node-to-workspace 🯷', 'mode main']
 f = ['move-node-to-workspace 🯸', 'mode main']
 p = ['move-node-to-workspace 🯹', 'mode main']
+b = ['move-node-to-workspace b', 'mode main']
+g = ['move-node-to-workspace g', 'mode main']
+v = ['move-node-to-workspace v', 'mode main']
+q = ['move-node-to-workspace q', 'mode main']
+a = ['move-node-to-workspace a', 'mode main']
+z = ['move-node-to-workspace z', 'mode main']
 esc = 'mode main'                             # "quit" back to main (safety exit)
 
 [mode.window-nav.binding]
@@ -129,10 +145,15 @@ e = ['move down', 'mode main']
 i = ['move up', 'mode main']
 o = ['move right', 'mode main']
 
-minus = ['resize smart -150', 'mode main']
-equal = ['resize smart +150', 'mode main']
-
-esc = 'mode main' # "quit" back to main (safety exit)
+[mode.resize-window.binding]
+n = ['resize width -150']
+e = ['resize height -150']
+i = ['resize height +150']
+o = ['resize width -150']
+r = ['balance-sizes']
+minus = ['resize smart -150']
+equal = ['resize smart +150']
+esc = 'mode main'             # "quit" back to main (safety exit)
 
 [mode.window-merge.binding]
 n = ['join-with left', 'mode main']
@@ -141,8 +162,21 @@ i = ['join-with up', 'mode main']
 o = ['join-with right', 'mode main']
 esc = 'mode main'                    # "quit" back to main (safety exit)
 
+[mode.app-launcher.binding]
+c = ['exec-and-forget open -a "Calendar"', 'mode main']
+m = ['exec-and-forget open -a "Mail"', 'mode main']
+b = ['exec-and-forget open -a "Google Chrome"', 'mode main']
+s = ['exec-and-forget open -a "Slack"', 'mode main']
+f = ['exec-and-forget open -a "Finder"', 'mode main']
+p = ['exec-and-forget open -a "1Password"', 'mode main']
+t = ['exec-and-forget open -a "Ghostty"', 'mode main']
+d = ['exec-and-forget open -a "Docker Desktop"', 'mode main']
+v = ['exec-and-forget open -a "Spotify"', 'mode main']
+esc = 'mode main'
+
 [[on-window-detected]]
-if.app-id = 'app.zen-browser.zen'
+# if.app-id = 'app.zen-browser.zen'
+# NOTE: trying to have the POP floating regardless of browser
 if.window-title-regex-substring = 'Picture-in-Picture'
 run = 'layout floating'
 
@@ -152,16 +186,20 @@ if.app-id = 'com.google.Chrome'
 if.window-title-regex-substring = 'Picture-in-Picture'
 run = 'layout floating'
 
+[[on-window-detected]]
+if.app-id = 'com.apple.calendar'
+run = ['workspace Calendar', 'move-workspace-to-monitor main']
+
 [workspace-to-monitor-force-assignment]
 # "🯱" = ['built-in', 'secondary']
 # "🯲" = ['built-in', 'secondary']
-"🯳" = ['built-in', 'secondary']
+"🯳" = ['secondary', 'built-in']
 # "🯴" = ['built-in', 'secondary']
 # "🯵" = ['built-in', 'secondary']
-"🯶" = ['built-in', 'secondary']
+"🯶" = ['secondary', 'built-in']
 # "🯷" = ['built-in', 'secondary']
 # "🯸" = ['built-in', 'secondary']
-"🯹" = ['built-in', 'secondary']
+"🯹" = ['secondary', 'built-in']
 # "🯰" = ['built-in', 'secondary']
 # Planning = ['lg', 'built-in']
 # Writing = ['lg', 'built-in']

@@ -16,3 +16,5 @@
 
 [include]
 	path = ~/.config/gitconfig.local
+[core]
+	excludesfile = /Users/henriquerodrigues/.config/.gitignore_global

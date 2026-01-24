@@ -4,21 +4,34 @@ if status is-interactive
     set -gx PATH /opt/homebrew/bin $PATH
     set -gx fish_key_bindings fish_vi_key_bindings
     # https://github.com/eza-community/eza?tab=readme-ov-file
-    set -gx EZA_STANDARD_OPTIONS --group-directories-first --icons --git --long --header --color=auto --hyperlink --smart-group --git-repos --no-user --created --accessed --modified --time-style=long-iso
+    set -gx EZA_STANDARD_OPTIONS --group-directories-first --icons --git --long --header --color=auto --hyperlink --smart-group --git-repos --no-user --modified --time-style=long-iso
     eval "$(/opt/homebrew/bin/brew shellenv)"
 
-    # Direnv Setup (moved inside interactive check)
-    if type -q direnv
-        direnv hook fish | source
-        # Direnv behavior configuration
-        set -g direnv_fish_mode eval_on_arrow
+    # Load environment variables from a global .env file
+    # cat ~/.env.global >/tmp/myenvfile && loadenv /tmp/myenvfile
+    loadenv "$HOME/.env.global"
+
+    # Initialize shell tools (only if they exist)
+    if type -q atuin
+        atuin init fish | source # Shell history
     end
+
+    if type -q zoxide
+        zoxide init fish | source # Smart directory jumping
+    end
+
+    # Direnv Setup (moved inside interactive check)
+    # if type -q direnv
+    #     direnv hook fish | source
+    #     # Direnv behavior configuration
+    #     set -g direnv_fish_mode eval_on_arrow
+    # end
 end
 
 # Shell Variables
 set -x STOW_DIR ~/_/dotfiles
 # set -gx FUELIX_KEY (op read op://iqou5ut7nmb4rwplbb4d6duh3u/rwi4fscs2fp7kc5tmlsk6rijh4/api_key)
-set -U nvm_default_version v22.20.0
+# set -U nvm_default_version v22.20.0
 
 # echo (op read "op://private/atuin/username")
 #
@@ -34,14 +47,6 @@ set fzf_directory_opts --bind "ctrl-o:execute($EDITOR {} &> /dev/tty)"
 #     source ~/.atuin/bin/env.fish
 # end
 
-# Initialize shell tools (only if they exist)
-if type -q atuin
-    atuin init fish | source # Shell history
-end
-if type -q zoxide
-    zoxide init fish | source # Smart directory jumping
-end
-
 # Core Command Abbreviations
 # NOTE: Using abbr instead of aliases since aliases can break some scripts that rely on exact command names
 abbr --add -g cd z
@@ -50,11 +55,14 @@ abbr --add -g vi nvim
 abbr --add -g vim nvim
 abbr --add -g v. nvim .
 abbr --add -g :q exit
-abbr --add -g x exit
+# abbr --add -g x exit
 abbr --add -g g lazygit
 abbr --add -g nd npm run dev
 
+# OpenCoce
 abbr --add -g oc opencode
+abbr --add -g occ --set-cursor "opencode run \"%\""
+
 abbr --add -g o "open ."
 
 abbr --add -g nc "z nvim && nvim"
@@ -109,11 +117,10 @@ end
 # end
 
 # pnpm
-# set -gx PNPM_HOME /Users/zambo/Library/pnpm
-# if not string match -q -- $PNPM_HOME $PATH
-#     set -gx PATH "$PNPM_HOME" $PATH
-# end
-
+set -gx PNPM_HOME /Users/henriquerodrigues/Library/pnpm
+if not string match -q -- $PNPM_HOME $PATH
+    set -gx PATH "$PNPM_HOME" $PATH
+end
 # pnpm end
 
 set -gx XDG_CONFIG_HOME "$HOME/.config"
