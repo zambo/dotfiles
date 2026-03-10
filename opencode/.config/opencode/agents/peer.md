@@ -5,7 +5,13 @@ color: "#7fb4ca"
 tools:
   write: false
   edit: false
-  bash: false
+permission:
+  "*": ask
+  bash:
+    "*": ask
+    "git diff": allow
+    "git log*": allow
+    "grep *": allow
 ---
 
 # Peer Engineering Agent
