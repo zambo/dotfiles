@@ -1,8 +1,8 @@
 -- Fuel iX API integration for CodeCompanion
-
 -- Set to true to disable the plugin. Useful for testing configs with different lua files.
+local DISABLE_PLUGIN = false
 -- E.g.: codecompanion-minimal.lua
-if false then
+if DISABLE_PLUGIN then
   return {}
 end
 
@@ -243,7 +243,8 @@ end
 
 return {
   {
-    ---@type CodeCompanion
+    ---@module 'codecompanion'
+    ---@type LazyPluginSpec
     "olimorris/codecompanion.nvim",
     enabled = true,
 
@@ -355,6 +356,9 @@ return {
           auto_scroll = false, -- I prefer manual control over scrolling
           -- show_settings = true,
         },
+        diff = {
+          provider = "mini_diff",
+        },
         inline = {
           enabled = true,
           -- layout = "vertical", -- Works better with my split layout
@@ -380,10 +384,10 @@ return {
             return require("codecompanion.adapters").extend("opencode", {
               commands = {
                 default = { "opencode", "acp" },
-                fuel_ix_sonnet_4_5 = { "opencode", "acp", "-m", "fuel_ix/" .. MODELS.SONNET },
-                fuel_ix_haiku_4_5 = { "opencode", "acp", "-m", "fuel_ix/" .. MODELS.HAIKU },
-                fuel_ix_gpt_4_1 = { "opencode", "acp", "-m", "fuel_ix/" .. MODELS.GPT_4_1 },
-                fuel_ix_gpt_5_2 = { "opencode", "acp", "-m", "fuel_ix/" .. MODELS.GPT_5_2 },
+                -- fuel_ix_sonnet_4_5 = { "opencode", "acp", "-m", "fuel_ix/" .. MODELS.SONNET },
+                -- fuel_ix_haiku_4_5 = { "opencode", "acp", "-m", "fuel_ix/" .. MODELS.HAIKU },
+                -- fuel_ix_gpt_4_1 = { "opencode", "acp", "-m", "fuel_ix/" .. MODELS.GPT_4_1 },
+                -- fuel_ix_gpt_5_2 = { "opencode", "acp", "-m", "fuel_ix/" .. MODELS.GPT_5_2 },
               },
             })
           end,

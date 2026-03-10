@@ -1,7 +1,14 @@
 return {
   {
     "neovim/nvim-lspconfig",
-    opts = function()
+
+    opts = function(_, opts)
+      -- Extend existing servers instead of replacing
+      opts.servers = opts.servers or {}
+      opts.servers.copilot = {
+        enabled = true,
+      }
+
       -- Disable autoformat for eslint
       vim.api.nvim_create_autocmd("LspAttach", {
         callback = function(args)
@@ -12,6 +19,8 @@ return {
           end
         end,
       })
+
+      return opts
     end,
   },
 }
