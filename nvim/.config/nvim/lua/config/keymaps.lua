@@ -18,12 +18,22 @@ map("n", "<leader>cj", ":%!jq -S .<CR>", { desc = "Format JSON with jq" })
 
 -- cmd + shift + bracket to switch buffer
 -- this leverages combo I have set on my keyboard to switch tabs in browser
-map("n", "\x1b[1;6C", "<cmd>bnext<cr>", { desc = "Next buffer" })
-map("n", "\x1b[1;6D", "<cmd>bprev<cr>", { desc = "Previous buffer" })
+-- map("n", "\x1b[1;6C", "<cmd>bnext<cr>", { desc = "Next buffer" })
+-- map("n", "\x1b[1;6D", "<cmd>bprev<cr>", { desc = "Previous buffer" })
 
--- Expand 'cc' into 'CodeCompanion' in the command line
-vim.cmd([[cab cc CodeCompanion]])
-vim.cmd([[cab ccc CodeCompanionChat]])
+-- cmd + shift + bracket to switch windows (cycles through windows)
+-- this leverages combo I have set on my keyboard to switch tabs in browser
+-- vim.keymap.del("n", "\x1b[1;6C", { silent = true }) -- Remove any existing mapping
+-- vim.keymap.del("n", "\x1b[1;6D", { silent = true })
+-- map("n", "\x1b[1;6C", "<cmd>wincmd w<cr>", { desc = "Next Window" })
+-- map("n", "\x1b[1;6D", "<cmd>wincmd p<cr>", { desc = "Previous Window" })
+
+-- CodeCompanion command abbreviations and keymaps (only if plugin is loaded)
+if LazyVim.has("codecompanion.nvim") then
+  -- Expand 'cc' into 'CodeCompanion' in the command line
+  vim.cmd([[cab cc CodeCompanion]])
+  vim.cmd([[cab ccc CodeCompanionChat]])
+end
 
 map("n", "<leader>e", function()
   local explorer_pickers = Snacks.picker.get({ source = "explorer" })
@@ -41,17 +51,21 @@ map("n", "<leader>e", function()
 end, { desc = "Focus Snacks Explorer if not active" })
 
 -- Change buffer using cmd shift brackets
-map("n", "<C-S-Right>", ":bnext<CR>", { desc = "Next buffer" })
-map("n", "<C-S-Left>", ":bprevious<CR>", { desc = "Previous buffer" })
+-- map("n", "<C-S-Right>", ":bnext<CR>", { desc = "Next buffer" })
+-- map("n", "<C-S-Left>", ":bprevious<CR>", { desc = "Previous buffer" })
+map("n", "<C-S-Right>", ":wincmd w<CR>", { desc = "Next window" })
+map("n", "<C-S-Left>", ":wincmd p<CR>", { desc = "Previous window" })
 
--- AI/CodeCompanion group under <leader>a
-map({ "n", "v" }, "<leader>aa", "<cmd>CodeCompanionActions<cr>", { desc = "Actions" })
-map({ "n", "v" }, "<leader>at", "<cmd>CodeCompanionChat Toggle<cr>", { desc = "Toggle Chat" })
-map("v", "<leader>ad", "<cmd>CodeCompanionChat Add<cr>", { desc = "Add to Chat" })
-map({ "n", "v" }, "<leader>ai", "<cmd>CodeCompanion<cr>", { desc = "Inline Chat" })
-map({ "n", "v" }, "<leader>ac", function()
-  require("codecompanion").prompt("commit-message")
-end, { desc = "Generate Commit Message" })
+-- AI/CodeCompanion group under <leader>a (only if plugin is loaded)
+if LazyVim.has("codecompanion.nvim") then
+  map({ "n", "v" }, "<leader>aa", "<cmd>CodeCompanionActions<cr>", { desc = "Actions" })
+  map({ "n", "v" }, "<leader>at", "<cmd>CodeCompanionChat Toggle<cr>", { desc = "Toggle Chat" })
+  map("v", "<leader>ad", "<cmd>CodeCompanionChat Add<cr>", { desc = "Add to Chat" })
+  map({ "n", "v" }, "<leader>ai", "<cmd>CodeCompanion<cr>", { desc = "Inline Chat" })
+  map({ "n", "v" }, "<leader>ac", function()
+    require("codecompanion").prompt("commit-message")
+  end, { desc = "Generate Commit Message" })
+end
 
 -- map("n", "<leader>acR", function()
 --   vim.cmd("Lazy! reload codecompanion.nvim")
