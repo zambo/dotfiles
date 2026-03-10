@@ -44,20 +44,12 @@ font-style-bold-italic = "Bold Italic"
 # font-variation-bold-italic = wght=800
 # font-variation-bold-italic = slnt=-11
 
-font-size = 14
+font-size = 12
 font-feature = "'calt', 'ss01', 'ss02', 'ss03', 'ss04', 'ss05', 'ss06', 'ss07', 'ss08', 'ss09', 'liga'" 
-
 font-thicken = true
-
-# bold-is-bright = true
-
+bold-is-bright = true
 alpha-blending = native
-
-theme = "kanagawa-wave"
-# theme = "tokyonight_moon"
-
 cursor-click-to-move = true
-# background-opacity = 0.95
 
 macos-titlebar-style = hidden
 macos-option-as-alt = true
@@ -80,11 +72,16 @@ adjust-underline-position = 9
 
 # theme = "kanagawa-wave"
 # theme = "tokyonight_moon"
-theme = "Kanagawa Wave"
+# theme = "Kanagawa Wave"
+theme = "TokyoNight Moon"
+# theme = "Catppuccin Macchiato"
 window-colorspace = display-p3
 alpha-blending = native
-# background-opacity = 0.95
-background-blur-radius = 65
+background-opacity = .95
+background-blur = true
+background-blur-radius = 25
+unfocused-split-opacity = 0.4
+
 
 
 
@@ -112,7 +109,6 @@ window-inherit-font-size = true
 # SPLITS
 # ============================================================================
 
-unfocused-split-opacity = 0.6
 split-divider-color = #c0a36e
 
 # ============================================================================
@@ -150,6 +146,9 @@ keybind = alt+right=unbind
 # Quick Terminal
 keybind = global:alt+ctrl+shift+super+t=toggle_quick_terminal
 quick-terminal-position = center
+quick-terminal-size = 80%
+quick-terminal-animation-duration = 0
+quick-terminal-screen = mouse
 
 # Config Reload
 keybind = super+r=reload_config
@@ -170,7 +169,7 @@ keybind = super+shift+equal=equalize_splits
 # ============================================================================
 
 # Other Options:
-# background-opacity = 0.95
+# background-opacity = 0.92
 # bold-is-bright = true
 # macos-icon-frame = beige
 # macos-titlebar-proxy-icon = hidden
@@ -199,9 +198,13 @@ keybind = super+shift+equal=equalize_splits
 # keybind = ctrl+a>p=previous_tab
 
 window-save-state = always
-unfocused-split-opacity = 0.6
+
+
 # focus-follows-mouse = true
-split-divider-color = #c0a36e 
+# Kanagawa
+# split-divider-color = #c0a36e 
+# TokyoNight
+split-divider-color = #c3e88d
 shell-integration = fish
 
 keybind = shift+enter=text:\n

@@ -1,0 +1,6 @@
+theme: tokyo-night
+layout: horizontal
+response:
+  prettify_json: false
+heading:
+  visible: true
