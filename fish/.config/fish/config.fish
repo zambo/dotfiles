@@ -28,6 +28,50 @@ if status is-interactive
     # end
 end
 
+# Function to create a new note with a simple template
+function quicknote --description "Create a new note with frontmatter"
+    set -l note_name ""
+    set -l tags ""
+
+    # Parse arguments
+    for arg in $argv
+        if string match -q "#*" $arg
+            set -l tag (string sub -s 2 $arg)
+            if test -n "$tags"
+                set tags "$tags, $tag"
+            else
+                set tags "$tag"
+            end
+        else if test -z "$note_name"
+            set note_name $arg
+        end
+    end
+
+    # Default to timestamp-based name if no name provided
+    if test -z "$note_name"
+        set note_name (date +"%Y%m%d-%H%M%S")
+    end
+
+    set -l timestamp (date +"%Y-%m-%d")
+    set -l time (date +"%H:%M")
+
+    set -l template_file ~/.config/fish/note_template.md
+
+    if not test -f $template_file
+        echo "---
+title: {{TITLE}}
+date: {{DATE}}
+time: {{TIME}}
+tags: [{{TAGS}}]
+---
+
+# {{TITLE}}
+" >$template_file
+    end
+
+    cd ~/_/notes && nvim -c "0r $template_file | %s/{{DATE}}/$timestamp/g | %s/{{TIME}}/$time/g | %s/{{TITLE}}/$note_name/g | %s/{{TAGS}}/$tags/g | normal! gg2jA" $note_name.md
+end
+
 # Shell Variables
 set -x STOW_DIR ~/_/dotfiles
 # set -gx FUELIX_KEY (op read op://iqou5ut7nmb4rwplbb4d6duh3u/rwi4fscs2fp7kc5tmlsk6rijh4/api_key)
@@ -58,6 +102,10 @@ abbr --add -g :q exit
 # abbr --add -g x exit
 abbr --add -g g lazygit
 abbr --add -g nd npm run dev
+
+abbr --add -g b bat
+abbr --add -g d lazydocker
+abbr --add -g p posting
 
 # OpenCoce
 abbr --add -g oc opencode
@@ -93,6 +141,10 @@ abbr --add -g cd z # zoxide for better directory navigation
 abbr --add -g cat bat # bat for enhanced file viewing
 abbr --add -g find fd # fd for improved file searching
 abbr --add -g grep rg # ripgrep for faster searching
+
+# Quick Notes
+# abbr --add -g n --set-cursor "cd ~/_/notes && nvim \"%\".md"
+abbr --add -g n --set-cursor "quicknote \"%\" #inbox"
 
 # Moving Directories
 abbr --add -g .. "cd .."
