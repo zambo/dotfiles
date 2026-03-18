@@ -1,6 +1,5 @@
 {
 	"$schema": "https://opencode.ai/config.json",
-	// Theme configuration
 	"default_agent": "plan",
 	"disabled_providers": [
 		"azure_openai",
@@ -16,32 +15,7 @@
 	],
 	"username": "zambo",
 	"autoupdate": true,
-	// Permissions
-	// "permission": {
-	// 	"*": "ask",
-	// 	"bash": {
-	// 		"*": "ask",
-	// 		"grep *": "allow",
-	// 		"rga *": "allow",
-	// 		"find *": "allow",
-	// 		"fd *": "allow",
-	// 		"ls *": "allow",
-	// 		"cat *": "allow",
-	// 		"bat *": "allow",
-	// 		"head *": "allow",
-	// 		"tail *": "allow"
-	// 	},
-	// 	"read": {
-	// 		"*": "allow"
-	// 	},
-	// 	"write": {
-	// 		"*": "deny"
-	// 	},
-	// 	"grep": {
-	// 		"*": "allow"
-	// 	}
-	// },
-	// Provider and Model configuration
+	"plugin": ["superpowers@git+https://github.com/obra/superpowers.git"],
 	"provider": {
 		"fuel_ix": {
 			"npm": "@ai-sdk/openai-compatible",
@@ -50,15 +24,8 @@
 				"baseURL": "https://api.fuelix.ai/v1"
 			},
 			"models": {
-				"gpt-5.2-2025-12-11": {
-					"name": "gpt-5.2-2025-12-11"
-				},
 				"claude-sonnet-4-5-20250929": {
 					"name": "Claude Sonnet 4.5 (2025-09-29)",
-					"reasoning": true
-				},
-				"claude-sonnet-4-5": {
-					"name": "Claude Sonnet 4.5",
 					"reasoning": true
 				},
 				"claude-sonnet-4-6": {
@@ -79,17 +46,16 @@
 				},
 				"gpt-4-1": {
 					"name": "GPT 4.1"
-				},
-				"gpt-5": {
-					"name": "GPT 5"
-				},
-				"gpt-5-chat": {
-					"name": "GPT 5 Chat"
-				},
-				"gpt-5-mini": {
-					"name": "GPT 5 Mini"
 				}
 			}
+		}
+	},
+	"permission": {
+		"read": {
+			"~/.config/opencode/get-shit-done/*": "allow"
+		},
+		"external_directory": {
+			"~/.config/opencode/get-shit-done/*": "allow"
 		}
 	}
 }
