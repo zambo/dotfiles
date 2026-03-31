@@ -28,7 +28,7 @@
 2. {Another lesson}
 
 ### Cost Observations
-- Model mix: {X}% opus, {Y}% sonnet, {Z}% haiku
+- Model mix: {X}% claude-opus-4.6, {Y}% claude-sonnet-4-6, {Z}% claude-haiku-4-5
 - Sessions: {count}
 - Notable: {efficiency observation}
 

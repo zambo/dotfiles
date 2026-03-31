@@ -19,6 +19,12 @@ return {
     ---@type snacks.Config
     opts = {
       -- debug = true,
+      styles = {
+        -- Terminal
+        terminal = {
+          stack = true,
+        },
+      },
       dashboard = {
         preset = {
           header = [[
@@ -151,6 +157,13 @@ return {
             ignored = true, -- show ignored files
             exclude = ignoreList,
           },
+        },
+      },
+      terminal = {
+        ---@class snacks.terminal.Config
+        ---@field override? fun(cmd?: string|string[], opts?: snacks.terminal.Opts) Use this to use a different terminal implementation
+        {
+          win = { style = "terminal" },
         },
       },
     },

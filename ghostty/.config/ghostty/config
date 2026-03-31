@@ -77,10 +77,12 @@ theme = "TokyoNight Moon"
 # theme = "Catppuccin Macchiato"
 window-colorspace = display-p3
 alpha-blending = native
-background-opacity = .95
-background-blur = true
-background-blur-radius = 25
-unfocused-split-opacity = 0.4
+background-opacity = 0.5
+background-opacity-cells = true
+background-blur = true 
+background-blur-radius = 250
+
+unfocused-split-opacity = 0.6
 
 
 

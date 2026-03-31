@@ -6,7 +6,7 @@ on-focus-changed = ['move-mouse window-lazy-center']
 enable-normalization-flatten-containers = true                         # Normalizations. See:https://nikitabobko.github.io/AeroSpace/guide#normalization
 enable-normalization-opposite-orientation-for-nested-containers = true
 
-accordion-padding = 64
+accordion-padding = 16
 default-root-container-layout = 'tiles'
 default-root-container-orientation = 'vertical'                 # Possible values: horizontal|vertical|auto
 on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
@@ -21,12 +21,12 @@ preset = 'qwerty'
 
 # https://nikitabobko.github.io/AeroSpace/guide#assign-workspaces-to-monitors
 [gaps]
-inner.horizontal = 16
-inner.vertical = 16
-outer.left = 4
-outer.bottom = 6
-outer.top = [{ monitor."LG HDR 4K" = 6 }, { monitor."Sidecar Display" = 6 }, 6]
-outer.right = 4
+inner.horizontal = 8
+inner.vertical = 8
+outer.left = 2
+outer.bottom = 2
+outer.top = [{ monitor."LG HDR 4K" = 2 }, { monitor."Sidecar Display" = 2 }, 2]
+outer.right = 2
 
 # 'main' binding mode declaration
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
@@ -163,6 +163,7 @@ o = ['join-with right', 'mode main']
 esc = 'mode main'                    # "quit" back to main (safety exit)
 
 [mode.app-launcher.binding]
+a = ['exec-and-forget open -a "Arc"', 'mode main']
 c = ['exec-and-forget open -a "Calendar"', 'mode main']
 m = ['exec-and-forget open -a "Mail"', 'mode main']
 b = ['exec-and-forget open -a "Google Chrome"', 'mode main']

@@ -3,7 +3,7 @@ name: Conventional Commit Message
 interaction: chat
 description: Generate a Conventional Commit Message
 opts:
-  alias: commit-message
+  alias: cc
   auto_submit: true
   ignore_system_prompt: true
   placement: chat

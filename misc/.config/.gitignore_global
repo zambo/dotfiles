@@ -1,3 +1,0 @@
-# git config --global core.excludesfile ~/.config/.gitignore_global
-# My own notes and things, like a tray
-.zambo

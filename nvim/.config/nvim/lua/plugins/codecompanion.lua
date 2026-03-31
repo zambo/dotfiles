@@ -29,7 +29,7 @@ local MODELS = {
   GPT_4_1 = "gpt-4-1",
   GPT_5_2 = "gpt-5-2",
   HAIKU = "claude-haiku-4-5",
-  SONNET = "claude-sonnet-4-5",
+  SONNET = "claude-sonnet-4-6",
 }
 
 -- Helper function to select adapter based on API key availability
@@ -481,15 +481,10 @@ return {
       prompt_library = {
         markdown = {
           dirs = {
+            vim.fn.stdpath("config") .. "/prompts", -- Custom prompts directory
             -- I keep my custom prompts in my nvim config as markdown files
             -- See: https://codecompanion.olimorris.dev/configuration/prompt-library
-            "~/.config/nvim/prompts",
-          },
-        },
-        mapping = {
-          -- Use Copilot if Fuel iX API key is not available
-          ["commit-message"] = {
-            adapter = get_adapter(MODELS.HAIKU),
+            -- "~/.config/nvim/prompts/*",
           },
         },
       },

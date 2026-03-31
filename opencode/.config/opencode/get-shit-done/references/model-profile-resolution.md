@@ -20,11 +20,11 @@ Look up the agent in the table for the resolved profile. Pass the model paramete
 Task(
   prompt="...",
   subagent_type="gsd-planner",
-  model="{resolved_model}"  # "inherit", "sonnet", or "haiku"
+  model="{resolved_model}"  # "inherit", "fuel_ix/claude-sonnet-4-6", "fuel_ix/claude-haiku-4-5", or "github-copilot/claude-opus-4.6"
 )
 ```
 
-**Note:** Opus-tier agents resolve to `"inherit"` (not `"opus"`). This causes the agent to use the parent session's model, avoiding conflicts with organization policies that may block specific opus versions.
+**Note:** Quality-tier agents resolve to `"github-copilot/claude-opus-4.6"`. Balanced-tier agents resolve to `"fuel_ix/claude-sonnet-4-6"`. Budget-tier agents resolve to `"fuel_ix/claude-haiku-4-5"`. The `inherit` profile causes all agents to resolve to `"inherit"`, using the parent session's model.
 
 If `model_profile` is `"inherit"`, all agents resolve to `"inherit"` (useful for OpenCode `/model`).
 
@@ -33,4 +33,4 @@ If `model_profile` is `"inherit"`, all agents resolve to `"inherit"` (useful for
 1. Resolve once at orchestration start
 2. Store the profile value
 3. Look up each agent's model from the table when spawning
-4. Pass model parameter to each Task call (values: `"inherit"`, `"sonnet"`, `"haiku"`)
+  4. Pass model parameter to each Task call (values: `"inherit"`, `"fuel_ix/claude-sonnet-4-6"`, `"fuel_ix/claude-haiku-4-5"`, `"github-copilot/claude-opus-4.6"`)

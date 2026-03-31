@@ -3,7 +3,6 @@
 	"default_agent": "plan",
 	"disabled_providers": [
 		"azure_openai",
-		"anthropic",
 		"cohere",
 		"google_palm",
 		"huggingface",

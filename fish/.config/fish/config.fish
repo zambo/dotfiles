@@ -20,6 +20,14 @@ if status is-interactive
         zoxide init fish | source # Smart directory jumping
     end
 
+    # Jira shortcuts reminder
+    echo ""
+    echo "Jira (acli) reminders:"
+    echo "  jit  → create Task    jib  → create Bug    jis  → create Story"
+    echo "  jitp → create subtask (with parent)"
+    echo "  jiass <ISSUE> → assign to me    jimy → list my issues"
+    echo ""
+
     # Direnv Setup (moved inside interactive check)
     # if type -q direnv
     #     direnv hook fish | source
@@ -116,6 +124,10 @@ abbr --add -g o "open ."
 abbr --add -g nc "z nvim && nvim"
 abbr --add -g fc "z ~/.config/fish && nvim config.fish"
 
+# Gcloud
+abbr --add -g gcp --set-cursor "gcloud config set project \"%\""
+abbr --add -g gca --set-cursor "gcloud config set account \"%\""
+
 # Yarn/NPM
 abbr --add -g nd "npm run dev"
 abbr --add -g ni "npm install"
@@ -135,6 +147,29 @@ abbr --add -g ttc task complete
 abbr --add -g ttd task done
 abbr --add -g ttu task undo
 # abbr --add -g tt taskwarrior-tui
+
+# Jira / acli Shortcuts
+set -l JIRA_PROJECT AI
+set -l JIRA_ASSIGNEE "henrique.zambonin@telus.com"
+set -l JIRA_LABEL AgenticHub
+
+abbr --add -g jit --set-cursor "acli jira workitem create --project \"$JIRA_PROJECT\" --type \"Task\" --assignee \"$JIRA_ASSIGNEE\" --label \"$JIRA_LABEL\" --summary \"%\""
+abbr --add -g jib --set-cursor "acli jira workitem create --project \"$JIRA_PROJECT\" --type \"Bug\" --assignee \"$JIRA_ASSIGNEE\" --label \"$JIRA_LABEL\" --summary \"%\""
+abbr --add -g jis --set-cursor "acli jira workitem create --project \"$JIRA_PROJECT\" --type \"Story\" --assignee \"$JIRA_ASSIGNEE\" --label \"$JIRA_LABEL\" --summary \"%\""
+
+# Create with editor (nvim)
+abbr --add -g jite "acli jira workitem create --project \"$JIRA_PROJECT\" --type \"Task\" --assignee \"$JIRA_ASSIGNEE\" --label \"$JIRA_LABEL\" --editor"
+abbr --add -g jibe "acli jira workitem create --project \"$JIRA_PROJECT\" --type \"Bug\" --assignee \"$JIRA_ASSIGNEE\" --label \"$JIRA_LABEL\" --editor"
+abbr --add -g jise "acli jira workitem create --project \"$JIRA_PROJECT\" --type \"Story\" --assignee \"$JIRA_ASSIGNEE\" --label \"$JIRA_LABEL\" --editor"
+
+# Assign an existing issue to yourself
+abbr --add -g jiass --set-cursor "acli jira workitem update --issue \"%\" --assignee \"$JIRA_ASSIGNEE\""
+
+# List issues assigned to you
+abbr --add -g jimy "acli jira workitem search --jql \"project = $JIRA_PROJECT AND assignee = '$JIRA_ASSIGNEE' AND statusCategory != Done\""
+
+# Create with parent (subtask)
+abbr --add -g jitp --set-cursor "acli jira workitem create --project \"$JIRA_PROJECT\" --type \"Task\" --assignee \"$JIRA_ASSIGNEE\" --label \"$JIRA_LABEL\" --parent \"%\" --summary \"\""
 
 # Better Alternatives
 abbr --add -g cd z # zoxide for better directory navigation
@@ -189,3 +224,8 @@ export PATH="$HOME/.local/bin:$PATH"
 
 # Auto load direnv
 # direnv hook fish | source
+
+# gh token for npm
+set -gx NPM_TOKEN (gh auth token)
+
+rbenv init - fish | source

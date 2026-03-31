@@ -7,21 +7,21 @@
  * would be faster, use fewer tokens, and be less error-prone).
  */
 const MODEL_PROFILES = {
-  'gsd-planner': { quality: 'opus', balanced: 'opus', budget: 'sonnet' },
-  'gsd-roadmapper': { quality: 'opus', balanced: 'sonnet', budget: 'sonnet' },
-  'gsd-executor': { quality: 'opus', balanced: 'sonnet', budget: 'sonnet' },
-  'gsd-phase-researcher': { quality: 'opus', balanced: 'sonnet', budget: 'haiku' },
-  'gsd-project-researcher': { quality: 'opus', balanced: 'sonnet', budget: 'haiku' },
-  'gsd-research-synthesizer': { quality: 'sonnet', balanced: 'sonnet', budget: 'haiku' },
-  'gsd-debugger': { quality: 'opus', balanced: 'sonnet', budget: 'sonnet' },
-  'gsd-codebase-mapper': { quality: 'sonnet', balanced: 'haiku', budget: 'haiku' },
-  'gsd-verifier': { quality: 'sonnet', balanced: 'sonnet', budget: 'haiku' },
-  'gsd-plan-checker': { quality: 'sonnet', balanced: 'sonnet', budget: 'haiku' },
-  'gsd-integration-checker': { quality: 'sonnet', balanced: 'sonnet', budget: 'haiku' },
-  'gsd-nyquist-auditor': { quality: 'sonnet', balanced: 'sonnet', budget: 'haiku' },
-  'gsd-ui-researcher': { quality: 'opus', balanced: 'sonnet', budget: 'haiku' },
-  'gsd-ui-checker': { quality: 'sonnet', balanced: 'sonnet', budget: 'haiku' },
-  'gsd-ui-auditor': { quality: 'sonnet', balanced: 'sonnet', budget: 'haiku' },
+  'gsd-planner':             { quality: 'github-copilot/claude-opus-4.6', balanced: 'github-copilot/claude-opus-4.6', budget: 'fuel_ix/claude-sonnet-4-6' },
+  'gsd-roadmapper':          { quality: 'github-copilot/claude-opus-4.6', balanced: 'fuel_ix/claude-sonnet-4-6',      budget: 'fuel_ix/claude-sonnet-4-6' },
+  'gsd-executor':            { quality: 'github-copilot/claude-opus-4.6', balanced: 'fuel_ix/claude-sonnet-4-6',      budget: 'fuel_ix/claude-sonnet-4-6' },
+  'gsd-phase-researcher':    { quality: 'github-copilot/claude-opus-4.6', balanced: 'fuel_ix/claude-sonnet-4-6',      budget: 'fuel_ix/claude-haiku-4-5' },
+  'gsd-project-researcher':  { quality: 'github-copilot/claude-opus-4.6', balanced: 'fuel_ix/claude-sonnet-4-6',      budget: 'fuel_ix/claude-haiku-4-5' },
+  'gsd-research-synthesizer':{ quality: 'fuel_ix/claude-sonnet-4-6',      balanced: 'fuel_ix/claude-sonnet-4-6',      budget: 'fuel_ix/claude-haiku-4-5' },
+  'gsd-debugger':            { quality: 'github-copilot/claude-opus-4.6', balanced: 'fuel_ix/claude-sonnet-4-6',      budget: 'fuel_ix/claude-sonnet-4-6' },
+  'gsd-codebase-mapper':     { quality: 'fuel_ix/claude-sonnet-4-6',      balanced: 'fuel_ix/claude-haiku-4-5',       budget: 'fuel_ix/claude-haiku-4-5' },
+  'gsd-verifier':            { quality: 'fuel_ix/claude-sonnet-4-6',      balanced: 'fuel_ix/claude-sonnet-4-6',      budget: 'fuel_ix/claude-haiku-4-5' },
+  'gsd-plan-checker':        { quality: 'fuel_ix/claude-sonnet-4-6',      balanced: 'fuel_ix/claude-sonnet-4-6',      budget: 'fuel_ix/claude-haiku-4-5' },
+  'gsd-integration-checker': { quality: 'fuel_ix/claude-sonnet-4-6',      balanced: 'fuel_ix/claude-sonnet-4-6',      budget: 'fuel_ix/claude-haiku-4-5' },
+  'gsd-nyquist-auditor':     { quality: 'fuel_ix/claude-sonnet-4-6',      balanced: 'fuel_ix/claude-sonnet-4-6',      budget: 'fuel_ix/claude-haiku-4-5' },
+  'gsd-ui-researcher':       { quality: 'github-copilot/claude-opus-4.6', balanced: 'fuel_ix/claude-sonnet-4-6',      budget: 'fuel_ix/claude-haiku-4-5' },
+  'gsd-ui-checker':          { quality: 'fuel_ix/claude-sonnet-4-6',      balanced: 'fuel_ix/claude-sonnet-4-6',      budget: 'fuel_ix/claude-haiku-4-5' },
+  'gsd-ui-auditor':          { quality: 'fuel_ix/claude-sonnet-4-6',      balanced: 'fuel_ix/claude-sonnet-4-6',      budget: 'fuel_ix/claude-haiku-4-5' },
 };
 const VALID_PROFILES = Object.keys(MODEL_PROFILES['gsd-planner']);
 

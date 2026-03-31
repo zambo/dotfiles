@@ -380,9 +380,9 @@ function resolveModelInternal(cwd, agentType) {
   // Fall back to profile lookup
   const profile = String(config.model_profile || 'balanced').toLowerCase();
   const agentModels = MODEL_PROFILES[agentType];
-  if (!agentModels) return 'sonnet';
+  if (!agentModels) return 'fuel_ix/claude-sonnet-4-6';
   if (profile === 'inherit') return 'inherit';
-  return agentModels[profile] || agentModels['balanced'] || 'sonnet';
+  return agentModels[profile] || agentModels['balanced'] || 'fuel_ix/claude-sonnet-4-6';
 }
 
 // ─── Misc utilities ───────────────────────────────────────────────────────────

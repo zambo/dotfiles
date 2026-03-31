@@ -6,18 +6,18 @@ Model profiles control which Claude model each GSD agent uses. This allows balan
 
 | Agent | `quality` | `balanced` | `budget` | `inherit` |
 |-------|-----------|------------|----------|-----------|
-| gsd-planner | opus | opus | sonnet | inherit |
-| gsd-roadmapper | opus | sonnet | sonnet | inherit |
-| gsd-executor | opus | sonnet | sonnet | inherit |
-| gsd-phase-researcher | opus | sonnet | haiku | inherit |
-| gsd-project-researcher | opus | sonnet | haiku | inherit |
-| gsd-research-synthesizer | sonnet | sonnet | haiku | inherit |
-| gsd-debugger | opus | sonnet | sonnet | inherit |
-| gsd-codebase-mapper | sonnet | haiku | haiku | inherit |
-| gsd-verifier | sonnet | sonnet | haiku | inherit |
-| gsd-plan-checker | sonnet | sonnet | haiku | inherit |
-| gsd-integration-checker | sonnet | sonnet | haiku | inherit |
-| gsd-nyquist-auditor | sonnet | sonnet | haiku | inherit |
+| gsd-planner | github-copilot/claude-opus-4.6 | github-copilot/claude-opus-4.6 | fuel_ix/claude-sonnet-4-6 | inherit |
+| gsd-roadmapper | github-copilot/claude-opus-4.6 | fuel_ix/claude-sonnet-4-6 | fuel_ix/claude-sonnet-4-6 | inherit |
+| gsd-executor | github-copilot/claude-opus-4.6 | fuel_ix/claude-sonnet-4-6 | fuel_ix/claude-sonnet-4-6 | inherit |
+| gsd-phase-researcher | github-copilot/claude-opus-4.6 | fuel_ix/claude-sonnet-4-6 | fuel_ix/claude-haiku-4-5 | inherit |
+| gsd-project-researcher | github-copilot/claude-opus-4.6 | fuel_ix/claude-sonnet-4-6 | fuel_ix/claude-haiku-4-5 | inherit |
+| gsd-research-synthesizer | fuel_ix/claude-sonnet-4-6 | fuel_ix/claude-sonnet-4-6 | fuel_ix/claude-haiku-4-5 | inherit |
+| gsd-debugger | github-copilot/claude-opus-4.6 | fuel_ix/claude-sonnet-4-6 | fuel_ix/claude-sonnet-4-6 | inherit |
+| gsd-codebase-mapper | fuel_ix/claude-sonnet-4-6 | fuel_ix/claude-haiku-4-5 | fuel_ix/claude-haiku-4-5 | inherit |
+| gsd-verifier | fuel_ix/claude-sonnet-4-6 | fuel_ix/claude-sonnet-4-6 | fuel_ix/claude-haiku-4-5 | inherit |
+| gsd-plan-checker | fuel_ix/claude-sonnet-4-6 | fuel_ix/claude-sonnet-4-6 | fuel_ix/claude-haiku-4-5 | inherit |
+| gsd-integration-checker | fuel_ix/claude-sonnet-4-6 | fuel_ix/claude-sonnet-4-6 | fuel_ix/claude-haiku-4-5 | inherit |
+| gsd-nyquist-auditor | fuel_ix/claude-sonnet-4-6 | fuel_ix/claude-sonnet-4-6 | fuel_ix/claude-haiku-4-5 | inherit |
 
 ## Profile Philosophy
 
@@ -61,13 +61,13 @@ Override specific agents without changing the entire profile:
 {
   "model_profile": "balanced",
   "model_overrides": {
-    "gsd-executor": "opus",
-    "gsd-planner": "haiku"
+    "gsd-executor": "github-copilot/claude-opus-4.6",
+    "gsd-planner": "fuel_ix/claude-haiku-4-5"
   }
 }
 ```
 
-Overrides take precedence over the profile. Valid values: `opus`, `sonnet`, `haiku`, `inherit`.
+Overrides take precedence over the profile. Valid values: any full model ID (e.g. `github-copilot/claude-opus-4.6`, `fuel_ix/claude-sonnet-4-6`, `fuel_ix/claude-haiku-4-5`) or `inherit`.
 
 ## Switching Profiles
 
@@ -94,8 +94,8 @@ Verification requires goal-backward reasoning - checking if code *delivers* what
 **Why Haiku for gsd-codebase-mapper?**
 Read-only exploration and pattern extraction. No reasoning required, just structured output from file contents.
 
-**Why `inherit` instead of passing `opus` directly?**
-Claude Code's `"opus"` alias maps to a specific model version. Organizations may block older opus versions while allowing newer ones. GSD returns `"inherit"` for opus-tier agents, causing them to use whatever opus version the user has configured in their session. This avoids version conflicts and silent fallbacks to Sonnet.
+**Why full model IDs instead of tier aliases?**
+OpenCode requires provider-prefixed model IDs (e.g. `github-copilot/claude-opus-4.6`) rather than generic aliases like `"opus"`. The quality tier maps to `github-copilot/claude-opus-4.6` (via GitHub Copilot), balanced to `fuel_ix/claude-sonnet-4-6`, and budget to `fuel_ix/claude-haiku-4-5`.
 
 **Why `inherit` profile?**
 Some runtimes (including OpenCode) let users switch models at runtime (`/model`). The `inherit` profile keeps all GSD subagents aligned to that live selection.
