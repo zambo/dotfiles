@@ -1,14 +1,15 @@
 -- Registers the tree-sitter-envspec parser and wires up .env* filetype detection.
 --
 -- The grammar lives at:
---   ~/temp/varlock/packages/tree-sitter-envspec/
+--   <nvim_config>/tree-sitter-envspec/
+-- (i.e. the tree-sitter-envspec/ directory next to this file's lua/ parent)
 --
--- To compile the parser after grammar changes:
---   cd ~/temp/varlock/packages/tree-sitter-envspec && tree-sitter generate
+-- To regenerate parser.c after grammar.js changes (requires tree-sitter-cli):
+--   cd <nvim_config>/tree-sitter-envspec && tree-sitter generate
 -- Then inside Neovim: :TSInstall envspec  (or :TSUpdate envspec)
 --
 -- To iterate on highlights.scm without recompiling:
---   Edit queries/highlights.scm, then :e (reopen the buffer) to see changes.
+--   Edit tree-sitter-envspec/queries/envspec/highlights.scm, then :e to see changes.
 
 -- ─── Filetype detection ───────────────────────────────────────────────────────
 -- Must run at startup (init) so filetype is set before any buffer opens.
@@ -36,31 +37,29 @@ return {
   {
     "nvim-treesitter/nvim-treesitter",
     opts = function(_, opts)
-      local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
+      -- Grammar lives inside the Neovim config directory, next to lua/.
+      local grammar_dir = vim.fn.stdpath("config") .. "/tree-sitter-envspec"
 
+      local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
       parser_config.envspec = {
         install_info = {
-          -- Path to the local grammar. Update this if you move the varlock checkout.
-          url = vim.fn.expand("~/_/temp/varlock/packages/tree-sitter-envspec"),
+          url = grammar_dir,
           files = { "src/parser.c" },
-          -- parser.c is pre-generated and committed; no npm/generate step needed.
+          -- parser.c is pre-generated and committed; no build step needed.
           generate_requires_npm = false,
           requires_generate_from_grammar = false,
         },
         filetype = "envspec",
       }
 
-      -- Add "envspec" to the list of parsers that nvim-treesitter ensures are installed.
+      -- Add "envspec" to the list of parsers nvim-treesitter ensures are installed.
       opts.ensure_installed = opts.ensure_installed or {}
       vim.list_extend(opts.ensure_installed, { "envspec" })
     end,
 
-    -- Copy the queries into nvim-treesitter's runtime so it can find them.
-    -- This runs after the plugin loads.
     config = function(_, opts)
-      -- Add the grammar's queries directory to runtimepath so Neovim finds highlights.scm.
-      -- nvim-treesitter looks for queries/<lang>/*.scm in all runtimepath directories.
-      local grammar_dir = vim.fn.expand("~/_/temp/varlock/packages/tree-sitter-envspec")
+      -- Add the grammar dir to runtimepath so Neovim finds queries/envspec/*.scm.
+      local grammar_dir = vim.fn.stdpath("config") .. "/tree-sitter-envspec"
       if vim.fn.isdirectory(grammar_dir) == 1 then
         vim.opt.runtimepath:append(grammar_dir)
       end
