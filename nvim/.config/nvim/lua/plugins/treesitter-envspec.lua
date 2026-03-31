@@ -12,17 +12,22 @@
 
 -- ─── Filetype detection ───────────────────────────────────────────────────────
 -- Must run at startup (init) so filetype is set before any buffer opens.
+-- We use priority = math.huge to override LazyVim/Neovim built-in "env" filetype.
 vim.filetype.add({
   -- Exact filename ".env"
   filename = {
     [".env"] = "envspec",
   },
-  -- Glob patterns for .env variants
+  -- Glob patterns for .env variants, with high priority to override built-in "env"
   pattern = {
-    ["%.env$"] = "envspec",        -- ends with .env (e.g. /path/to/.env)
-    ["%.env%..*"] = "envspec",     -- .env.local, .env.production, .env.schema
-    [".*%.env$"] = "envspec",      -- foo.env, api.env
-    [".*%.env%..*"] = "envspec",   -- api.env.schema, foo.env.local
+    -- .env.local, .env.production, .env.schema (dotfile with extension)
+    ["%.env%..*"] = { "envspec", { priority = math.huge } },
+    -- /path/to/.env (ends with /.env — the trailing dot-env file)
+    [".*/%.env$"] = { "envspec", { priority = math.huge } },
+    -- foo.env, api.env (not a dotfile, but ends with .env)
+    [".+%.env$"] = { "envspec", { priority = math.huge } },
+    -- api.env.schema, foo.env.local
+    [".+%.env%..*"] = { "envspec", { priority = math.huge } },
   },
 })
 
