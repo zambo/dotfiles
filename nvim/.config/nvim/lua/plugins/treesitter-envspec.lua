@@ -1,0 +1,107 @@
+-- Registers the tree-sitter-envspec parser and wires up .env* filetype detection.
+--
+-- The grammar lives at:
+--   ~/temp/varlock/packages/tree-sitter-envspec/
+--
+-- To compile the parser after grammar changes:
+--   cd ~/temp/varlock/packages/tree-sitter-envspec && tree-sitter generate
+-- Then inside Neovim: :TSInstall envspec  (or :TSUpdate envspec)
+--
+-- To iterate on highlights.scm without recompiling:
+--   Edit queries/highlights.scm, then :e (reopen the buffer) to see changes.
+
+-- ─── Filetype detection ───────────────────────────────────────────────────────
+-- Must run at startup (init) so filetype is set before any buffer opens.
+vim.filetype.add({
+  -- Exact filename ".env"
+  filename = {
+    [".env"] = "envspec",
+  },
+  -- Glob patterns for .env variants
+  pattern = {
+    ["%.env$"] = "envspec",        -- ends with .env (e.g. /path/to/.env)
+    ["%.env%..*"] = "envspec",     -- .env.local, .env.production, .env.schema
+    [".*%.env$"] = "envspec",      -- foo.env, api.env
+    [".*%.env%..*"] = "envspec",   -- api.env.schema, foo.env.local
+  },
+})
+
+return {
+  -- ─── Tree-sitter parser registration ────────────────────────────────────────
+  {
+    "nvim-treesitter/nvim-treesitter",
+    opts = function(_, opts)
+      local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
+
+      parser_config.envspec = {
+        install_info = {
+          -- Path to the local grammar. Update this if you move the varlock checkout.
+          url = vim.fn.expand("~/_/temp/varlock/packages/tree-sitter-envspec"),
+          files = { "src/parser.c" },
+          -- parser.c is pre-generated and committed; no npm/generate step needed.
+          generate_requires_npm = false,
+          requires_generate_from_grammar = false,
+        },
+        filetype = "envspec",
+      }
+
+      -- Add "envspec" to the list of parsers that nvim-treesitter ensures are installed.
+      opts.ensure_installed = opts.ensure_installed or {}
+      vim.list_extend(opts.ensure_installed, { "envspec" })
+    end,
+
+    -- Copy the queries into nvim-treesitter's runtime so it can find them.
+    -- This runs after the plugin loads.
+    config = function(_, opts)
+      -- Add the grammar's queries directory to runtimepath so Neovim finds highlights.scm.
+      -- nvim-treesitter looks for queries/<lang>/*.scm in all runtimepath directories.
+      local grammar_dir = vim.fn.expand("~/_/temp/varlock/packages/tree-sitter-envspec")
+      if vim.fn.isdirectory(grammar_dir) == 1 then
+        vim.opt.runtimepath:append(grammar_dir)
+      end
+
+      require("nvim-treesitter.configs").setup(opts)
+    end,
+  },
+
+  -- ─── Decorator name highlighting (mini.hipatterns) ────────────────────────
+  -- Since decorator_comment is an opaque terminal token in the CST, tree-sitter
+  -- cannot capture sub-parts like @name as separate nodes. We use mini.hipatterns
+  -- to highlight decorator names with @attribute coloring inside envspec buffers.
+  {
+    "echasnovski/mini.hipatterns",
+    optional = true,
+    opts = function(_, opts)
+      opts.highlighters = opts.highlighters or {}
+
+      -- Highlight @decoratorName within decorator comment lines.
+      -- Applies only in envspec buffers.
+      opts.highlighters.envspec_decorator = {
+        -- Match @ followed by a valid decorator name (letter then alphanumeric/underscore)
+        pattern = function(buf)
+          if vim.bo[buf].filetype ~= "envspec" then
+            return nil
+          end
+          -- Match @name at start of decorator (after # and optional space)
+          return "@[a-zA-Z][a-zA-Z0-9_]*"
+        end,
+        group = "@attribute",
+      }
+
+      -- Highlight decorator values after = sign within decorator lines.
+      -- e.g. @type=string → highlight "string" differently
+      opts.highlighters.envspec_decorator_value = {
+        pattern = function(buf)
+          if vim.bo[buf].filetype ~= "envspec" then
+            return nil
+          end
+          -- Match =value after a decorator name (non-greedy up to next space or #)
+          return "@[a-zA-Z][a-zA-Z0-9_]*%f[=]=[^ \t#]+"
+        end,
+        group = "@constant",
+      }
+
+      return opts
+    end,
+  },
+}
