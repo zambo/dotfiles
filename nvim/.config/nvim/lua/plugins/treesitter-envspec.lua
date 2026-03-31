@@ -1,17 +1,15 @@
 -- Tree-sitter grammar for @env-spec dotenv superset format.
 --
--- Grammar source lives at:
---   <nvim_config>/tree-sitter-envspec/
+-- Grammar source: <nvim_config>/tree-sitter-envspec/
 --
--- To regenerate parser.c after grammar.js changes (requires tree-sitter-cli):
+-- Regenerate parser.c after grammar.js changes (needs tree-sitter-cli):
 --   cd ~/.config/nvim/tree-sitter-envspec && tree-sitter generate
--- Then: :TSInstall envspec  (or :TSUpdate envspec)
+--   then :TSInstall envspec
 --
--- To iterate on highlights without recompiling:
---   Edit tree-sitter-envspec/queries/envspec/highlights.scm, then :e
+-- Iterate on highlights without recompiling:
+--   edit tree-sitter-envspec/queries/envspec/highlights.scm, then :e
 
 -- ─── Filetype detection ───────────────────────────────────────────────────────
--- Run at module load time (top-level), before any plugin init.
 vim.filetype.add({
   filename = {
     [".env"] = "envspec",
@@ -29,16 +27,23 @@ return {
   {
     "nvim-treesitter/nvim-treesitter",
     init = function()
-      -- Add grammar dir to runtimepath early so queries/envspec/*.scm is found.
       local dir = vim.fn.stdpath("config") .. "/tree-sitter-envspec"
+
+      -- Add grammar dir to runtimepath so queries/envspec/*.scm is found.
+      -- prepend so it wins over any other envspec queries.
       if vim.fn.isdirectory(dir) == 1 then
         vim.opt.runtimepath:prepend(dir)
       end
+
+      -- Register the language mapping early — before any FileType autocmd fires.
+      -- Without this, LazyVim's FileType handler doesn't know envspec has a parser.
+      vim.treesitter.language.register("envspec", "envspec")
     end,
+
     opts = function(_, opts)
       local dir = vim.fn.stdpath("config") .. "/tree-sitter-envspec"
 
-      -- Register the parser entry so :TSInstall envspec knows where to find it.
+      -- Register install info so :TSInstall envspec works.
       require("nvim-treesitter.parsers").envspec = {
         install_info = {
           url = dir,
@@ -49,17 +54,34 @@ return {
         filetype = "envspec",
       }
 
-      -- Tell Neovim core that the "envspec" filetype uses the "envspec" parser.
-      vim.treesitter.language.register("envspec", "envspec")
-
       opts.ensure_installed = opts.ensure_installed or {}
       vim.list_extend(opts.ensure_installed, { "envspec" })
     end,
   },
 
+  -- ─── Kick highlighting on already-open envspec buffers ───────────────────
+  -- nvim-treesitter's FileType autocmd only runs for buffers opened after the
+  -- plugin loads. If the user opened an .env* file first (triggering LazyFile),
+  -- we re-fire treesitter highlighting once everything is settled.
+  {
+    "nvim-treesitter/nvim-treesitter",
+    event = "VeryLazy",
+    init = function()
+      vim.api.nvim_create_autocmd("User", {
+        pattern = "VeryLazy",
+        once = true,
+        callback = function()
+          for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+            if vim.bo[buf].filetype == "envspec" and vim.api.nvim_buf_is_loaded(buf) then
+              pcall(vim.treesitter.start, buf, "envspec")
+            end
+          end
+        end,
+      })
+    end,
+  },
+
   -- ─── mini.hipatterns — decorator name highlighting ───────────────────────
-  -- decorator_comment is an opaque token so tree-sitter can't capture @name
-  -- sub-parts. mini.hipatterns fills the gap for envspec buffers only.
   {
     "echasnovski/mini.hipatterns",
     optional = true,
