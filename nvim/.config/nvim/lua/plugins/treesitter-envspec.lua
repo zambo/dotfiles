@@ -40,8 +40,10 @@ return {
       -- Grammar lives inside the Neovim config directory, next to lua/.
       local grammar_dir = vim.fn.stdpath("config") .. "/tree-sitter-envspec"
 
-      local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
-      parser_config.envspec = {
+      -- In recent nvim-treesitter the parsers module is a plain table;
+      -- get_parser_configs() no longer exists. Add our entry directly.
+      local parsers = require("nvim-treesitter.parsers")
+      parsers.envspec = {
         install_info = {
           url = grammar_dir,
           files = { "src/parser.c" },
