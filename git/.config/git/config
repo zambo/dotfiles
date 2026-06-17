@@ -1,46 +1,50 @@
 [gpg]
-	format = ssh
+  format = ssh
 
 [gpg "ssh"]
-	program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
+  program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
 
 [commit]
-	gpgsign = true
+  gpgsign = true
 
 [user]
-	email = zambo@users.noreply.github.com
-	name = Henrique Zambonin
+  email = zambo@users.noreply.github.com
+  name = Henrique Zambonin
 
 [credential "https://github.com"]
-	helper = 
-	helper = !/opt/homebrew/bin/gh auth git-credential
+  helper = 
+  helper = !/opt/homebrew/bin/gh auth git-credential
 
 [credential "https://gist.github.com"]
-	helper = 
-	helper = !/opt/homebrew/bin/gh auth git-credential
+  helper = 
+  helper = !/opt/homebrew/bin/gh auth git-credential
 
 [include]
   ## Signkey is set in gitconfig.local, which is not tracked by git and can be used to override settings for different machines
-	path = ~/.config/gitconfig.local
+  path = ~/.config/gitconfig.local
   ; path =  /opt/homebrew/bin/delta/themes.gitconfig
   path = ~/.config/git/themes/delta/tokyonight.gitconfig
+  path = ~/.config/git/themes/delta/kanagawa.gitconfig
 
 [core]
-	excludesfile = /Users/henriquerodrigues/.config/.gitignore_global
+  excludesfile = /Users/henriquerodrigues/.config/.gitignore_global
   pager = delta
 
 [interactive]
-	diffFilter = delta --color-only
+  diffFilter = delta --color-only
 
 [delta]
-    features = tokyonight
-    navigate = true
-    ; side-by-side = true
-    hyperlinks = true
-    grep-output-type = ripgrep
-    line-numbers = true
-    true-color = always
-    diff-so-fancy = true
+  features = kanagawa
+  navigate = true
+  side-by-side = true
+  ; line-numbers-left-format = ""
+  ; line-numbers-right-format = "│ "
+  hyperlinks = true
+  grep-output-type = ripgrep
+  line-numbers = true
+  dark = true
+  true-color = always
+  diff-so-fancy = true
 
 [merge]
   tool = diffview
@@ -51,11 +55,11 @@
   keepBackup = false
 
 [diff]
-    colorMoved = default
+  colorMoved = default
 
 [alias]
-	# Difftastic aliases, so `git dlog -p` is `git log -p`
-	# with difftastic and likewise for the other subcommands.
-	dlog = -c diff.external=difft log --ext-diff
-	dshow = -c diff.external=difft show --ext-diff
-	ddiff = -c diff.external=difft diff
+  # Difftastic aliases, so `git dlog -p` is `git log -p`
+  # with difftastic and likewise for the other subcommands.
+  dlog = -c diff.external=difft log --ext-diff
+  dshow = -c diff.external=difft show --ext-diff
+  ddiff = -c diff.external=difft diff

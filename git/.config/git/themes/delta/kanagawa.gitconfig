@@ -1,0 +1,62 @@
+[delta "kanagawa"]
+    dark = true
+    right-arrow = >
+    syntax-theme = base16
+
+    # -- git
+    blame-format = " ({commit:>7}) {author:<18} {timestamp:^13} "
+    # blame-palette uses: bg, selection (2D4F67), purple, cyan, comment, yellow, green
+    blame-palette = "normal #1F1F28 #2D4F67 #957FB8 #7AA89F #727169 #C0A36E #76946A"
+    commit-decoration-style = none
+    commit-style = bold black "#FF9E64"
+
+    # -- grep
+    grep-file-style = "#C0A36E"
+    grep-line-number-style = "#C0A36E"
+
+    # -- diff
+    keep-plus-minus-markers = true
+    line-numbers = true
+
+    # Minus (removed) — C34043 red
+    line-numbers-minus-style = "#C34043"
+    minus-style                   = syntax "#3d1f22"
+    minus-non-emph-style          = syntax "#3d1f22"
+    minus-emph-style              = "#DCD7BA" "#5a2428" underline  # fg=foreground, bg=saturated red shade
+    minus-empty-line-marker-style = syntax "#3d1f22"
+
+    # Plus (added) — 76946A green
+    line-numbers-plus-style = "#76946A"
+    plus-style                    = syntax "#1e2e1e"
+    plus-non-emph-style           = syntax "#1e2e1e"
+    plus-emph-style               = "#DCD7BA" "#2a3d28" underline  # fg=foreground, bg=saturated green shade
+    plus-empty-line-marker-style  = syntax "#1e2e1e"
+
+    # Line number gutter — comment/brblack 727169
+    line-numbers-left-style   = "#727169"
+    line-numbers-left-format  = "{nm:>1}┊"
+    line-numbers-right-style  = "#727169"
+    line-numbers-right-format = "{np:>1}┊"
+    line-numbers-zero-style   = "#363646"  # darkened 727169
+
+    # Unchanged lines use syntax highlighter
+    zero-style = syntax
+
+    # Whitespace errors — foreground on red
+    whitespace-error-style = "#DCD7BA" "#C34043"
+
+    # -- decorations
+    # File labels — orange FF9E64
+    file-style = "#FF9E64" bold
+    file-decoration-style = "#C0A36E" overline  # yellow, like olive
+    file-added-label = [+]
+    file-copied-label = [*]
+    file-modified-label = [~]
+    file-removed-label = [-]
+    file-renamed-label = [>]
+
+    # Hunk header
+    hunk-header-decoration-style = none
+    hunk-header-file-style = "#C0A36E"         # yellow
+    hunk-header-line-number-style = "#FF9E64"  # orange
+    hunk-header-style = file line-number "#957FB8"  # purple, like orchid
