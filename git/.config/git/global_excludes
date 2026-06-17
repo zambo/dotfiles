@@ -1,0 +1,53 @@
+# Global git excludes (core.excludesFile)
+#
+# Personal-to-this-machine ignores. Things that should NEVER appear in any
+# project's tracked .gitignore go here. Build outputs, language ecosystems,
+# and framework artifacts belong in per-project .gitignore — not here.
+#
+# Patterns are gitignore-syntax. Trailing slash = directory only.
+
+# ─── macOS ──────────────────────────────────────────────────────────────────
+.DS_Store
+.AppleDouble
+.LSOverride
+.Spotlight-V100
+.Trashes
+.fseventsd
+
+# ─── Editor swap / backup files ─────────────────────────────────────────────
+*~
+*.bak
+*.orig
+*.swp
+*.swo
+*.swn
+
+# ─── Vim / Neovim personal artifacts ────────────────────────────────────────
+# (project-shared nvim configs like .nvim.lua should be in project .gitignore)
+.netrwhist
+Session.vim
+.vim/.netrwhist
+
+# ─── JetBrains personal workspace ───────────────────────────────────────────
+# (.idea/ itself is often shared — only personal subfiles ignored globally)
+**/.idea/workspace.xml
+**/.idea/tasks.xml
+**/.idea/usage.statistics.xml
+**/.idea/shelf/
+
+# ─── ctags / cscope ─────────────────────────────────────────────────────────
+tags
+TAGS
+cscope.*
+
+# ─── direnv local override ──────────────────────────────────────────────────
+.envrc.local
+
+# ─── Personal AI / agent tooling ────────────────────────────────────────────
+# Local-only state from agent CLIs. Should never be committed by anyone.
+**/.claude/
+**/.gsd/
+**/.zambo/
+**/.opencode/
+**/.aider*
+**/.cursor/

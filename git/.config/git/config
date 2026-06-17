@@ -27,7 +27,7 @@
   path = ~/.config/git/themes/delta/kanagawa.gitconfig
 
 [core]
-  excludesfile = /Users/henriquerodrigues/.config/.gitignore_global
+  excludesfile = ~/.config/git/global_excludes
   pager = delta
 
 [interactive]
