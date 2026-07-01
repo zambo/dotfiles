@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+// gsd-hook-version: 1.6.1
 // Check for GSD updates in background, write result to cache
 // Called by SessionStart hook - runs once per session
 
@@ -7,19 +8,21 @@ const path = require('path');
 const os = require('os');
 const { spawn } = require('child_process');
 
+const { updateCacheFileName } = require('../gsd-core/bin/lib/package-identity.cjs');
+
 const homeDir = os.homedir();
 const cwd = process.cwd();
 
-// Detect runtime config directory (supports Claude, OpenCode, Gemini)
+// Detect runtime config directory (supports Claude, OpenCode, Kilo, Gemini)
 // Respects CLAUDE_CONFIG_DIR for custom config directory setups
 function detectConfigDir(baseDir) {
   // Check env override first (supports multi-account setups)
   const envDir = process.env.CLAUDE_CONFIG_DIR;
-  if (envDir && fs.existsSync(path.join(envDir, 'get-shit-done', 'VERSION'))) {
+  if (envDir && fs.existsSync(path.join(envDir, 'gsd-core', 'VERSION'))) {
     return envDir;
   }
-  for (const dir of ['.config/opencode', '.opencode', '.gemini', '.config', 'opencode']) {
-    if (fs.existsSync(path.join(baseDir, dir, 'get-shit-done', 'VERSION'))) {
+  for (const dir of ['.config', 'opencode', '.gemini', '.config/kilo', '.kilo', '.config/opencode', '.opencode']) {
+    if (fs.existsSync(path.join(baseDir, dir, 'gsd-core', 'VERSION'))) {
       return path.join(baseDir, dir);
     }
   }
@@ -28,54 +31,36 @@ function detectConfigDir(baseDir) {
 
 const globalConfigDir = detectConfigDir(homeDir);
 const projectConfigDir = detectConfigDir(cwd);
-const cacheDir = path.join(globalConfigDir, 'cache');
-const cacheFile = path.join(cacheDir, 'gsd-update-check.json');
+// Use a shared, tool-agnostic cache directory to avoid multi-runtime
+// resolution mismatches where check-update writes to one runtime's cache
+// but statusline reads from another (#1421).
+const cacheDir = path.join(homeDir, '.cache', 'gsd');
+const cacheFile = path.join(cacheDir, updateCacheFileName);
 
 // VERSION file locations (check project first, then global)
-const projectVersionFile = path.join(projectConfigDir, 'get-shit-done', 'VERSION');
-const globalVersionFile = path.join(globalConfigDir, 'get-shit-done', 'VERSION');
+const projectVersionFile = path.join(projectConfigDir, 'gsd-core', 'VERSION');
+const globalVersionFile = path.join(globalConfigDir, 'gsd-core', 'VERSION');
 
 // Ensure cache directory exists
 if (!fs.existsSync(cacheDir)) {
   fs.mkdirSync(cacheDir, { recursive: true });
 }
 
-// Run check in background (spawn background process, windowsHide prevents console flash)
-const child = spawn(process.execPath, ['-e', `
-  const fs = require('fs');
-  const { execSync } = require('child_process');
-
-  const cacheFile = ${JSON.stringify(cacheFile)};
-  const projectVersionFile = ${JSON.stringify(projectVersionFile)};
-  const globalVersionFile = ${JSON.stringify(globalVersionFile)};
-
-  // Check project directory first (local install), then global
-  let installed = '0.0.0';
-  try {
-    if (fs.existsSync(projectVersionFile)) {
-      installed = fs.readFileSync(projectVersionFile, 'utf8').trim();
-    } else if (fs.existsSync(globalVersionFile)) {
-      installed = fs.readFileSync(globalVersionFile, 'utf8').trim();
-    }
-  } catch (e) {}
-
-  let latest = null;
-  try {
-    latest = execSync('npm view get-shit-done-cc version', { encoding: 'utf8', timeout: 10000, windowsHide: true }).trim();
-  } catch (e) {}
-
-  const result = {
-    update_available: latest && installed !== latest,
-    installed,
-    latest: latest || 'unknown',
-    checked: Math.floor(Date.now() / 1000)
-  };
-
-  fs.writeFileSync(cacheFile, JSON.stringify(result));
-`], {
+// Run check in background via a dedicated worker script.
+// Spawning a file (rather than node -e '<inline code>') keeps the worker logic
+// in plain JS with no template-literal regex-escaping concerns, and makes the
+// worker independently testable.
+const workerPath = path.join(__dirname, 'gsd-check-update-worker.js');
+const child = spawn(process.execPath, [workerPath], {
   stdio: 'ignore',
   windowsHide: true,
-  detached: true  // Required on Windows for proper process detachment
+  detached: true,  // Required on Windows for proper process detachment
+  env: {
+    ...process.env,
+    GSD_CACHE_FILE: cacheFile,
+    GSD_PROJECT_VERSION_FILE: projectVersionFile,
+    GSD_GLOBAL_VERSION_FILE: globalVersionFile,
+  },
 });
 
 child.unref();

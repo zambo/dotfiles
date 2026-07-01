@@ -1,5 +1,7 @@
 ---
 description: Create context handoff when pausing work mid-phase
+argument-hint: "[--report]"
+requires: [phase, progress]
 tools:
   read: true
   write: true
@@ -18,7 +20,7 @@ Routes to the pause-work workflow which handles:
 </objective>
 
 <execution_context>
-@/Users/henriquerodrigues/.config/opencode/get-shit-done/workflows/pause-work.md
+@/Users/henriquerodrigues/.config/opencode/gsd-core/workflows/pause-work.md
 </execution_context>
 
 <context>
@@ -26,7 +28,10 @@ State and phase progress are gathered in-workflow with targeted reads.
 </context>
 
 <process>
-**Follow the pause-work workflow** from `@/Users/henriquerodrigues/.config/opencode/get-shit-done/workflows/pause-work.md`.
+If `--report` is in $ARGUMENTS:
+Read and execute `/Users/henriquerodrigues/.config/opencode/gsd-core/workflows/session-report.md` end-to-end.
+
+**Follow the pause-work workflow**.
 
 The workflow handles all logic including:
 1. Phase directory detection

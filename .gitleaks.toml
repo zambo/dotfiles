@@ -1,0 +1,8 @@
+[allowlist]
+  description = "Known false positives — placeholder examples in docs and integrity hashes in manifests"
+  paths = [
+    # Truncated placeholder key (gzak_8f3c9a1b2d4e...) in deploy-gizmos skill docs
+    '''opencode/.config/opencode/skills/deploy-gizmos/SKILL\.md''',
+    # SHA-256 integrity hashes in GSD file manifest are not secrets
+    '''opencode/.config/opencode/gsd-file-manifest\.json''',
+  ]

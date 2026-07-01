@@ -5,6 +5,7 @@ argument-instructions: |
   Parse the argument as a phase number (integer, decimal, or letter-suffix), plus optional free-text instructions.
   Example: /gsd-add-tests 12
   Example: /gsd-add-tests 12 focus on edge cases in the pricing module
+requires: [phase]
 tools:
   read: true
   write: true
@@ -12,7 +13,7 @@ tools:
   bash: true
   glob: true
   grep: true
-  task: true
+  agent: true
   question: true
 ---
 <objective>
@@ -24,7 +25,7 @@ Output: Test files committed with message `test(phase-{N}): add unit and E2E tes
 </objective>
 
 <execution_context>
-@/Users/henriquerodrigues/.config/opencode/get-shit-done/workflows/add-tests.md
+@/Users/henriquerodrigues/.config/opencode/gsd-core/workflows/add-tests.md
 </execution_context>
 
 <context>
@@ -35,6 +36,6 @@ Phase: $ARGUMENTS
 </context>
 
 <process>
-Execute the add-tests workflow from @/Users/henriquerodrigues/.config/opencode/get-shit-done/workflows/add-tests.md end-to-end.
+Execute end-to-end.
 Preserve all workflow gates (classification approval, test plan approval, RED-GREEN verification, gap reporting).
 </process>

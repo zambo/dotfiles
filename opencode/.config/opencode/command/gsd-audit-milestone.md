@@ -1,12 +1,13 @@
 ---
 description: Audit milestone completion against original intent before archiving
 argument-hint: "[version]"
+requires: [execute-phase]
 tools:
   read: true
   glob: true
   grep: true
   bash: true
-  task: true
+  agent: true
   write: true
 ---
 <objective>
@@ -16,7 +17,7 @@ Verify milestone achieved its definition of done. Check requirements coverage, c
 </objective>
 
 <execution_context>
-@/Users/henriquerodrigues/.config/opencode/get-shit-done/workflows/audit-milestone.md
+@/Users/henriquerodrigues/.config/opencode/gsd-core/workflows/audit-milestone.md
 </execution_context>
 
 <context>
@@ -30,6 +31,6 @@ Glob: .planning/phases/*/*-VERIFICATION.md
 </context>
 
 <process>
-Execute the audit-milestone workflow from @/Users/henriquerodrigues/.config/opencode/get-shit-done/workflows/audit-milestone.md end-to-end.
+Execute end-to-end.
 Preserve all workflow gates (scope determination, verification reading, integration check, requirements coverage, routing).
 </process>

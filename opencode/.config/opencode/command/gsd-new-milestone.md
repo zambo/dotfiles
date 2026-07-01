@@ -1,11 +1,12 @@
 ---
 description: Start a new milestone cycle — update PROJECT.md and route to requirements
 argument-hint: "[milestone name, e.g., 'v1.1 Notifications']"
+requires: [new-project, phase, plan-phase]
 tools:
   read: true
   write: true
   bash: true
-  task: true
+  agent: true
   question: true
 ---
 <objective>
@@ -24,11 +25,11 @@ Brownfield equivalent of new-project. Project exists, PROJECT.md has history. Ga
 </objective>
 
 <execution_context>
-@/Users/henriquerodrigues/.config/opencode/get-shit-done/workflows/new-milestone.md
-@/Users/henriquerodrigues/.config/opencode/get-shit-done/references/questioning.md
-@/Users/henriquerodrigues/.config/opencode/get-shit-done/references/ui-brand.md
-@/Users/henriquerodrigues/.config/opencode/get-shit-done/templates/project.md
-@/Users/henriquerodrigues/.config/opencode/get-shit-done/templates/requirements.md
+@/Users/henriquerodrigues/.config/opencode/gsd-core/workflows/new-milestone.md
+@/Users/henriquerodrigues/.config/opencode/gsd-core/references/questioning.md
+@/Users/henriquerodrigues/.config/opencode/gsd-core/references/ui-brand.md
+@/Users/henriquerodrigues/.config/opencode/gsd-core/templates/project.md
+@/Users/henriquerodrigues/.config/opencode/gsd-core/templates/requirements.md
 </execution_context>
 
 <context>
@@ -38,6 +39,6 @@ Project and milestone context files are resolved inside the workflow (`init new-
 </context>
 
 <process>
-Execute the new-milestone workflow from @/Users/henriquerodrigues/.config/opencode/get-shit-done/workflows/new-milestone.md end-to-end.
+Execute end-to-end.
 Preserve all workflow gates (validation, questioning, research, requirements, roadmap approval, commits).
 </process>

@@ -1,7 +1,13 @@
 ---
 description: Update GSD to latest version with changelog display
+argument-hint: "[--sync | --reapply | --next | --rc]"
 tools:
+  read: true
+  write: true
+  edit: true
   bash: true
+  glob: true
+  grep: true
   question: true
 ---
 
@@ -18,19 +24,25 @@ Routes to the update workflow which handles:
 </objective>
 
 <execution_context>
-@/Users/henriquerodrigues/.config/opencode/get-shit-done/workflows/update.md
+@/Users/henriquerodrigues/.config/opencode/gsd-core/workflows/update.md
 </execution_context>
 
-<process>
-**Follow the update workflow** from `@/Users/henriquerodrigues/.config/opencode/get-shit-done/workflows/update.md`.
+<flags>
+- **--sync**: Sync managed GSD skills across runtime roots so multi-runtime users stay aligned after an update. Runs the sync-skills workflow (--from, --to, --dry-run, --apply flags supported).
+- **--reapply**: Reapply local modifications after a GSD update. Uses three-way comparison (pristine baseline, user-modified backup, newly installed version) to merge user customizations back. Runs the reapply-patches workflow.
+- **--next** (alias **--rc**): Target the `@next` RC dist-tag instead of `@latest` so you can install or refresh a release candidate (e.g. `1.4.0-rc.1`) through the normal update flow — scope/runtime detection, changelog preview, custom-file backup, and cache clearing all still apply. Omitting it keeps targeting `@latest` (no change). See ADR #660 for the RC channel.
+- **(no flag)**: Standard update — check for new version, show changelog, install.
+</flags>
 
-The workflow handles all logic including:
-1. Installed version detection (local/global)
-2. Latest version checking via npm
-3. Version comparison
-4. Changelog fetching and extraction
-5. Clean install warning display
-6. User confirmation
-7. Update execution
-8. Cache clearing
+<process>
+Parse the first token of $ARGUMENTS:
+- If it is `--sync`: strip the flag, execute the sync-skills workflow (passing remaining args for --from/--to/--dry-run/--apply).
+- If it is `--reapply`: strip the flag, execute the reapply-patches workflow.
+- Otherwise (including `--next` / `--rc`): execute the update workflow end-to-end, passing `$ARGUMENTS` through so the workflow's parse_update_channel step can select the release channel.
+
 </process>
+
+<execution_context_extended>
+@/Users/henriquerodrigues/.config/opencode/gsd-core/workflows/sync-skills.md
+@/Users/henriquerodrigues/.config/opencode/gsd-core/workflows/reapply-patches.md
+</execution_context_extended>

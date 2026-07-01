@@ -1,0 +1,5 @@
+# Truncated placeholder key in deploy-gizmos skill documentation example
+opencode/.config/opencode/skills/deploy-gizmos/SKILL.md:curl-auth-header:346
+
+# SHA-256 integrity hash for secrets.cjs in GSD file manifest — not a secret
+opencode/.config/opencode/gsd-file-manifest.json:generic-api-key:123

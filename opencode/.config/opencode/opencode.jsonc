@@ -1,20 +1,19 @@
 {
 	"$schema": "https://opencode.ai/config.json",
 	"default_agent": "plan",
-	"disabled_providers": [
-		"azure_openai",
-		"cohere",
-		"google_palm",
-		"huggingface",
-		"openai",
-		"replicate",
-		"stability_ai",
-		"vertex_ai",
-		"opencode"
-	],
+	// "disabled_providers": [
+	//   "azure_openai",
+	//   "cohere",
+	//   "google_palm",
+	//   "huggingface",
+	//   "openai",
+	//   "replicate",
+	//   "stability_ai",
+	//   "vertex_ai",
+	//   "opencode"
+	// ],
 	"username": "zambo",
 	"autoupdate": true,
-	"plugin": ["superpowers@git+https://github.com/obra/superpowers.git"],
 	"provider": {
 		"fuel_ix": {
 			"npm": "@ai-sdk/openai-compatible",
@@ -34,27 +33,74 @@
 				"claude-haiku-4-5": {
 					"name": "Claude Haiku 4.5"
 				},
-				"gemini-3.1-pro": {
-					"name": "gemini-3.1-pro"
+				"claude-haiku-4": {
+					"name": "Claude Haiku 4"
 				},
-				"gpt-5-2": {
+				"gemini-3.1-pro": {
+					"name": "Gemini 3.1 Pro"
+				},
+				"gemini-3.1-pro-preview": {
+					"name": "Gemini 3.1 Pro Preview"
+				},
+				"gemini-3.1-flash-image": {
+					"name": "Gemini 3.1 Flash Image"
+				},
+				"gemini-3.1-flash-lite": {
+					"name": "Gemini 3.1 Flash Lite"
+				},
+				"gemini-3-pro": {
+					"name": "Gemini 3 Pro"
+				},
+				"gemini-3-flash": {
+					"name": "Gemini 3 Flash"
+				},
+				"gemini-2.5-pro": {
+					"name": "Gemini 2.5 Pro"
+				},
+				"gemini-2.5-flash": {
+					"name": "Gemini 2.5 Flash"
+				},
+				"gemini-2.5-flash-lite": {
+					"name": "Gemini 2.5 Flash Lite"
+				},
+				"gemini-2.0-flash": {
+					"name": "Gemini 2.0 Flash"
+				},
+				"gpt-5.2-chat": {
 					"name": "GPT 5.2 Chat"
 				},
-				"gpt-5.4-2026-03-05": {
+				"gpt-5.4": {
 					"name": "GPT 5.4"
 				},
-				"gpt-4-1": {
+				"gpt-5.4-2026-03-05": {
+					"name": "GPT 5.4 (2026-03-05)"
+				},
+				"gpt-5.3-codex": {
+					"name": "GPT 5.3 Codex"
+				},
+				"gpt-4.1": {
 					"name": "GPT 4.1"
+				},
+				"kimi-k2.5": {
+					"name": "Kimi K2.5"
 				}
 			}
 		}
 	},
+	"mcp": {
+		"figma": {
+			"url": "http://127.0.0.1:3845/mcp",
+			"type": "remote"
+		}
+	},
 	"permission": {
 		"read": {
-			"~/.config/opencode/get-shit-done/*": "allow"
+			"~/.config/opencode/get-shit-done/*": "allow",
+			"~/.config/opencode/gsd-core/*": "allow"
 		},
 		"external_directory": {
-			"~/.config/opencode/get-shit-done/*": "allow"
+			"~/.config/opencode/get-shit-done/*": "allow",
+			"~/.config/opencode/gsd-core/*": "allow"
 		}
 	}
 }
