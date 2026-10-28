@@ -68,6 +68,14 @@ template = "default.md"
 # the group. This can be useful to quickly declare a group by the name of the
 # directory it applies to.
 
+# Daily notes: `ZkNew { group = "journal" }` creates/opens journal/<date>.md.
+[group."journal"]
+paths = ["journal"]
+
+[group."journal".note]
+filename = "{{format-date now '%Y-%m-%d'}}"
+template = "journal.md"
+
 #[group."<NAME>"]
 #paths = ["<DIR1>", "<DIR2>"]
 #[group."<NAME>".note]

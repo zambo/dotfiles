@@ -1,3 +1,7 @@
+-- Soft-wrap prose instead of scrolling long lines sideways.
+vim.opt_local.wrap = true
+vim.opt_local.linebreak = true
+
 -- zk: wiki-link helpers, active only for buffers inside a zk notebook.
 local ok, zk_util = pcall(require, "zk.util")
 if not ok or zk_util.notebook_root(vim.fn.expand("%:p")) == nil then

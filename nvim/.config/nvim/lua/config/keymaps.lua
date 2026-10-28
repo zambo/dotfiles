@@ -388,3 +388,67 @@ map("n", "<leader>ww", function()
 
   -- If only 1 window, do nothing
 end, { desc = "Window Picker" })
+
+-- ZK
+if LazyVim.has("zk") then
+  local zk_opts = { noremap = true, silent = false }
+
+  -- Create a new note after asking for its title.
+  map(
+    "n",
+    "<leader>zn",
+    "<Cmd>ZkNew { title = vim.fn.input('Title: ') }<CR>",
+    vim.tbl_extend("force", zk_opts, { desc = "New note" })
+  )
+
+  -- Open notes.
+  map(
+    "n",
+    "<leader>zo",
+    "<Cmd>ZkNotes { sort = { 'modified' } }<CR>",
+    vim.tbl_extend("force", zk_opts, { desc = "Open notes" })
+  )
+
+  -- Open notes associated with the selected tags.
+  map("n", "<leader>zt", "<Cmd>ZkTags<CR>", vim.tbl_extend("force", zk_opts, { desc = "Open tags" }))
+
+  -- Search for notes matching a given query.
+  map(
+    "n",
+    "<leader>zf",
+    "<Cmd>ZkNotes { sort = { 'modified' }, match = { vim.fn.input('Search: ') } }<CR>",
+    vim.tbl_extend("force", zk_opts, { desc = "Find notes" })
+  )
+
+  -- Open today's journal note (created from the journal template if missing).
+  map(
+    "n",
+    "<leader>zj",
+    function()
+      local root = vim.env.ZK_NOTEBOOK_DIR or vim.fn.expand("~/_/notes")
+      vim.fn.mkdir(root .. "/journal", "p")
+      require("zk").new({ group = "journal", dir = "journal", notebook_path = root })
+    end,
+    vim.tbl_extend("force", zk_opts, { desc = "Journal (today)" })
+  )
+
+  -- Quick capture into the inbox.
+  map(
+    "n",
+    "<leader>zi",
+    "<Cmd>ZkNew { dir = 'inbox', title = vim.fn.input('Inbox: ') }<CR>",
+    vim.tbl_extend("force", zk_opts, { desc = "New inbox note" })
+  )
+
+  -- Notes that no other note links to.
+  map(
+    "n",
+    "<leader>zO",
+    "<Cmd>ZkNotes { orphan = true, sort = { 'modified' } }<CR>",
+    vim.tbl_extend("force", zk_opts, { desc = "Orphan notes" })
+  )
+
+   -- Search for notes matching the current visual selection.
+   map("v", "<leader>zf", ":'<,'>ZkMatch<CR>", vim.tbl_extend("force", zk_opts, { desc = "Find notes (selection)" }))
+end
+
