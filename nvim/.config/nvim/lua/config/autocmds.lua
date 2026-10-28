@@ -18,3 +18,16 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufReadPost" }, {
     vim.diagnostic.enable(false, { bufnr = e.buf })
   end,
 })
+
+-- In markdown buffers, only show diagnostic virtual text on the cursor line;
+-- long lint messages otherwise run across every line of a note.
+local virtual_text = vim.diagnostic.handlers.virtual_text
+vim.diagnostic.handlers.virtual_text = {
+  show = function(ns, bufnr, diagnostics, opts)
+    if vim.bo[bufnr].filetype == "markdown" and type(opts.virtual_text) == "table" then
+      opts = vim.tbl_deep_extend("force", opts, { virtual_text = { current_line = true } })
+    end
+    return virtual_text.show(ns, bufnr, diagnostics, opts)
+  end,
+  hide = virtual_text.hide,
+}
