@@ -421,16 +421,11 @@ if LazyVim.has("zk") then
   )
 
   -- Open today's journal note (created from the journal template if missing).
-  map(
-    "n",
-    "<leader>zj",
-    function()
-      local root = vim.env.ZK_NOTEBOOK_DIR or vim.fn.expand("~/_/notes")
-      vim.fn.mkdir(root .. "/journal", "p")
-      require("zk").new({ group = "journal", dir = "journal", notebook_path = root })
-    end,
-    vim.tbl_extend("force", zk_opts, { desc = "Journal (today)" })
-  )
+  map("n", "<leader>zj", function()
+    local root = vim.env.ZK_NOTEBOOK_DIR or vim.fn.expand("~/_/notes")
+    vim.fn.mkdir(root .. "/journal", "p")
+    require("zk").new({ group = "journal", dir = "journal", notebook_path = root })
+  end, vim.tbl_extend("force", zk_opts, { desc = "Journal (today)" }))
 
   -- Quick capture into the inbox.
   map(
@@ -448,7 +443,35 @@ if LazyVim.has("zk") then
     vim.tbl_extend("force", zk_opts, { desc = "Orphan notes" })
   )
 
-   -- Search for notes matching the current visual selection.
-   map("v", "<leader>zf", ":'<,'>ZkMatch<CR>", vim.tbl_extend("force", zk_opts, { desc = "Find notes (selection)" }))
+  -- Search for notes matching the current visual selection.
+  map("v", "<leader>zf", ":'<,'>ZkMatch<CR>", vim.tbl_extend("force", zk_opts, { desc = "Find notes (selection)" }))
 end
 
+-- Open current markdown buffer in leaf preview
+map("n", "<leader>cv", function()
+  local bufnr = vim.api.nvim_get_current_buf()
+  local filetype = vim.bo[bufnr].filetype
+
+  if filetype ~= "markdown" then
+    vim.notify("leaf only works with markdown files", vim.log.levels.WARN)
+    return
+  end
+
+  local filepath = vim.api.nvim_buf_get_name(bufnr)
+  if filepath == "" then
+    vim.notify("Buffer has no file path", vim.log.levels.WARN)
+    return
+  end
+
+  vim.cmd.update()
+  Snacks.terminal({ "leaf", filepath }, {
+    count = next_term_count(),
+    win = {
+      position = "float",
+      width = 0.98,
+      height = 0.98,
+      border = "rounded",
+      minimal = true,
+    },
+  })
+end, { desc = "Preview markdown in leaf" })
