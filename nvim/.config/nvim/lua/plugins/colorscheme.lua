@@ -96,7 +96,7 @@ return {
       compile = false,
       undercurl = true,
       commentStyle = { italic = true },
-      functionStyle = { bold = true },
+      functionStyle = { bold = true, italic = true },
       keywordStyle = { italic = true },
       statementStyle = { bold = true },
       typeStyle = { italic = true },
@@ -115,6 +115,8 @@ return {
       },
       overrides = function(colors)
         local theme = colors.theme
+        local palette = colors.palette
+
         return {
           NormalFloat = { bg = "none" },
           FloatBorder = { bg = "none" },
@@ -134,6 +136,16 @@ return {
           SnacksDashboardDesc = { fg = theme.ui.fg },
           SnacksDashboardKey = { fg = theme.syn.special2 },
           SnacksDashboardFooter = { fg = theme.syn.comment },
+
+          -- BufferLineTab = { bg = "none" },
+          BufferLineFill = { bg = theme.ui.error },
+          BufferLineBackground = { fg = theme.ui.fg_dim, bg = theme.ui.bg_m1 },
+          BufferLineBufferSelected = { fg = theme.ui.fg, bg = theme.ui.bg, bold = true },
+          BufferLineBufferVisible = { fg = theme.ui.fg_dim, bg = theme.ui.bg_m1 },
+          BufferLineSeparator = { fg = theme.ui.bg_m3, bg = theme.ui.bg_m1 },
+          BufferLineSeparatorSelected = { fg = theme.ui.bg_m3, bg = theme.ui.bg },
+          BufferLineIndicatorSelected = { fg = palette.crystalBlue, bg = theme.ui.bg },
+          BufferLineCloseButtonSelected = { fg = theme.diag.fg_dim, bg = theme.ui.bg },
         }
       end,
       theme = "wave",
@@ -146,8 +158,8 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      -- colorscheme = "kanagawa",
-      colorscheme = "tokyonight-moon",
+      colorscheme = "kanagawa",
+      -- colorscheme = "tokyonight-moon",
       -- colorScheme = "catppuccin",
     },
   },
