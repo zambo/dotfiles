@@ -7,6 +7,10 @@ return {
         sidebars = "transparent",
         floats = "transparent",
       },
+      on_highlights = function(hl)
+        hl.StatusLine = { bg = "NONE" }
+        hl.StatusLineNC = { bg = "NONE" }
+      end,
     },
   },
   {

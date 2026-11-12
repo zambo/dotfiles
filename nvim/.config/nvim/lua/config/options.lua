@@ -14,3 +14,6 @@ vim.g.lazyvim_prettier_needs_config = true
 
 -- If you have any ESLint autoformat settings, disable them
 -- vim.g.lazyvim_eslint_auto_format = false
+
+vim.o.cmdheight = 0
+vim.o.laststatus = 3
