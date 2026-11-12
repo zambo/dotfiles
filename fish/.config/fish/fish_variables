@@ -67,7 +67,7 @@ SETUVAR _hydro_git_7366:main\u2022\x20\u21912\x20
 SETUVAR _hydro_git_81892:main\u2022\x20
 SETUVAR _hydro_git_86969:main\u2022\x20
 SETUVAR _hydro_git_9829:getting\x2dfrisky\u2022\x20
-SETUVAR fish_user_paths:/Applications/Ghostty\x2eapp/Contents/MacOS
+SETUVAR fish_user_paths:/opt/homebrew/share/google\x2dcloud\x2dsdk/bin\x1e/opt/homebrew/opt/openjdk\x4017/bin\x1e/Applications/Ghostty\x2eapp/Contents/MacOS
 SETUVAR hydro_color_git:yellow
 SETUVAR hydro_color_pwd:blue
 SETUVAR hydro_symbol_prompt:\u276f
