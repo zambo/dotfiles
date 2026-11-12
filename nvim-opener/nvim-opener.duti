@@ -1,0 +1,6 @@
+com.henriquerodrigues.nvimopener   public.plain-text                  all
+com.henriquerodrigues.nvimopener   public.source-code                 all
+com.henriquerodrigues.nvimopener   net.daringfireball.markdown        all
+com.henriquerodrigues.nvimopener   public.json                        all
+com.henriquerodrigues.nvimopener   public.yaml                        all
+# TOML registered by extension in install.sh (no stable system UTI)
