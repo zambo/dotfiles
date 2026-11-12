@@ -121,7 +121,9 @@ return {
               rel:on("WinLeave", function()
                 vim.schedule(function()
                   if not picker:is_focused() then
-                    picker.preview.win:close()
+                    if picker.preview and picker.preview.win then
+                      picker.preview.win:close()
+                    end
                   end
                 end)
               end)
@@ -132,7 +134,9 @@ return {
               picker.main = preview_win.win
             end,
             on_close = function(picker)
-              picker.preview.win:close()
+              if picker.preview and picker.preview.win then
+                picker.preview.win:close()
+              end
             end,
             layout = {
               preset = "sidebar",
