@@ -15,7 +15,6 @@ abbr --add -g v nvim
 abbr --add -g vi nvim
 abbr --add -g vim nvim
 abbr --add -g v. nvim . # opens nvim in current dir
-abbr --add -g nc "z nvim && nvim" # jumps to nvim config dir and opens it
 
 # Jump directly to config files
 abbr --add -g :aero "nvim ~/.config/aerospace/aerospace.toml"
@@ -24,6 +23,8 @@ abbr --add -g :env "nvim ~/.env.global"
 abbr --add -g :cc "nvim ~/.claude/settings.json"
 abbr --add -g :cl "nvim ~/.claude/settings.local.json"
 abbr --add -g :git "nvim ~/.config/git/config"
+abbr --add -g :vk "nvim ~/.config/nvim/lua/config/keymaps.lua"
+abbr --add -g :vc "nvim ~/.config/nvim/lua/config/options.lua"
 abbr --add -g :zk "nvim ~/.config/zk/config.toml"
 
 # Shell
