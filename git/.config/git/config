@@ -10,6 +10,7 @@
 [user]
   email = zambo@users.noreply.github.com
   name = Henrique Zambonin
+  signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINOWP8Fdgw11J+sI5nMkfokktkw9bNmF7bnwGg15NZk9
 
 [credential "https://github.com"]
   helper = 
@@ -20,7 +21,7 @@
   helper = !/opt/homebrew/bin/gh auth git-credential
 
 [include]
-  ## Signkey is set in gitconfig.local, which is not tracked by git and can be used to override settings for different machines
+  ## Optional per-machine overrides (not tracked by git)
   path = ~/.config/gitconfig.local
   ; path =  /opt/homebrew/bin/delta/themes.gitconfig
   path = ~/.config/git/themes/delta/tokyonight.gitconfig
