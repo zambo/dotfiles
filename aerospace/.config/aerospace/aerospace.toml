@@ -1,7 +1,20 @@
-start-at-login = true                                # 'start-at-login' needs to be 'true' for 'after-login-command' to work
+# Config version for compatibility and deprecations
+# See: https://nikitabobko.github.io/AeroSpace/guide#config-version
+config-version = 2
+
+start-at-login = true                               # 'start-at-login' needs to be 'true' for 'after-login-command' to work
 after-login-command = []
 after-startup-command = ['exec-and-forget borders']
-on-focus-changed = ['move-mouse window-lazy-center']
+# on-focus-changed = ['move-mouse window-lazy-center']
+
+# Reload the config automatically when the file is saved.
+# See: https://nikitabobko.github.io/AeroSpace/guide#config-version
+auto-reload-config = true
+
+# config-version = 2 makes 'persistent-workspaces' explicit instead of inferred
+# from keybindings. List every workspace that should stay alive even when empty.
+# See: https://nikitabobko.github.io/AeroSpace/guide#config-version-2
+persistent-workspaces = ["🯱", "🯲", "🯳", "🯴", "🯵", "🯶", "🯷", "🯸", "🯹"]
 
 enable-normalization-flatten-containers = true                         # Normalizations. See:https://nikitabobko.github.io/AeroSpace/guide#normalization
 enable-normalization-opposite-orientation-for-nested-containers = true
@@ -14,6 +27,23 @@ on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
 # You can effectively turn off macOS "Hide application" (cmd-h) feature by toggling this flag
 # Also see: https://nikitabobko.github.io/AeroSpace/goodies#disable-hide-app
 automatically-unhide-macos-hidden-apps = true
+
+# @deprecated @see https://nikitabobko.github.io/AeroSpace/guide#deprecations
+# See: https://nikitabobko.github.io/AeroSpace/guide#on-window-detected-callback
+# NOTE: `if = 'test ...'` is the current recommended syntax, replacing the
+# legacy `if.app-id` / `if.window-title-regex-substring` dot-key syntax
+# (soft-deprecated but still supported).
+# NOTE: single-line inline tables (not TOML 1.1 multi-line) on purpose —
+# taplo (LSP) doesn't parse TOML 1.1's multi-line inline tables yet.
+on-window-detected = [
+  # Matches PiP windows regardless of browser (Chrome, Zen, etc.)
+  { if = 'test %{window-title} ~= Picture-in-Picture', run = 'layout floating' },
+  { if = 'test %{app-bundle-id} = com.apple.calendar', run = [
+    'workspace 1',
+    'move-workspace-to-monitor main',
+  ] },
+  # { if = 'test %{app-bundle-id} = com.apple.iphonesimulator', run = '...' },
+]
 
 # See https://nikitabobko.github.io/AeroSpace/guide#key-mapping
 [key-mapping]
@@ -58,10 +88,14 @@ outer.right = 2
 [mode.main.binding]
 alt-enter = 'fullscreen --no-outer-gaps'
 alt-ctrl-semicolon = 'mode leader'
-# cmd-ctrl-tab = 'move-workspace-to-monitor --wrap-around next'
 # alt-ctrl-semicolon = 'mode service'
 # alt-ctrl-esc = ['reload-config']
 cmd-shift-esc = ['reload-config']
+cmd-h = []                                             # Disable "hide application"
+cmd-alt-h = []                                         # Disable "hide others"
+cmd-shift-7 = 'exec-and-forget screencapture -i -c -w' # Screenshot to clipboardth - window only
+cmd-shift-8 = 'exec-and-forget screencapture -i -c'    # Screenshot to clipboardth - interactive
+
 
 [mode.leader.binding]
 g = 'mode workspace-nav'  # "go" to workspace / navigate workspaces
@@ -71,7 +105,8 @@ m = 'mode window-move'    # "move" windows
 j = 'mode window-merge'   # "join" windows together
 a = 'mode app-launcher'   # "app" launcher
 r = 'mode resize-window'  # "resize" window
-esc = 'mode main'         # "quit" back to main (safety exit)
+# = 'move-workspace-to-monitor --wrap-around next'
+esc = 'mode main' # "quit" back to main (safety exit)
 
 [mode.workspace-nav.binding]
 x = ['workspace 🯱', 'mode main']
@@ -83,26 +118,34 @@ t = ['workspace 🯶', 'mode main']
 w = ['workspace 🯷', 'mode main']
 f = ['workspace 🯸', 'mode main']
 p = ['workspace 🯹', 'mode main']
+1 = ['workspace 🯱', 'mode main']
+2 = ['workspace 🯲', 'mode main']
+3 = ['workspace 🯳', 'mode main']
+4 = ['workspace 🯴', 'mode main']
+5 = ['workspace 🯵', 'mode main']
+6 = ['workspace 🯶', 'mode main']
+7 = ['workspace 🯷', 'mode main']
+8 = ['workspace 🯸', 'mode main']
+9 = ['workspace 🯹', 'mode main']
 
-b = ['workspace B', 'mode main']
-g = ['workspace G', 'mode main']
-v = ['workspace V', 'mode main']
-q = ['workspace Q', 'mode main']
-a = ['workspace A', 'mode main']
-z = ['workspace Z', 'mode main']
+# g = ['workspace G', 'mode main']
+# v = ['workspace V', 'mode main']
+# a = ['workspace A', 'mode main']
+# z = ['workspace Z', 'mode main']
 
-# q = [
-#   'exec-and-forget aerospace list-workspaces --monitor focused --empty no | aerospace workspace next --wrap-around',
-#   'mode main',
-# ]
-# q = ['workspace next --wrap-around', 'mode main']
-# b = [
-#   'exec-and-forget aerospace list-workspaces --monitor focused --empty no | aerospace workspace prev --wrap-around',
-#   'mode main',
-# ]
-# b = ['workspace prev --wrap-around', 'mode main']
+# Skip empty workspaces when cycling. Uses AeroSpace's native shell pipe
+# operator (0.21+) instead of shelling out to a second 'aerospace' process.
+# See: https://nikitabobko.github.io/AeroSpace/guide#shell
+q = [
+  'list-workspaces --monitor focused --empty no | workspace --stdin --wrap-around next',
+  'mode main',
+]
+b = [
+  'list-workspaces --monitor focused --empty no | workspace --stdin --wrap-around prev',
+  'mode main',
+]
 tab = ['workspace-back-and-forth', 'mode main']
-esc = 'mode main'                               # "quit" back to main (safety exit)
+esc = 'mode main' # "quit" back to main (safety exit)
 
 [mode.workspace-move.binding]
 x = ['move-node-to-workspace 🯱', 'mode main']
@@ -114,13 +157,24 @@ t = ['move-node-to-workspace 🯶', 'mode main']
 w = ['move-node-to-workspace 🯷', 'mode main']
 f = ['move-node-to-workspace 🯸', 'mode main']
 p = ['move-node-to-workspace 🯹', 'mode main']
-b = ['move-node-to-workspace B', 'mode main']
-g = ['move-node-to-workspace G', 'mode main']
-v = ['move-node-to-workspace V', 'mode main']
-q = ['move-node-to-workspace Q', 'mode main']
-a = ['move-node-to-workspace A', 'mode main']
-z = ['move-node-to-workspace Z', 'mode main']
-esc = 'mode main'                             # "quit" back to main (safety exit)
+1 = ['move-node-to-workspace 🯱', 'mode main']
+2 = ['move-node-to-workspace 🯲', 'mode main']
+3 = ['move-node-to-workspace 🯳', 'mode main']
+4 = ['move-node-to-workspace 🯴', 'mode main']
+5 = ['move-node-to-workspace 🯵', 'mode main']
+6 = ['move-node-to-workspace 🯶', 'mode main']
+7 = ['move-node-to-workspace 🯷', 'mode main']
+8 = ['move-node-to-workspace 🯸', 'mode main']
+9 = ['move-node-to-workspace 🯹', 'mode main']
+
+# b = ['move-node-to-workspace B', 'mode main']
+# g = ['move-node-to-workspace G', 'mode main']
+# v = ['move-node-to-workspace V', 'mode main']
+# q = ['move-node-to-workspace Q', 'mode main']
+# a = ['move-node-to-workspace A', 'mode main']
+# z = ['move-node-to-workspace Z', 'mode main']
+
+esc = 'mode main' # "quit" back to main (safety exit)
 
 [mode.window-nav.binding]
 n = ['focus left', 'mode main']
@@ -151,9 +205,10 @@ e = ['resize height -150']
 i = ['resize height +150']
 o = ['resize width +150']
 r = ['balance-sizes']
+f = ['flatten-workspace-tree']
 minus = ['resize smart -150']
 equal = ['resize smart +150']
-esc = 'mode main'             # "quit" back to main (safety exit)
+esc = 'mode main'              # "quit" back to main (safety exit)
 
 [mode.window-merge.binding]
 n = ['join-with left', 'mode main']
@@ -174,22 +229,6 @@ t = ['exec-and-forget open -a "Ghostty"', 'mode main']
 d = ['exec-and-forget open -a "Docker Desktop"', 'mode main']
 v = ['exec-and-forget open -a "Spotify"', 'mode main']
 esc = 'mode main'
-
-[[on-window-detected]]
-# if.app-id = 'app.zen-browser.zen'
-# NOTE: trying to have the POP floating regardless of browser
-if.window-title-regex-substring = 'Picture-in-Picture'
-run = 'layout floating'
-
-
-[[on-window-detected]]
-if.app-id = 'com.google.Chrome'
-if.window-title-regex-substring = 'Picture-in-Picture'
-run = 'layout floating'
-
-[[on-window-detected]]
-if.app-id = 'com.apple.calendar'
-run = ['workspace Calendar', 'move-workspace-to-monitor main']
 
 [workspace-to-monitor-force-assignment]
 # "🯱" = ['built-in', 'secondary']
@@ -213,6 +252,6 @@ run = ['workspace Calendar', 'move-workspace-to-monitor main']
 # Calendar = ['secondary', 'main']
 # Edge = ['lg', 'built-in']
 # Generic = ['lg', 'built-in']
-"B" = ['duet', 'built-in']
-"G" = ['duet', 'built-in']
-"V" = ['duet', 'built-in']
+# "B" = ['duet', 'built-in']
+# "G" = ['duet', 'built-in']
+# "V" = ['duet', 'built-in']
