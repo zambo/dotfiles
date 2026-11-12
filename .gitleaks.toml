@@ -1,8 +1,18 @@
+[extend]
+useDefault = true
+
 [allowlist]
-  description = "Known false positives — placeholder examples in docs and integrity hashes in manifests"
-  paths = [
-    # Truncated placeholder key (gzak_8f3c9a1b2d4e...) in deploy-gizmos skill docs
-    '''opencode/.config/opencode/skills/deploy-gizmos/SKILL\.md''',
-    # SHA-256 integrity hashes in GSD file manifest are not secrets
-    '''opencode/.config/opencode/gsd-file-manifest\.json''',
-  ]
+description = "Known false positives — placeholder examples in docs, integrity hashes in manifests, and this config's own rule pattern"
+paths = [
+  # Truncated placeholder key (gzak_8f3c9a1b2d4e...) in deploy-gizmos skill docs
+  '''opencode/.config/opencode/skills/deploy-gizmos/SKILL\.md''',
+  # SHA-256 integrity hashes in GSD file manifest are not secrets
+  '''opencode/.config/opencode/gsd-file-manifest\.json''',
+  # The employer-identifiers regex below would otherwise match itself
+  '''\.gitleaks\.toml''',
+]
+
+[[rules]]
+id = "employer-identifiers"
+description = "Work emails and company domains"
+regex = '''(?i)[a-z0-9._%+-]+@(poatek|telus|willowtree)\.com|willowtree\.atlassian\.net'''
