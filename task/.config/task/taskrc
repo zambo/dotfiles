@@ -24,3 +24,4 @@ include solarized-dark-256.theme
 #include solarized-light-256.theme
 #include no-color.theme
 news.version=3.4.2
+include sync.rc

@@ -145,3 +145,4 @@ fish/.config/fish/config.local.fish
 lazygit/.config/lazygit/temp_lazygit.tar.gz
 opencode/.config/opencode/service.json
 acli/.config/acli/global_auth_config.yaml
+task/.config/task/sync.rc
