@@ -653,13 +653,12 @@
 
 os:
   editPreset: "nvim"
-
 git:
-  pagers:
-    - pager: delta --dark --paging=never --side-by-side --line-numbers
+  overrideGpg: true
+  diffRenderers:
+    - command: delta --dark --paging=never --side-by-side --line-numbers
       colorArg: never
-    # - externalDiffCommand: difft --color=always
-
+  # - externalDiffCommand: difft --color=always
 customCommands:
   # retrieved from: https://github.com/jesseduffield/lazygit/wiki/Custom-Commands-Compendium#conventional-commit
   - key: "<c-v>"
