@@ -14,8 +14,8 @@ end
 -- Configuration
 -- ============================================================================
 
-local FUELIX_API_URL = "https://proxy.fuelix.ai/v1"
-local FUELIX_API_KEY = os.getenv("FUEL_IX_API_KEY")
+local FUELIX_API_URL = os.getenv("FUELIX_API_URL")
+local FUELIX_API_KEY = os.getenv("FUELIX_API_KEY")
 local CACHE_FILE = vim.fn.stdpath("cache") .. "/fuelix_models.json"
 local CACHE_DURATION = 24 * 60 * 60 -- 24 hours - models don't change that often
 
@@ -170,7 +170,7 @@ local function fuel_ix_health_check()
     details.api_key.msg = "API key not set"
     return {
       ok = false,
-      message = "❌ Health check failed: FUEL_IX_API_KEY is not configured",
+      message = "❌ Health check failed: FUELIX_API_KEY is not configured",
       details = details,
     }
   end
@@ -536,7 +536,7 @@ return {
 
       -- Notify which backend is active
       if USE_COPILOT then
-        vim.notify("CodeCompanion: Using Copilot (FUEL_IX_API_KEY not set)", vim.log.levels.WARN)
+        vim.notify("CodeCompanion: Using Copilot (FUELIX_API_KEY not set)", vim.log.levels.WARN)
       else
         vim.notify("CodeCompanion: Using Fuel iX", vim.log.levels.INFO)
       end
