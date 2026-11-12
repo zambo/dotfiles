@@ -8,30 +8,34 @@
 
 shell-integration = fish
 
-# font-family = "Monaspace Krypton Var"
-# font-family-bold = "Monaspace Xenon Var"
-# font-family-italic = "Monaspace Radon Var"
-# font-family-bold-italic = "Monaspace Argon Var"
+# ============================================================================
+# FONT
+# ============================================================================
 
+font-family = "DepartureMono Nerd Font Mono"
+font-size = 13
+font-feature = "'calt', 'ss01', 'ss02', 'ss03', 'ss04', 'ss05', 'ss06', 'ss07', 'ss08', 'ss09', 'liga'"
+font-thicken = true
+bold-is-bright = true
+freetype-load-flags = "no-force-autohint"
 
-shell-integration = "fish"
-
-font-family = "OperatorMono Nerd Font"
+# Alternative Fonts:
+# font-family = "OperatorMono Nerd Font"
 # font-family-bold = "JetBrainsMono Nerd Font Mono"
 # font-family-italic = "Operator Mono SSm Lig"
 # font-family-bold-italic = "JetBrainsMono Nerd Font Mono"
-
-# Alternative Fonts:
+#
 # font-family = "JetBrainsMono Nerd Font Mono"
+#
 # font-family = "Monaspace Krypton Var"
 # font-family-bold = "Monaspace Xenon Var"
 # font-family-italic = "Monaspace Radon Var"
 # font-family-bold-italic = "Monaspace Argon Var"
 
-font-style = "Light" 
-font-style-italic = "Book Italic"
-font-style-bold = "Bold"
-font-style-bold-italic = "Bold Italic"
+# font-style = "Light"
+# font-style-italic = "Book Italic"
+# font-style-bold = "Bold"
+# font-style-bold-italic = "Bold Italic"
 
 # font-variation = slnt=-11
 
@@ -43,22 +47,6 @@ font-style-bold-italic = "Bold Italic"
 #
 # font-variation-bold-italic = wght=800
 # font-variation-bold-italic = slnt=-11
-
-font-size = 12
-font-feature = "'calt', 'ss01', 'ss02', 'ss03', 'ss04', 'ss05', 'ss06', 'ss07', 'ss08', 'ss09', 'liga'" 
-font-thicken = true
-bold-is-bright = true
-alpha-blending = native
-cursor-click-to-move = true
-
-macos-titlebar-style = hidden
-macos-option-as-alt = true
- keybind = alt+left=unbind
-keybind = alt+right=unbind
-macos-icon = retro
-# macos-icon-frame = chrome
-
-freetype-load-flags = "no-force-autohint"
 
 # Cell Adjustments
 adjust-cell-height = 75%
@@ -72,20 +60,30 @@ adjust-underline-position = 9
 
 # theme = "kanagawa-wave"
 # theme = "tokyonight_moon"
-# theme = "Kanagawa Wave"
-theme = "TokyoNight Moon"
+theme = "Kanagawa Wave"
+# theme = "TokyoNight Moon"
 # theme = "Catppuccin Macchiato"
 window-colorspace = display-p3
 alpha-blending = native
 background-opacity = 0.5
 background-opacity-cells = true
-background-blur = true 
-background-blur-radius = 250
-
+background-blur = true
+# background-blur = macos-glass-regular
+background-blur-radius = 50
 unfocused-split-opacity = 0.6
 
+# Kanagawa
+split-divider-color = #c0a36e
+# TokyoNight
+# split-divider-color = #c3e88d
 
+# Adaptive darkening shader: darkens washed-out frames when a bright window
+# is behind Ghostty. No-op when the backdrop is already dark.
+# See shaders/adaptive-darken.glsl for tuning constants.
+# custom-shader = shaders/adaptive-darken.glsl
 
+# Ensure text stays legible even when the shader doesn't fully compensate.
+# minimum-contrast = 0
 
 # ============================================================================
 # CURSOR
@@ -99,19 +97,13 @@ cursor-click-to-move = true
 # WINDOW CONFIGURATION
 # ============================================================================
 
-window-padding-x = 16
-window-padding-y = 16
+window-padding-x = 8
+window-padding-y = 8
 window-padding-color = extend
 window-padding-balance = true
 window-decoration = true
 window-save-state = always
 window-inherit-font-size = true
-
-# ============================================================================
-# SPLITS
-# ============================================================================
-
-split-divider-color = #c0a36e
 
 # ============================================================================
 # MACOS SPECIFIC
@@ -120,13 +112,18 @@ split-divider-color = #c0a36e
 macos-titlebar-style = hidden
 macos-option-as-alt = true
 macos-icon = retro
+# macos-icon-frame = chrome
+macos-icon-frame = beige
+# macos-titlebar-proxy-icon = hidden
 
 # ============================================================================
 # MOUSE & CLIPBOARD
 # ============================================================================
 
 mouse-hide-while-typing = true
-copy-on-select = clipboard
+copy-on-select = true
+clipboard-read = allow
+clipboard-write = allow
 clipboard-paste-protection = false
 clipboard-paste-bracketed-safe = false
 
@@ -136,6 +133,9 @@ clipboard-paste-bracketed-safe = false
 
 link-url = true
 confirm-close-surface = true
+# focus-follows-mouse = true
+# fullscreen = true
+term = xterm-256color
 
 # ============================================================================
 # KEYBINDINGS
@@ -144,6 +144,7 @@ confirm-close-surface = true
 # Unbind conflicting keys
 keybind = alt+left=unbind
 keybind = alt+right=unbind
+# keybind = super+m=unbind
 
 # Quick Terminal
 keybind = global:alt+ctrl+shift+super+t=toggle_quick_terminal
@@ -166,18 +167,14 @@ keybind = super+shift+left=resize_split:left,50
 keybind = super+shift+right=resize_split:right,50
 keybind = super+shift+equal=equalize_splits
 
-# ============================================================================
-# ALTERNATIVE CONFIGURATIONS (commented out)
-# ============================================================================
+# Override default tab switching to send escape sequences to Neovim
+keybind = super+shift+bracket_left=unbind
+keybind = super+shift+bracket_left=text:\x1b[1;6D
+keybind = super+shift+bracket_right=unbind
+keybind = super+shift+bracket_right=text:\x1b[1;6C
 
-# Other Options:
-# background-opacity = 0.92
-# bold-is-bright = true
-# macos-icon-frame = beige
-# macos-titlebar-proxy-icon = hidden
-# term = xterm-256color
-# fullscreen = true
-# focus-follows-mouse = true
+# Background opacity toggle
+keybind = cmd+u=toggle_background_opacity
 
 # Vim-like Scrolling:
 # keybind = performable:ctrl+u=scroll_page_up
@@ -187,7 +184,7 @@ keybind = super+shift+equal=equalize_splits
 
 # Tmux-style Split Navigation:
 # keybind = ctrl+n=goto_split:left
-# keybind = ctrl+e=goto_spperformable:lit:bottom
+# keybind = ctrl+e=goto_split:bottom
 # keybind = ctrl+i=goto_split:top
 # keybind = ctrl+o=goto_split:right
 # keybind = ctrl+a>n=new_split:left
@@ -199,41 +196,9 @@ keybind = super+shift+equal=equalize_splits
 # keybind = ctrl+a>n=next_tab
 # keybind = ctrl+a>p=previous_tab
 
-window-save-state = always
+# ============================================================================
+# ALTERNATIVE CONFIGURATIONS (commented out)
+# ============================================================================
 
-
-# focus-follows-mouse = true
-# Kanagawa
-# split-divider-color = #c0a36e 
-# TokyoNight
-split-divider-color = #c3e88d
-shell-integration = fish
-
-keybind = shift+enter=text:\n
-
-copy-on-select = clipboard
-
-keybind = ctrl+enter=toggle_split_zoom
-
-keybind = super+shift+up=resize_split:up,50
-keybind = super+shift+down=resize_split:down,50
-keybind = super+shift+left=resize_split:left,50
-keybind = super+shift+right=resize_split:right,50
-
-keybind = super+shift+equal=equalize_splits
-
-
-# Override default tab switching to send escape sequences to Neovim
-keybind = super+shift+bracket_left=unbind
-keybind = super+shift+bracket_left=text:\x1b[1;6D
-keybind = super+shift+bracket_right=unbind
-keybind = super+shift+bracket_right=text:\x1b[1;6C
-
-
-
-# Vim like scrolling
-# keybind = ctrl+u=scroll_page_up
-# keybind = ctrl+d=scroll_page_down
-# keybind = g+g=scroll_to_top
-# keybind = shift+g=scroll_to_bottom
-
+# Other Options:
+# background-opacity = 0.92
