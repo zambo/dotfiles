@@ -14,3 +14,6 @@ vim.g.lazyvim_prettier_needs_config = true
 
 -- If you have any ESLint autoformat settings, disable them
 -- vim.g.lazyvim_eslint_auto_format = false
+
+vim.o.exrc = true -- load .nvim.lua from project root
+vim.o.secure = true -- sandbox it (no shell/write commands)
