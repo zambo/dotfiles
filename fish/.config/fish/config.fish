@@ -1,15 +1,25 @@
+# The following lines were added by Docker Desktop to add commands to your PATH.
+# export PATH="$PATH:$HOME/.docker/bin"
+# End of Docker Desktop section.
+set -x DOCKER_HOST unix://$HOME/.config/colima/default/docker.sock
+set -x DOCKER_CONFIG $HOME/.docker-act
+
 # Environment Variables
 if status is-interactive
     set -gx EDITOR nvim
-    set -gx PATH /opt/homebrew/bin $PATH
+    set -gx VISUAL nvim
+    set -gx PAGER delta
+
     set -gx fish_key_bindings fish_vi_key_bindings
+
     # https://github.com/eza-community/eza?tab=readme-ov-file
     set -gx EZA_STANDARD_OPTIONS --group-directories-first --icons --git --long --header --color=auto --hyperlink --smart-group --git-repos --no-user --modified --time-style=long-iso
-    eval "$(/opt/homebrew/bin/brew shellenv)"
 
-    # Load environment variables from a global .env file
-    # cat ~/.env.global >/tmp/myenvfile && loadenv /tmp/myenvfile
-    loadenv "$HOME/.env.global"
+    # Cached `brew shellenv fish` output (regenerate with: brew shellenv fish > ~/.cache/fish/brew_shellenv.fish)
+    # Avoids spawning brew as a subprocess on every shell startup.
+    # NOTE: this cache goes stale if brew itself is reinstalled/upgraded/moved. Regenerate it then.
+    source ~/.cache/fish/brew_shellenv.fish
+
 
     # Initialize shell tools (only if they exist)
     if type -q atuin
@@ -19,213 +29,78 @@ if status is-interactive
     if type -q zoxide
         zoxide init fish | source # Smart directory jumping
     end
-
-    # Jira shortcuts reminder
-    echo ""
-    echo "Jira (acli) reminders:"
-    echo "  jit  → create Task    jib  → create Bug    jis  → create Story"
-    echo "  jitp → create subtask (with parent)"
-    echo "  jiass <ISSUE> → assign to me    jimy → list my issues"
-    echo ""
-
-    # Direnv Setup (moved inside interactive check)
-    # if type -q direnv
-    #     direnv hook fish | source
-    #     # Direnv behavior configuration
-    #     set -g direnv_fish_mode eval_on_arrow
-    # end
 end
 
-# Function to create a new note with a simple template
-function quicknote --description "Create a new note with frontmatter"
-    set -l note_name ""
+set -gx NOTES_DIR ~/_/notes
+
+# Function to create a new note via zk (handles frontmatter/YAML escaping safely)
+function quicknote --description "Create a new note with zk"
+    set -l title ""
     set -l tags ""
 
-    # Parse arguments
+    # Parse arguments: leading #tag words become tags, everything else is the title
     for arg in $argv
         if string match -q "#*" $arg
-            set -l tag (string sub -s 2 $arg)
             if test -n "$tags"
-                set tags "$tags, $tag"
+                set tags "$tags $arg"
             else
-                set tags "$tag"
+                set tags "$arg"
             end
-        else if test -z "$note_name"
-            set note_name $arg
+        else if test -n "$title"
+            set title "$title $arg"
+        else
+            set title "$arg"
         end
     end
 
-    # Default to timestamp-based name if no name provided
-    if test -z "$note_name"
-        set note_name (date +"%Y%m%d-%H%M%S")
+    # Default to timestamp-based title if none provided
+    if test -z "$title"
+        set title (date +"%Y-%m-%d %H:%M")
     end
 
-    set -l timestamp (date +"%Y-%m-%d")
-    set -l time (date +"%H:%M")
-
-    set -l template_file ~/.config/fish/note_template.md
-
-    if not test -f $template_file
-        echo "---
-title: {{TITLE}}
-date: {{DATE}}
-time: {{TIME}}
-tags: [{{TAGS}}]
----
-
-# {{TITLE}}
-" >$template_file
+    if test -n "$tags"
+        zk new --title "$title" --extra "tags=$tags" --working-dir $NOTES_DIR
+    else
+        zk new --title "$title" --working-dir $NOTES_DIR
     end
-
-    cd ~/_/notes && nvim -c "0r $template_file | %s/{{DATE}}/$timestamp/g | %s/{{TIME}}/$time/g | %s/{{TITLE}}/$note_name/g | %s/{{TAGS}}/$tags/g | normal! gg2jA" $note_name.md
 end
 
 # Shell Variables
 set -x STOW_DIR ~/_/dotfiles
-# set -gx FUELIX_KEY (op read op://iqou5ut7nmb4rwplbb4d6duh3u/rwi4fscs2fp7kc5tmlsk6rijh4/api_key)
-# set -U nvm_default_version v22.20.0
-
-# echo (op read "op://private/atuin/username")
-#
-
-# not needed when using https://github.com/berk-karaal/loadenv.fish
 
 # Key Bindings
 set fzf_directory_opts --bind "ctrl-o:execute($EDITOR {} &> /dev/tty)"
 
-# Shell Integrations
-# Source atuin environment first
-# if test -f ~/.atuin/bin/env.fish
-#     source ~/.atuin/bin/env.fish
-# end
+# NVIM_APPNAME variants (aliases, not abbrs, since these set env vars inline)
+alias nvc='NVIM_APPNAME=nvim-chad nvim'
+alias nvs='NVIM_APPNAME=nvim-scratch nvim'
+alias nve='NVIM_APPNAME=nvim-edge nvim'
 
-# Core Command Abbreviations
-# NOTE: Using abbr instead of aliases since aliases can break some scripts that rely on exact command names
-abbr --add -g cd z
-abbr --add -g v nvim
-abbr --add -g vi nvim
-abbr --add -g vim nvim
-abbr --add -g v. nvim .
-abbr --add -g :q exit
-# abbr --add -g x exit
-abbr --add -g g lazygit
-abbr --add -g nd npm run dev
-
-abbr --add -g b bat
-abbr --add -g d lazydocker
-abbr --add -g p posting
-
-# OpenCoce
-abbr --add -g oc opencode
-abbr --add -g occ --set-cursor "opencode run \"%\""
-
-abbr --add -g o "open ."
-
-abbr --add -g nc "z nvim && nvim"
-abbr --add -g fc "z ~/.config/fish && nvim config.fish"
-
-# Gcloud
-abbr --add -g gcp --set-cursor "gcloud config set project \"%\""
-abbr --add -g gca --set-cursor "gcloud config set account \"%\""
-
-# Yarn/NPM
-abbr --add -g nd "npm run dev"
-abbr --add -g ni "npm install"
-abbr --add -g nr "npm run"
-
-# Docker shortcuts
-abbr --add -g dcu "docker compose up"
-abbr --add -g dcd "docker compose down"
-abbr --add -g dcb "docker compose build"
-abbr --add -g dcl "docker compose logs"
-
-# Task Management Aliases
-abbr --add -g tt taskwarrior-tui
-abbr --add -g tta task add
-abbr --add -g ttl task list
-abbr --add -g ttc task complete
-abbr --add -g ttd task done
-abbr --add -g ttu task undo
-# abbr --add -g tt taskwarrior-tui
-
-# Jira / acli Shortcuts
-set -l JIRA_PROJECT AI
-set -l JIRA_ASSIGNEE "henrique.zambonin@telus.com"
-set -l JIRA_LABEL AgenticHub
-
-abbr --add -g jit --set-cursor "acli jira workitem create --project \"$JIRA_PROJECT\" --type \"Task\" --assignee \"$JIRA_ASSIGNEE\" --label \"$JIRA_LABEL\" --summary \"%\""
-abbr --add -g jib --set-cursor "acli jira workitem create --project \"$JIRA_PROJECT\" --type \"Bug\" --assignee \"$JIRA_ASSIGNEE\" --label \"$JIRA_LABEL\" --summary \"%\""
-abbr --add -g jis --set-cursor "acli jira workitem create --project \"$JIRA_PROJECT\" --type \"Story\" --assignee \"$JIRA_ASSIGNEE\" --label \"$JIRA_LABEL\" --summary \"%\""
-
-# Create with editor (nvim)
-abbr --add -g jite "acli jira workitem create --project \"$JIRA_PROJECT\" --type \"Task\" --assignee \"$JIRA_ASSIGNEE\" --label \"$JIRA_LABEL\" --editor"
-abbr --add -g jibe "acli jira workitem create --project \"$JIRA_PROJECT\" --type \"Bug\" --assignee \"$JIRA_ASSIGNEE\" --label \"$JIRA_LABEL\" --editor"
-abbr --add -g jise "acli jira workitem create --project \"$JIRA_PROJECT\" --type \"Story\" --assignee \"$JIRA_ASSIGNEE\" --label \"$JIRA_LABEL\" --editor"
-
-# Assign an existing issue to yourself
-abbr --add -g jiass --set-cursor "acli jira workitem update --issue \"%\" --assignee \"$JIRA_ASSIGNEE\""
-
-# List issues assigned to you
-abbr --add -g jimy "acli jira workitem search --jql \"project = $JIRA_PROJECT AND assignee = '$JIRA_ASSIGNEE' AND statusCategory != Done\""
-
-# Create with parent (subtask)
-abbr --add -g jitp --set-cursor "acli jira workitem create --project \"$JIRA_PROJECT\" --type \"Task\" --assignee \"$JIRA_ASSIGNEE\" --label \"$JIRA_LABEL\" --parent \"%\" --summary \"\""
-
-# Better Alternatives
-abbr --add -g cd z # zoxide for better directory navigation
-abbr --add -g cat bat # bat for enhanced file viewing
-abbr --add -g find fd # fd for improved file searching
-abbr --add -g grep rg # ripgrep for faster searching
-
-# Quick Notes
-# abbr --add -g n --set-cursor "cd ~/_/notes && nvim \"%\".md"
-abbr --add -g n --set-cursor "quicknote \"%\" #inbox"
-
-# Moving Directories
-abbr --add -g .. "cd .."
-abbr --add -g ... "cd ../.."
-abbr --add -g .... "cd ../../.."
-abbr --add -g ..... "cd ../../../.."
-abbr --add -g ...... "cd ../../../../.."
-
-# Safety Features
-# Move files to trash instead of deleting them (requires `brew install trash`)
-if type -q trash
-    abbr --add -g rm trash
-end
-
-# bun
-# set --export BUN_INSTALL "$HOME/.bun"
-# set --export PATH $BUN_INSTALL/bin $PATH
-
-# alias claude="/Users/zambo/.claude/local/claude"
-# function claude
-#     /Users/zambo/.claude/local/claude $argv
-# end
+# Abbreviations live in conf.d/abbr.fish (auto-loaded by fish)
 
 # pnpm
-set -gx PNPM_HOME /Users/henriquerodrigues/Library/pnpm
+set -gx PNPM_HOME $HOME/Library/pnpm
 if not string match -q -- $PNPM_HOME $PATH
     set -gx PATH "$PNPM_HOME" $PATH
 end
-# pnpm end
 
 set -gx XDG_CONFIG_HOME "$HOME/.config"
 set -x ZEPHYR_SDK_INSTALL_DIR ~/zephyr-sdk-0.16.8
 
-# Local and private variables. E.g. API keys, secrets, etc.
-# if test -f ~/.config/fish/config.local.fish
-#     source ~/.config/fish/config.local.fish
-# end
-
-# Load cht.sh completions manually since fish has issues with dots in completion filenames
-# source ~/.config/fish/completions/cheat_sh.fish
 export PATH="$HOME/.local/bin:$PATH"
-
-# Auto load direnv
-# direnv hook fish | source
 
 # gh token for npm
 set -gx NPM_TOKEN (gh auth token)
 
 rbenv init - fish | source
+
+# Starship
+set -gx STARSHIP_CONFIG "$HOME/.config/starship/config.toml"
+starship init fish | source
+
+set -gx JAVA_HOME /opt/homebrew/opt/openjdk@17
+set -gx CPPFLAGS "-I/opt/homebrew/opt/openjdk@17/include"
+set -gx ANDROID_HOME $HOME/Library/Android/sdk
+
+# OMP
+set -gx PI_CONFIG_DIR ".config/omp"
