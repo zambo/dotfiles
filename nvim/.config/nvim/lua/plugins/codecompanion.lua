@@ -481,11 +481,12 @@ return {
                     return model ~= nil and model:find("^gpt") ~= nil
                   end,
                 },
-                -- Recent Claude models reject temperature and top_p together
+                -- The openai adapter sets top_p `enabled = false`, but CodeCompanion only
+                -- honours `enabled` functions, so top_p is still sent. GPT 5.6 rejects it
+                -- and Claude rejects it alongside temperature, so never send it.
                 top_p = {
-                  enabled = function(self)
-                    local model = require("codecompanion.adapters.utils").model(self)
-                    return not (model and model:find("^claude"))
+                  enabled = function()
+                    return false
                   end,
                 },
               },
