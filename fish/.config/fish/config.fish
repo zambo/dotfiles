@@ -36,16 +36,12 @@ set -gx NOTES_DIR ~/_/notes
 # Function to create a new note via zk (handles frontmatter/YAML escaping safely)
 function quicknote --description "Create a new note with zk"
     set -l title ""
-    set -l tags ""
+    set -l tags
 
-    # Parse arguments: leading #tag words become tags, everything else is the title
+    # Parse arguments: #tag words become tags (# stripped), everything else is the title
     for arg in $argv
-        if string match -q "#*" $arg
-            if test -n "$tags"
-                set tags "$tags $arg"
-            else
-                set tags "$arg"
-            end
+        if string match -q "#*" -- $arg
+            set -a tags (string replace -r '^#+' '' -- $arg)
         else if test -n "$title"
             set title "$title $arg"
         else
@@ -59,7 +55,7 @@ function quicknote --description "Create a new note with zk"
     end
 
     if test -n "$tags"
-        zk new --title "$title" --extra "tags=$tags" --working-dir $NOTES_DIR
+        zk new --title "$title" --extra "tags=["(string join '\, ' -- $tags)"]" --working-dir $NOTES_DIR
     else
         zk new --title "$title" --working-dir $NOTES_DIR
     end
