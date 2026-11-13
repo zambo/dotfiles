@@ -481,6 +481,13 @@ return {
                     return model ~= nil and model:find("^gpt") ~= nil
                   end,
                 },
+                -- Recent Claude models reject temperature and top_p together
+                top_p = {
+                  enabled = function(self)
+                    local model = require("codecompanion.adapters.utils").model(self)
+                    return not (model and model:find("^claude"))
+                  end,
+                },
               },
             })
           end,
