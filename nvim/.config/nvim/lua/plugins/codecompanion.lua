@@ -34,8 +34,8 @@ local MODELS = {
 }
 
 -- Helper function to select adapter based on API key availability
-local function get_adapter(model)
-  return USE_COPILOT and "copilot" or { name = "fuel_ix_responses", model = model }
+local function get_adapter(model, name)
+  return USE_COPILOT and "copilot" or { name = name or "fuel_ix_responses", model = model }
 end
 
 -- Debug mode - set FUELIX_DEBUG=1 to enable diagnostic logging
@@ -280,7 +280,7 @@ return {
 
         inline = {
           -- Use Copilot if Fuel iX API key is not available
-          adapter = get_adapter(MODELS.LUNA),
+          adapter = get_adapter(MODELS.LUNA, "fuel_ix_responses_fast"),
           keymaps = {
             accept_change = {
               modes = { n = "ga" },
@@ -490,6 +490,17 @@ return {
                     return false
                   end,
                 },
+              },
+            })
+          end,
+
+          -- Same as fuel_ix_responses with low reasoning effort, for quick inline edits
+          fuel_ix_responses_fast = function()
+            return require("codecompanion.adapters").extend("fuel_ix_responses", {
+              name = "fuel_ix_responses_fast",
+              formatted_name = "Fuel iX (responses, low reasoning)",
+              schema = {
+                ["reasoning.effort"] = { default = "low" },
               },
             })
           end,
