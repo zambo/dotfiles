@@ -91,10 +91,11 @@ alt-ctrl-semicolon = 'mode leader'
 # alt-ctrl-semicolon = 'mode service'
 # alt-ctrl-esc = ['reload-config']
 cmd-shift-esc = ['reload-config']
-cmd-h = []                                             # Disable "hide application"
-cmd-alt-h = []                                         # Disable "hide others"
-cmd-shift-7 = 'exec-and-forget screencapture -i -c -w' # Screenshot to clipboardth - window only
-cmd-shift-8 = 'exec-and-forget screencapture -i -c'    # Screenshot to clipboardth - interactive
+cmd-h = []                                                # Disable "hide application"
+cmd-alt-h = []                                            # Disable "hide others"
+cmd-shift-7 = 'exec-and-forget screencapture -i -c -w'    # Screenshot to clipboard - window only
+cmd-shift-8 = 'exec-and-forget screencapture -i -c'       # Screenshot to clipboard - interactive
+cmd-shift-9 = 'exec-and-forget screencapture -i -c -w -S' # Screenshot to clipboard - monitor only
 
 
 [mode.leader.binding]
