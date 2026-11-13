@@ -396,64 +396,28 @@ return {
         -- HTTP adapter for Fuel iX API
         -- This is the main adapter I use for all CodeCompanion interactions
         http = {
+          -- Fuel iX speaks the Chat Completions API, so extend the built-in
+          -- openai_compatible adapter (see the plugin's openai-compatible-providers guide)
           fuel_ix = function()
-            local openai = require("codecompanion.adapters.http.openai_legacy")
-            return {
+            return require("codecompanion.adapters").extend("openai_compatible", {
               name = "fuel_ix",
               formatted_name = "Fuel iX",
-              roles = {
-                llm = "assistant",
-                user = "user",
-              },
 
+              -- NOTE: Streaming caveats:
+              -- 1. Not all models support streaming
+              -- 2. May conflict with nvim markdown plugins (render-markdown, marksman etc.)
+              -- Vision support is experimental - not all models support images
               opts = {
-                -- NOTE: Streaming caveats:
-                -- 1. Not all models support streaming
-                -- 2. May conflict with nvim markdown plugins (render-markdown, marksman etc.)
                 stream = true,
-                -- Vision support is experimental - not all models support images
                 vision = true,
               },
-              features = {
-                text = true,
-                tokens = true,
-              },
 
-              url = FUELIX_API_URL .. "/chat/completions",
-
-              headers = {
-                ["Authorization"] = "Bearer " .. FUELIX_API_KEY,
-                ["Content-Type"] = "application/json",
-              },
-
-              handlers = {
-                setup = function(self)
-                  if self.opts and self.opts.stream then
-                    self.parameters.stream = true
-                  end
-                  return true
-                end,
-
-                -- Fuel iX uses an OpenAI-compatible API, so we just delegate everything
-                -- to the built-in OpenAI adapter handlers
-                tokens = function(self, data)
-                  return openai.handlers.tokens(self, data)
-                end,
-                form_parameters = function(self, params, messages)
-                  return openai.handlers.form_parameters(self, params, messages)
-                end,
-                form_messages = function(self, messages)
-                  return openai.handlers.form_messages(self, messages)
-                end,
-                chat_output = function(self, data, context)
-                  return openai.handlers.chat_output(self, data, context)
-                end,
-                inline_output = function(self, data, context)
-                  return openai.handlers.inline_output(self, data, context)
-                end,
-                on_exit = function(self, data)
-                  return openai.handlers.on_exit(self, data)
-                end,
+              -- FUELIX_API_URL already ends in /v1, so the paths below omit it
+              env = {
+                url = "FUELIX_API_URL",
+                api_key = "FUELIX_API_KEY",
+                chat_url = "/chat/completions",
+                models_endpoint = "/models",
               },
 
               schema = {
@@ -470,7 +434,7 @@ return {
                   end,
                 },
               },
-            }
+            })
           end,
 
           -- Fuel iX models served on the Responses API (/responses), mirroring
