@@ -397,7 +397,7 @@ return {
         -- This is the main adapter I use for all CodeCompanion interactions
         http = {
           fuel_ix = function()
-            local openai = require("codecompanion.adapters.http.openai")
+            local openai = require("codecompanion.adapters.http.openai_legacy")
             return {
               name = "fuel_ix",
               formatted_name = "Fuel iX",
