@@ -472,6 +472,54 @@ return {
               },
             }
           end,
+
+          -- Fuel iX models served on the Responses API (/responses), mirroring
+          -- the fuel_ix_responses provider in opencode.jsonc
+          fuel_ix_responses = function()
+            return require("codecompanion.adapters").extend("openai", {
+              name = "fuel_ix_responses",
+              formatted_name = "Fuel iX (responses)",
+              url = "${url}/responses",
+              env = {
+                url = "FUELIX_API_URL",
+                api_key = "FUELIX_API_KEY",
+              },
+              -- Compaction and OpenAI's hosted web search may not be supported by Fuel iX
+              opts = { compaction = false },
+              available_tools = {
+                ["web_search"] = { enabled = false },
+              },
+              schema = {
+                model = {
+                  default = "gpt-5.6-luna",
+                  -- A function replaces OpenAI's built-in list instead of merging into it
+                  choices = function()
+                    return {
+                      ["claude-opus-5-5"] = {
+                        formatted_name = "Claude Opus 5.5",
+                        opts = { can_use_tools = true, has_vision = true },
+                      },
+                      ["gpt-5.6-luna"] = {
+                        formatted_name = "GPT 5.6 Luna",
+                        opts = { can_use_tools = true, has_vision = true, can_reason = true },
+                      },
+                      ["gpt-5.6-terra"] = {
+                        formatted_name = "GPT 5.6 Terra",
+                        opts = { can_use_tools = true, has_vision = true, can_reason = true },
+                      },
+                    }
+                  end,
+                },
+                -- verbosity (text.verbosity) is a GPT-only parameter
+                verbosity = {
+                  enabled = function(self)
+                    local model = require("codecompanion.adapters.utils").model(self)
+                    return model ~= nil and model:find("^gpt") ~= nil
+                  end,
+                },
+              },
+            })
+          end,
         },
       },
 
