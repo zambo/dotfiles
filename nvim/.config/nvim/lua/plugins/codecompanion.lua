@@ -30,11 +30,12 @@ local MODELS = {
   GPT_5_2 = "gpt-5-2",
   HAIKU = "claude-haiku-4-5",
   SONNET = "claude-sonnet-4-6",
+  LUNA = "gpt-5.6-luna",
 }
 
 -- Helper function to select adapter based on API key availability
 local function get_adapter(model)
-  return USE_COPILOT and "copilot" or { name = "fuel_ix", model = model }
+  return USE_COPILOT and "copilot" or { name = "fuel_ix_responses", model = model }
 end
 
 -- Debug mode - set FUELIX_DEBUG=1 to enable diagnostic logging
@@ -263,7 +264,7 @@ return {
       interactions = {
         chat = {
           -- Use Copilot if Fuel iX API key is not available
-          adapter = get_adapter(MODELS.SONNET),
+          adapter = get_adapter(MODELS.LUNA),
           variables = {
             ["buffer"] = {
               opts = {
@@ -279,7 +280,7 @@ return {
 
         inline = {
           -- Use Copilot if Fuel iX API key is not available
-          adapter = get_adapter(MODELS.HAIKU),
+          adapter = get_adapter(MODELS.LUNA),
           keymaps = {
             accept_change = {
               modes = { n = "ga" },
@@ -295,7 +296,7 @@ return {
 
         cmd = {
           -- Use Copilot if Fuel iX API key is not available
-          adapter = get_adapter(MODELS.HAIKU),
+          adapter = get_adapter(MODELS.LUNA),
           opts = {
             completion_provider = "blink",
           },
@@ -455,7 +456,7 @@ return {
               },
               schema = {
                 model = {
-                  default = "gpt-5.6-luna",
+                  default = MODELS.LUNA,
                   -- A function replaces OpenAI's built-in list instead of merging into it
                   choices = function()
                     return {
